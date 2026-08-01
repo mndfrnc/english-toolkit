@@ -1,0 +1,156 @@
+[
+  {
+    "id": "do-explicacao-pt",
+    "module": "dodoesdid",
+    "lesson": "Por que existem dois do em What do you do?",
+    "type": "explanation",
+    "language": "pt-BR",
+    "speed": "normal",
+    "file": "audio/do_explicacao_pt.mp3",
+    "transcript": "O primeiro do organiza a pergunta. O segundo do e o verbo principal, e significa fazer ou atuar como. Cada do tem um trabalho diferente na frase.",
+    "question": null
+  },
+  {
+    "id": "do-frase-lenta-01",
+    "module": "dodoesdid",
+    "lesson": "What do you do in Recife?",
+    "type": "sentence_slow",
+    "language": "en-US",
+    "speed": "slow",
+    "file": "audio/do_frase_lenta.mp3",
+    "transcript": "What, do, you, do, in Recife?",
+    "question": null
+  },
+  {
+    "id": "do-frase-natural-01",
+    "module": "dodoesdid",
+    "lesson": "What do you do in Recife?",
+    "type": "sentence_natural",
+    "language": "en-US",
+    "speed": "normal",
+    "file": "audio/do_frase_natural.mp3",
+    "transcript": "What do you do in Recife?",
+    "question": null
+  },
+  {
+    "id": "do-listening-01",
+    "module": "dodoesdid",
+    "lesson": "Do como auxiliar",
+    "type": "listening",
+    "language": "en-US",
+    "speed": "normal",
+    "file": "audio/do_listening_01.mp3",
+    "transcript": "What do you do in Recife?",
+    "question": "Qual dos dois usos de do e o auxiliar, o primeiro ou o segundo?"
+  },
+  {
+    "id": "does-explicacao-pt",
+    "module": "dodoesdid",
+    "lesson": "Does e a versao do para he/she/it",
+    "type": "explanation",
+    "language": "pt-BR",
+    "speed": "normal",
+    "file": "audio/does_explicacao_pt.mp3",
+    "transcript": "Does e a forma de do usada com ele, ela ou isso no presente. Quando does aparece, o verbo principal perde o s no final.",
+    "question": null
+  },
+  {
+    "id": "does-listening-01",
+    "module": "dodoesdid",
+    "lesson": "Does she work here?",
+    "type": "listening",
+    "language": "en-US",
+    "speed": "normal",
+    "file": "audio/does_listening_01.mp3",
+    "transcript": "Does she work here?",
+    "question": "Essa frase esta no presente ou no passado?"
+  },
+  {
+    "id": "did-explicacao-pt",
+    "module": "dodoesdid",
+    "lesson": "Did, o ladrao do passado",
+    "type": "explanation",
+    "language": "pt-BR",
+    "speed": "normal",
+    "file": "audio/did_explicacao_pt.mp3",
+    "transcript": "Did carrega sozinho o passado da frase inteira. Por isso o verbo principal volta para a forma base, sem ed e sem mudar de forma.",
+    "question": null
+  },
+  {
+    "id": "did-listening-01",
+    "module": "dodoesdid",
+    "lesson": "Did you watch the race?",
+    "type": "listening",
+    "language": "en-US",
+    "speed": "normal",
+    "file": "audio/did_listening_01.mp3",
+    "transcript": "Did you watch the race?",
+    "question": "Qual e o verbo principal desta frase?"
+  },
+  {
+    "id": "whwords-explicacao-pt",
+    "module": "whwords",
+    "lesson": "WH-words nao substituem o auxiliar",
+    "type": "explanation",
+    "language": "pt-BR",
+    "speed": "normal",
+    "file": "audio/whwords_explicacao_pt.mp3",
+    "transcript": "A wh word escolhe qual informacao esta faltando, mas ela nao substitui o auxiliar. As duas peças aparecem juntas na frase.",
+    "question": null
+  },
+  {
+    "id": "whwords-listening-01",
+    "module": "whwords",
+    "lesson": "Where do you work?",
+    "type": "listening",
+    "language": "en-US",
+    "speed": "normal",
+    "file": "audio/whwords_listening_01.mp3",
+    "transcript": "Where do you work?",
+    "question": "Que informacao a wh word esta procurando?"
+  },
+  {
+    "id": "be-explicacao-pt",
+    "module": "tobe",
+    "lesson": "To be nunca pede ajuda",
+    "type": "explanation",
+    "language": "pt-BR",
+    "speed": "normal",
+    "file": "audio/be_explicacao_pt.mp3",
+    "transcript": "To be e o unico verbo que nunca precisa de do, does ou did. Ele mesmo pula para o inicio da pergunta, sozinho.",
+    "question": null
+  },
+  {
+    "id": "have-explicacao-pt",
+    "module": "have",
+    "lesson": "Have, posse ou auxiliar",
+    "type": "explanation",
+    "language": "pt-BR",
+    "speed": "normal",
+    "file": "audio/have_explicacao_pt.mp3",
+    "transcript": "Have com substantivo depois e posse, significa ter. Have com participio depois e auxiliar de tempo perfeito, indica experiencia.",
+    "question": null
+  },
+  {
+    "id": "have-listening-01",
+    "module": "have",
+    "lesson": "Have you worked here?",
+    "type": "listening",
+    "language": "en-US",
+    "speed": "normal",
+    "file": "audio/have_listening_01.mp3",
+    "transcript": "Have you worked here?",
+    "question": "Have aqui e posse ou auxiliar?"
+  },
+  {
+    "id": "modais-explicacao-pt",
+    "module": "modais",
+    "lesson": "Can, could, should, would sao folgados",
+    "type": "explanation",
+    "language": "pt-BR",
+    "speed": "normal",
+    "file": "audio/modais_explicacao_pt.mp3",
+    "transcript": "Os modais can, could, should e would nunca precisam de do, does ou did. Eles vao sozinhos para o inicio da pergunta, igual ao to be.",
+    "question": null
+  }
+]

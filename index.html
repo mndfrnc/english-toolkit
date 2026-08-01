@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"></link>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet"></link>
+<style>
+*{box-sizing:border-box}
+[data-theme="light"]{--bg:#FBF9F2;--card:#FFFFFF;--ink:#2A211F;--inkSoft:#5C5250;--line:#E7DFD3;--vinho:#912124;--periwinkle:#5468C4;--berry:#B0576A;--pink:#DD6187;--cloud:#8FADCB;--skyblue:#5FA0AC;--shadow:rgba(42,33,31,0.10)}
+[data-theme="dark"]{--bg:#1C1815;--card:#28221D;--ink:#F3ECE6;--inkSoft:#C9BDB5;--line:#3D342D;--vinho:#E28587;--periwinkle:#9FB4EE;--berry:#E3A2B0;--pink:#F6B0C2;--cloud:#7C93A8;--skyblue:#6FA6B0;--shadow:rgba(0,0,0,0.4)}
+body{margin:0}
+a{color:var(--periwinkle)}
+a:hover{color:var(--vinho)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media print{
+.no-print{display:none !important}
+.print-sheet{display:none}
+.print-sheet.print-selected{display:block !important;page-break-after:always;margin:0 !important}
+}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;background-color:var(--bg);background-image:url(assets/background.svg);background-size:1024px;background-repeat:repeat;color:var(--ink);font-family:Inter,system-ui,sans-serif;padding-bottom:80px">
+
+<div class="no-print" style="position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between">
+<div style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--vinho);font-size:18px">English Toolkit — Amanda</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+<sc-for list="{{ navItems }}" as="nav" hint-placeholder-count="7">
+<button onClick="{{ nav.onClick }}" style="{{ nav.style }}">{{ nav.label }}</button>
+</sc-for>
+<button onClick="{{ toggleTheme }}" style="background:transparent;border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:16px">{{ themeIcon }}</button>
+</div>
+</div>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div style="max-width:900px;margin:0 auto;padding:24px 20px">
+<img src="assets/header.png" alt="Try again. One day, you'll need the right words." style="width:100%;height:auto;display:block;margin-bottom:8px" />
+<p style="font-family:'Kalam',cursive;font-size:19px;color:var(--inkSoft);margin:0 0 24px">Do vocabulário à frase: montando o inglês peça por peça.</p>
+
+<div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin-bottom:24px">
+<p style="margin:0;font-size:15px;line-height:1.6;color:var(--inkSoft)">Este é o seu painel de estudo. Ele não substitui o curso — ele organiza o que você já viu e testa se realmente colou. Comece por onde parou ou escolha um módulo abaixo.</p>
+</div>
+
+<div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:24px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+<h2 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--vinho);font-size:22px;margin:0">Seu progresso</h2>
+<span style="font-size:15px;font-weight:700;color:var(--inkSoft)">{{ masteredCount }} de 8 tópicos dominados</span>
+</div>
+<sc-for list="{{ topicsView }}" as="t" hint-placeholder-count="8">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--line)">
+<span style="font-size:14px">{{ t.label }}</span>
+<span style="font-size:13px;font-weight:700;white-space:nowrap">{{ t.statusLabel }}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+<sc-for list="{{ homeCards }}" as="c" hint-placeholder-count="7">
+<button onClick="{{ c.click }}" style="{{ c.cardStyle }}">
+<div style="font-size:28px;margin-bottom:6px">{{ c.icon }}</div>
+<div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:17px;color:var(--vinho);margin-bottom:4px">{{ c.title }}</div>
+<div style="font-size:13px;color:var(--inkSoft)">{{ c.subtitle }}</div>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDuvidas }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:820px;margin:0 auto;padding:24px 20px">
+<h1 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--vinho);font-size:30px;margin:0 0 6px">🧠 Dúvidas que travaram a Amanda</h1>
+<p style="font-size:15px;color:var(--inkSoft);line-height:1.6;margin:0 0 24px">Não é um site de regras de gramática. É um sistema que reconhece onde você travou, explica de mais de um jeito, testa sua compreensão e só então avança.</p>
+
+<sc-for list="{{ microlessonsView }}" as="l" hint-placeholder-count="8">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:14px;overflow:hidden">
+<button onClick="{{ l.toggleExpand }}" style="width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+<span style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;color:var(--ink)">{{ l.badge }} {{ l.title }}</span>
+<span style="font-size:18px;color:var(--periwinkle)">{{ l.expandIcon }}</span>
+</button>
+
+<sc-if value="{{ l.expanded }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 20px 22px 20px;display:flex;flex-direction:column;gap:16px">
+
+<div style="background:var(--bg);border-left:4px solid var(--periwinkle);border-radius:8px;padding:12px 16px">
+<div style="font-size:13px;font-weight:700;color:var(--periwinkle);margin-bottom:4px">"{{ l.question }}"</div>
+<div style="font-size:15px;line-height:1.5">{{ l.shortAnswer }}</div>
+</div>
+
+<div style="font-size:14px;line-height:1.6;color:var(--inkSoft)"><strong style="color:var(--ink)">Lógica: </strong>{{ l.logicPt }}</div>
+<div style="font-size:14px;line-height:1.6;color:var(--inkSoft)"><strong style="color:var(--ink)">Tecnicamente: </strong>{{ l.technical }}</div>
+
+<div style="background:var(--pink);color:#fff;border-radius:10px;padding:12px 16px;font-family:'Kalam',cursive;font-size:16px">🧩 {{ l.metaphor }}</div>
+
+<div>
+<div style="font-size:13px;font-weight:700;color:var(--inkSoft);margin-bottom:8px">Frase desmontada — clique em cada peça</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ l.brokenPieces }}" as="piece" hint-placeholder-count="4">
+<button onClick="{{ piece.onClick }}" style="{{ piece.style }}">{{ piece.word }}</button>
+</sc-for>
+</div>
+<sc-if value="{{ l.activeRole }}" hint-placeholder-val="{{ false }}">
+<div style="margin-top:8px;font-size:13px;color:var(--periwinkle);font-weight:600">→ {{ l.activeRole }}</div>
+</sc-if>
+</div>
+
+<div style="font-size:14px;line-height:1.6;color:var(--inkSoft)"><strong style="color:var(--ink)">Em português: </strong>{{ l.ptComparison }}</div>
+
+<div style="background:var(--vinho);color:#fff;border-radius:10px;padding:12px 16px;font-size:14px"><strong>🚫 Erro comum:</strong> {{ l.commonError }}</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;font-size:14px">
+<sc-if value="{{ l.transform.afirmativa }}" hint-placeholder-val="{{ false }}"><div><strong>Afirmativa:</strong> {{ l.transform.afirmativa }}</div></sc-if>
+<sc-if value="{{ l.transform.negativa }}" hint-placeholder-val="{{ false }}"><div><strong>Negativa:</strong> {{ l.transform.negativa }}</div></sc-if>
+<sc-if value="{{ l.transform.pergunta }}" hint-placeholder-val="{{ false }}"><div><strong>Pergunta:</strong> {{ l.transform.pergunta }}</div></sc-if>
+<sc-if value="{{ l.transform.resposta }}" hint-placeholder-val="{{ false }}"><div><strong>Resposta:</strong> {{ l.transform.resposta }}</div></sc-if>
+</div>
+
+<div style="background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:14px 16px">
+<div style="font-size:14px;font-weight:700;margin-bottom:8px">✏️ Mini exercício</div>
+<div style="font-size:14px;margin-bottom:8px">{{ l.mini.prompt }}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<input value="{{ l.exerciseInput }}" onChange="{{ l.onExerciseInput }}" placeholder="sua resposta" style="flex:1;min-width:180px;padding:9px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:14px" />
+<button onClick="{{ l.onCheckExercise }}" style="background:var(--periwinkle);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:14px">Verificar</button>
+</div>
+<sc-if value="{{ l.exerciseChecked }}" hint-placeholder-val="{{ false }}">
+<div style="margin-top:10px;font-size:14px">
+<sc-if value="{{ l.exerciseCorrect }}" hint-placeholder-val="{{ false }}"><div style="color:#3F8F5F;font-weight:700">✅ Isso mesmo.</div></sc-if>
+<sc-if value="{{ l.exerciseIncorrect }}" hint-placeholder-val="{{ false }}">
+<div style="color:var(--vinho);font-weight:700">Resposta esperada: {{ l.mini.answer }}</div>
+<div style="color:var(--inkSoft);margin-top:4px">{{ l.technical }}</div>
+<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line)">
+<div style="font-weight:700;margin-bottom:4px">Tente mais uma:</div>
+<div>{{ l.extra.prompt }}</div>
+<div style="color:var(--inkSoft);font-size:13px;margin-top:2px">Resposta: {{ l.extra.answer }}</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<button onClick="{{ l.toggleUnderstood }}" style="{{ l.understoodBtnStyle }}">{{ l.understoodLabel }}</button>
+<sc-if value="{{ l.hasAlt }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ l.onCycleAlt }}" style="background:transparent;border:2px solid var(--periwinkle);color:var(--periwinkle);border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:14px">🔄 Explique de outro jeito</button>
+</sc-if>
+</div>
+<sc-if value="{{ l.currentAlt }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--cloud);color:#1a1a1a;border-radius:10px;padding:12px 16px;font-size:14px">
+<strong>{{ l.currentAlt.label }}:</strong> {{ l.currentAlt.text }}
+</div>
+</sc-if>
+
+<div>
+<label style="font-size:13px;font-weight:700;color:var(--inkSoft);display:block;margin-bottom:6px">✍️ Minha explicação com minhas palavras</label>
+<textarea value="{{ l.myExplanation }}" onChange="{{ l.onMyExplanationChange }}" placeholder="Escreva aqui do seu jeito..." style="width:100%;min-height:70px;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:inherit;font-size:14px"></textarea>
+</div>
+
+<div style="background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px">
+<div style="font-family:'Baloo 2',sans-serif;font-weight:700;color:var(--vinho);font-size:14px;margin-bottom:10px">🔊 Áudio da Aula</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+<button onClick="{{ l.onPlayPt }}" style="{{ styleAudioBtn }}">🇧🇷 Ouça a lógica (PT)</button>
+<button onClick="{{ l.onPlaySlow }}" style="{{ styleAudioBtn }}">🐢 Frase devagar</button>
+<button onClick="{{ l.onPlayNatural }}" style="{{ styleAudioBtn }}">🗣️ Frase natural</button>
+<button onClick="{{ l.onRepeatFlow }}" style="{{ styleAudioBtn }}">🔁 Escute e repita</button>
+</div>
+<sc-if value="{{ l.repeatPhase }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:13px;font-weight:700;color:var(--periwinkle);margin-bottom:10px">{{ l.repeatPhaseLabel }}</div>
+</sc-if>
+<sc-if value="{{ l.listening }}" hint-placeholder-val="{{ false }}">
+<div style="border-top:1px solid var(--line);padding-top:10px;margin-bottom:10px">
+<div style="font-size:13px;font-weight:700;margin-bottom:6px">🎧 Mini listening: {{ l.listening.q }}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+<button onClick="{{ l.onPlayListening }}" style="{{ styleAudioBtn }}">▶️ Ouvir</button>
+<button onClick="{{ l.onRevealListening }}" style="{{ styleAudioBtn }}">👁️ Ver resposta</button>
+</div>
+<sc-if value="{{ l.listeningRevealed }}" hint-placeholder-val="{{ false }}"><div style="margin-top:6px;font-size:13px;color:var(--inkSoft)">Resposta: {{ l.listening.a }}</div></sc-if>
+</div>
+</sc-if>
+<div style="border-top:1px solid var(--line);padding-top:10px">
+<div style="font-size:13px;font-weight:700;margin-bottom:6px">🎙️ Minha gravação</div>
+<button onClick="{{ l.onRecordClick }}" style="{{ styleAudioBtn }}">{{ l.recordLabel }}</button>
+<sc-if value="{{ l.recording.url }}" hint-placeholder-val="{{ false }}"><audio controls="{{ true }}" src="{{ l.recording.url }}" style="display:block;margin-top:8px;width:100%"></audio></sc-if>
+<sc-if value="{{ l.recordingUnavailable }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:var(--inkSoft);margin-top:6px">Gravação ainda não disponível neste navegador.</div></sc-if>
+</div>
+</div>
+
+</div>
+</sc-if>
+</div>
+</sc-for>
+
+<div style="background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:20px">
+<button onClick="{{ toggleErrorPanel }}" style="width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:14px 18px;font-weight:700;font-size:14px;color:var(--inkSoft)">📋 Meus erros ({{ errorCount }}) {{ errorPanelIcon }}</button>
+<sc-if value="{{ errorPanelOpen }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 18px 16px 18px;display:flex;flex-direction:column;gap:8px">
+<sc-if value="{{ hasErrors }}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ errorGroups }}" as="g" hint-placeholder-count="0">
+<div style="font-size:13px;border-top:1px solid var(--line);padding-top:8px">
+<strong>{{ g.type }}</strong> — errado {{ g.count }}x. Última: "{{ g.given }}" → certo: "{{ g.correct }}". {{ g.explanation }}
+</div>
+</sc-for>
+</sc-if>
+<sc-if value="{{ noErrors }}" hint-placeholder-val="{{ true }}"><div style="font-size:13px;color:var(--inkSoft)">Nenhum erro registrado ainda.</div></sc-if>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isLab }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:820px;margin:0 auto;padding:24px 20px">
+<h1 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--vinho);font-size:30px;margin:0 0 6px">🧩 Laboratório "Montando a Frase"</h1>
+<p style="font-size:15px;color:var(--inkSoft);line-height:1.6;margin:0 0 24px">Mude o sujeito e o tempo verbal — a frase recalcula sozinha. Clique nas peças para ver a função de cada uma.</p>
+
+<sc-for list="{{ labView }}" as="s" hint-placeholder-count="7">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px">
+<div style="font-size:12px;font-weight:700;color:var(--berry);margin-bottom:8px">{{ s.context }}</div>
+<div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:19px;margin-bottom:14px">{{ s.currentSentence }}</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+<sc-for list="{{ s.piecesView }}" as="piece" hint-placeholder-count="4">
+<button onClick="{{ piece.onClick }}" style="{{ piece.style }}">{{ piece.word }}</button>
+</sc-for>
+</div>
+<sc-if value="{{ s.activeRole }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:var(--periwinkle);font-weight:600;margin-bottom:14px">→ {{ s.activeRole }}</div></sc-if>
+
+<div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:12px">
+<div style="display:flex;gap:6px">
+<sc-for list="{{ s.formOptions }}" as="f" hint-placeholder-count="3">
+<button onClick="{{ f.onClick }}" style="{{ f.style }}">{{ f.label }}</button>
+</sc-for>
+</div>
+<div style="display:flex;gap:6px">
+<sc-for list="{{ s.tenseOptions }}" as="tOpt" hint-placeholder-count="2">
+<button onClick="{{ tOpt.onClick }}" style="{{ tOpt.style }}">{{ tOpt.label }}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">
+<sc-for list="{{ s.subjectOptions }}" as="sub" hint-placeholder-count="6">
+<button onClick="{{ sub.onClick }}" style="{{ sub.style }}">{{ sub.label }}</button>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+<button onClick="{{ s.onPlay }}" style="{{ styleAudioBtn }}">🔊 Ouvir</button>
+<button onClick="{{ s.onToggleTranslation }}" style="background:transparent;border:none;color:var(--periwinkle);font-weight:700;cursor:pointer;font-size:13px">{{ s.translationToggleLabel }}</button>
+</div>
+<sc-if value="{{ s.showTranslation }}" hint-placeholder-val="{{ false }}">
+<div style="margin-top:8px;font-size:14px;color:var(--inkSoft)">{{ s.translationText }}</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ isAux }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:820px;margin:0 auto;padding:24px 20px">
+<h1 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--vinho);font-size:30px;margin:0 0 6px">⚙️ Auxiliares e Modais</h1>
+<p style="font-size:15px;color:var(--inkSoft);line-height:1.6;margin:0 0 24px">Organizado por função: qual trabalho esta palavra faz nesta frase — não por lista de vocabulário.</p>
+
+<sc-for list="{{ auxGroupsView }}" as="g" hint-placeholder-count="4">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:16px;overflow:hidden">
+<button onClick="{{ g.toggle }}" style="width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:18px 20px">
+<div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:18px;color:var(--vinho)">{{ g.title }} {{ g.expandIcon }}</div>
+<div style="font-family:'Kalam',cursive;font-size:14px;color:var(--inkSoft);margin-top:2px">{{ g.metaphor }}</div>
+</button>
+<sc-if value="{{ g.expanded }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 20px 18px 20px;display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ g.itemsView }}" as="item" hint-placeholder-count="3">
+<div style="background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px">
+<div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:16px;color:var(--berry);margin-bottom:6px">{{ item.word }}</div>
+<div style="font-size:13px;color:var(--inkSoft);margin-bottom:4px"><strong style="color:var(--ink)">Significado literal:</strong> {{ item.literal }}</div>
+<div style="font-size:13px;color:var(--inkSoft);margin-bottom:10px"><strong style="color:var(--ink)">Função:</strong> {{ item.func }}</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:6px;font-size:13px;margin-bottom:10px">
+<sc-if value="{{ item.affirmative }}" hint-placeholder-val="{{ false }}"><div><strong>Afirmativa:</strong> {{ item.affirmative }}</div></sc-if>
+<sc-if value="{{ item.negative }}" hint-placeholder-val="{{ false }}"><div><strong>Negativa:</strong> {{ item.negative }}</div></sc-if>
+<sc-if value="{{ item.question }}" hint-placeholder-val="{{ false }}"><div><strong>Pergunta:</strong> {{ item.question }}</div></sc-if>
+</div>
+<sc-if value="{{ item.commonError }}" hint-placeholder-val="{{ false }}"><div style="background:var(--vinho);color:#fff;border-radius:8px;padding:9px 12px;font-size:13px;margin-bottom:10px"><strong>🚫</strong> {{ item.commonError }}</div></sc-if>
+<sc-if value="{{ item.mini }}" hint-placeholder-val="{{ false }}">
+<div style="border-top:1px solid var(--line);padding-top:10px">
+<div style="font-size:13px;margin-bottom:6px">✏️ {{ item.mini.prompt }}</div>
+<div style="display:flex;gap:8px">
+<input value="{{ item.exerciseInput }}" onChange="{{ item.onExerciseInput }}" placeholder="sua resposta" style="flex:1;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13px" />
+<button onClick="{{ item.onCheckExercise }}" style="background:var(--periwinkle);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13px">Verificar</button>
+</div>
+<sc-if value="{{ item.exerciseChecked }}" hint-placeholder-val="{{ false }}">
+<div style="margin-top:6px;font-size:13px;font-weight:700">{{ item.exerciseFeedback }}</div>
+</sc-if>
+</div>
+</sc-if>
+<div style="margin-top:10px"><button onClick="{{ item.onPlay }}" style="{{ styleAudioBtnSm }}">🔊 Ouvir exemplo</button></div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ isWh }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:820px;margin:0 auto;padding:24px 20px">
+<h1 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--vinho);font-size:30px;margin:0 0 6px">❓ WH-words</h1>
+<p style="font-size:15px;color:var(--inkSoft);line-height:1.6;margin:0 0 24px">A WH-word nunca substitui o auxiliar — ela só se soma a ele. <em>Do you work remotely? → Where do you work? → Why do you work remotely? → What do you do?</em></p>
+
+<sc-for list="{{ whWordsView }}" as="w" hint-placeholder-count="8">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px">
+<div style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--vinho);font-size:18px">{{ w.word }} <span style="font-size:13px;font-weight:500;color:var(--inkSoft)">— {{ w.busca }}</span></div>
+<label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--inkSoft);cursor:pointer">
+<input type="checkbox" checked="{{ w.checked }}" onChange="{{ w.onToggle }}" />entendi
+</label>
+</div>
+<div style="font-size:14px;margin-bottom:4px"><strong>{{ w.example }}</strong> — {{ w.translation }}</div>
+<div style="font-size:13px;color:var(--vinho);margin-bottom:4px">🚫 {{ w.error }}</div>
+<div style="font-size:13px;color:var(--inkSoft)">🎯 {{ w.interview }} · 💬 {{ w.daily }}</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ isInterviews }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:820px;margin:0 auto;padding:24px 20px">
+<h1 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--vinho);font-size:30px;margin:0 0 6px">🎯 English for Interviews</h1>
+<p style="font-size:15px;color:var(--inkSoft);line-height:1.6;margin:0 0 24px">Dados profissionais revisados — nada de números ou empresas sem confirmação. Preencha os campos [EDITÁVEL] com o que for real.</p>
+
+<sc-for list="{{ interviewsView }}" as="b" hint-placeholder-count="10">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px">
+<div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:17px;color:var(--vinho);margin-bottom:10px">{{ b.id }}. {{ b.title }}</div>
+<div style="font-size:13px;color:var(--inkSoft);margin-bottom:8px"><strong style="color:var(--ink)">A2:</strong> {{ b.a2 }}</div>
+<div style="font-size:14px;margin-bottom:6px"><strong>Natural:</strong> {{ b.natural }}</div>
+<sc-if value="{{ b.tag }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:var(--berry);margin-bottom:10px">{{ b.tag }}</div></sc-if>
+<div style="font-size:13px;color:var(--inkSoft);font-family:'Kalam',cursive;margin-bottom:10px">Estrutura: {{ b.structure }}</div>
+<sc-if value="{{ b.fillField }}" hint-placeholder-val="{{ false }}">
+<div style="margin-bottom:10px">
+<label style="font-size:12px;font-weight:700;color:var(--inkSoft)">{{ b.fillField }}</label>
+<input placeholder="preencha aqui" style="width:100%;margin-top:4px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:13px" />
+</div>
+</sc-if>
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
+<sc-for list="{{ b.keywordsView }}" as="kw" hint-placeholder-count="3">
+<span style="background:var(--cloud);color:#1a1a1a;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600">{{ kw }}</span>
+</sc-for>
+</div>
+<div style="display:flex;gap:8px;margin-bottom:12px">
+<button onClick="{{ b.onPlay }}" style="{{ styleAudioBtnSm }}">🔊 Ouvir</button>
+<button onClick="{{ b.onCopy }}" style="{{ styleAudioBtnSm }}">{{ b.copyLabel }}</button>
+</div>
+<label style="font-size:12px;font-weight:700;color:var(--inkSoft);display:block;margin-bottom:6px">Minha versão</label>
+<textarea value="{{ b.myAnswer }}" onChange="{{ b.onMyAnswerChange }}" placeholder="Escreva sua própria versão aqui..." style="width:100%;min-height:60px;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit;font-size:14px"></textarea>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPrintables }}" hint-placeholder-val="{{ false }}">
+<div class="no-print" style="max-width:820px;margin:0 auto;padding:24px 20px">
+<h1 style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--vinho);font-size:30px;margin:0 0 6px">🖨️ Printables</h1>
+<p style="font-size:15px;color:var(--inkSoft);line-height:1.6;margin:0 0 20px">Marque as folhas que quer imprimir — cada uma sai em uma página, formato A4.</p>
+
+<sc-for list="{{ printablesView }}" as="p" hint-placeholder-count="4">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px">
+<label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:10px">
+<input type="checkbox" checked="{{ p.checked }}" onChange="{{ p.onToggle }}" />
+<span style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;color:var(--vinho)">{{ p.title }}</span>
+</label>
+<sc-for list="{{ p.lines }}" as="ln" hint-placeholder-count="2">
+<div style="font-size:13px;color:var(--inkSoft);margin-bottom:4px">{{ ln }}</div>
+</sc-for>
+<sc-if value="{{ p.isGrid }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:6px">
+<sc-for list="{{ whWordsForPrint }}" as="w" hint-placeholder-count="8">
+<div style="font-size:12px;border:1px solid var(--line);border-radius:6px;padding:6px 8px"><strong>{{ w.word }}</strong> — {{ w.busca }}: "{{ w.example }}"</div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-for>
+
+<sc-if value="{{ printWarning }}" hint-placeholder-val="{{ false }}"><div style="color:var(--vinho);font-size:13px;font-weight:700;margin-bottom:10px">Selecione pelo menos uma folha.</div></sc-if>
+<button onClick="{{ doPrint }}" style="background:var(--vinho);color:#fff;border:none;border-radius:10px;padding:12px 22px;font-weight:700;font-size:15px;cursor:pointer;font-family:'Baloo 2',sans-serif">Imprimir selecionadas</button>
+</div>
+
+<sc-for list="{{ printablesView }}" as="ps" hint-placeholder-count="4">
+<div class="print-sheet {{ ps.printClass }}" style="width:190mm;min-height:270mm;padding:14mm;background:#fff;color:#1a1a1a">
+<h2 style="font-family:'Baloo 2',sans-serif;font-size:24px;color:#912124;margin:0 0 16px">{{ ps.title }}</h2>
+<sc-for list="{{ ps.lines }}" as="pln" hint-placeholder-count="2"><p style="font-size:15px;line-height:1.7">{{ pln }}</p></sc-for>
+<sc-if value="{{ ps.isGrid }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:10px">
+<sc-for list="{{ whWordsForPrint }}" as="pw" hint-placeholder-count="8">
+<div style="border:1px solid #B9D0E2;border-radius:8px;padding:10px 12px"><strong>{{ pw.word }}</strong> — {{ pw.busca }}<br/>"{{ pw.example }}"</div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{ speechUnsupported }}" hint-placeholder-val="{{ false }}">
+<div class="no-print" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--vinho);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;box-shadow:0 4px 16px var(--shadow)">Seu navegador não suporta leitura de voz — funciona melhor no Chrome ou Edge.</div>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;englishVoice&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en-US&quot;,&quot;options&quot;:[&quot;en-US&quot;,&quot;en-GB&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Áudio&quot;},&quot;slowRate&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.7,&quot;min&quot;:0.5,&quot;max&quot;:0.9,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Áudio&quot;}}">
+const SUBJECTS = ['i','you','he','she','we','they'];
+const PRONOUNS = {i:'I',you:'You',he:'He',she:'She',we:'We',they:'They'};
+
+class Component extends DCLogic {
+  state = {
+    theme:'light', view:'home', data:null,
+    duvidasUI:{}, understood:{}, myExplanations:{},
+    labUI:{},
+    auxUI:{}, auxExerciseInput:{}, auxExerciseChecked:{},
+    whChecked:{},
+    interviewAnswers:{},
+    printSelected:['f1','f2','f3','f4'], printWarning:false,
+    errorLog:[], errorPanelOpen:false,
+    lastSection:null,
+    repeatFlow:null, recordings:{}, listeningRevealed:{},
+    speechUnsupported:false
+  };
+
+  componentDidMount(){
+    this.loadPersisted();
+    import('./content-data.js').then((mod)=>{ this.setState({data:mod}); }).catch((e)=>{ console.error('content-data.js failed to load', e); });
+  }
+
+  readLS(key, fallback){
+    try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }catch(e){ return fallback; }
+  }
+  writeLS(key, value){ try{ localStorage.setItem(key, JSON.stringify(value)); }catch(e){} }
+
+  loadPersisted(){
+    this.setState({
+      theme: this.readLS('toolkit_theme','light'),
+      understood: this.readLS('toolkit_understood',{}),
+      myExplanations: this.readLS('toolkit_my_explanations',{}),
+      whChecked: this.readLS('toolkit_wh_checked',{}),
+      interviewAnswers: this.readLS('toolkit_interview_answers',{}),
+      errorLog: this.readLS('toolkit_error_log',[]),
+      printSelected: this.readLS('toolkit_printables_selected',['f1','f2','f3','f4']),
+      lastSection: this.readLS('toolkit_last_section', null)
+    });
+  }
+
+  setView(v){
+    this.setState({view:v});
+    if(v!=='home'){ this.writeLS('toolkit_last_section', v); this.setState({lastSection:v}); }
+  }
+
+  toggleTheme(){
+    this.setState((s)=>{ const t = s.theme==='light'?'dark':'light'; this.writeLS('toolkit_theme', t); return {theme:t}; });
+  }
+
+  speak(text, lang, rate){
+    if(!('speechSynthesis' in window)){ this.setState({speechUnsupported:true}); setTimeout(()=>this.setState({speechUnsupported:false}), 4000); return; }
+    try{
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = lang; u.rate = rate || 1;
+      window.speechSynthesis.speak(u);
+    }catch(e){ this.setState({speechUnsupported:true}); }
+  }
+
+  startRepeatFlow(id, text){
+    const voice = (this.props && this.props.englishVoice) || 'en-US';
+    this.speak(text, voice, 1);
+    this.setState({repeatFlow:{id, phase:'Tocando a frase...'}});
+    setTimeout(()=>{
+      this.setState((s)=> s.repeatFlow && s.repeatFlow.id===id ? {repeatFlow:{id, phase:'Sua vez! Repita em voz alta.'}} : {});
+      setTimeout(()=>{
+        this.speak(text, voice, 1);
+        this.setState((s)=> s.repeatFlow && s.repeatFlow.id===id ? {repeatFlow:{id, phase:'Pronto — clique em "Escute e repita" para repetir.'}} : {});
+      }, 3000);
+    }, 900);
+  }
+
+  toggleExpand(id){
+    this.setState((s)=>({ duvidasUI:{...s.duvidasUI, [id]:{...(s.duvidasUI[id]||{}), expanded: !(s.duvidasUI[id]||{}).expanded} } }));
+  }
+  toggleChip(scope, id, idx){
+    const key = scope==='duvida' ? 'duvidasUI' : (scope==='lab' ? 'labUI' : 'auxUI');
+    this.setState((s)=>{
+      const cur = s[key][id] || {};
+      return { [key]: {...s[key], [id]: {...cur, activeChip: cur.activeChip===idx ? null : idx} } };
+    });
+  }
+  markUnderstood(id){
+    this.setState((s)=>{ const u = {...s.understood, [id]: !s.understood[id]}; this.writeLS('toolkit_understood', u); return {understood:u}; });
+  }
+  cycleAlt(id, topic){
+    this.setState((s)=>{
+      const cur = s.duvidasUI[id]||{};
+      const list = (this.state.data && this.state.data.ALT_EXPLANATIONS[topic]) || [];
+      const total = Math.max(list.length,1);
+      const next = ((cur.altIndex==null? -1: cur.altIndex)+1) % total;
+      return { duvidasUI: {...s.duvidasUI, [id]: {...cur, altIndex:next} } };
+    });
+  }
+  setMyExplanation(id, text){
+    this.setState((s)=>{ const m = {...s.myExplanations,[id]:text}; this.writeLS('toolkit_my_explanations', m); return {myExplanations:m}; });
+  }
+  setExerciseInput(id, val){
+    this.setState((s)=>({ duvidasUI:{...s.duvidasUI,[id]:{...(s.duvidasUI[id]||{}), exerciseInput:val, exerciseChecked:false}} }));
+  }
+  normalize(s){ return (s||'').toLowerCase().replace(/[.?!]/g,'').replace(/\s+/g,' ').trim(); }
+  checkExercise(id, given, correct, explanation, type){
+    const ok = this.normalize(given)===this.normalize(correct);
+    if(!ok) this.logError({type: type||id, given, correct, explanation});
+    this.setState((s)=>({ duvidasUI:{...s.duvidasUI, [id]:{...(s.duvidasUI[id]||{}), exerciseChecked:true, exerciseCorrect:ok}} }));
+  }
+  logError(entry){
+    const log = [...this.state.errorLog, {...entry, ts:Date.now()}];
+    this.setState({errorLog:log});
+    this.writeLS('toolkit_error_log', log);
+  }
+  toggleErrorPanel(){ this.setState((s)=>({errorPanelOpen: !s.errorPanelOpen})); }
+
+  onPlayListening(id, transcript){
+    const voice = (this.props && this.props.englishVoice) || 'en-US';
+    this.speak(transcript, voice, 1);
+  }
+  onRevealListening(id){
+    this.setState((s)=>({ listeningRevealed:{...s.listeningRevealed, [id]: !s.listeningRevealed[id]} }));
+  }
+
+  async startRecording(id){
+    try{
+      const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+      const mr = new MediaRecorder(stream);
+      this._chunks = [];
+      mr.ondataavailable = (e)=>this._chunks.push(e.data);
+      mr.onstop = ()=>{
+        const blob = new Blob(this._chunks, {type:'audio/webm'});
+        const url = URL.createObjectURL(blob);
+        stream.getTracks().forEach((t)=>t.stop());
+        this.setState((s)=>({ recordings:{...s.recordings, [id]:{status:'done', url}} }));
+      };
+      this._mr = mr; this._mrId = id;
+      mr.start();
+      this.setState((s)=>({ recordings:{...s.recordings, [id]:{status:'recording'}} }));
+    }catch(e){
+      this.setState((s)=>({ recordings:{...s.recordings, [id]:{status:'unavailable'}} }));
+    }
+  }
+  stopRecording(id){
+    if(this._mr && this._mr.state==='recording' && this._mrId===id) this._mr.stop();
+  }
+  onRecordClick(id){
+    const cur = (this.state.recordings[id]||{}).status;
+    if(cur==='recording') this.stopRecording(id); else this.startRecording(id);
+  }
+
+  setLabField(id, field, value){
+    this.setState((s)=>({ labUI:{...s.labUI, [id]:{...(s.labUI[id]||{}), [field]:value}} }));
+  }
+
+  isThird(subject){ return subject==='he'||subject==='she'; }
+  cap(w){ return w.charAt(0).toUpperCase()+w.slice(1); }
+  thirdPersonS(verb){
+    if(!verb) return verb;
+    if(/(ss|sh|ch|x|o)$/.test(verb)) return verb+'es';
+    if(/[^aeiou]y$/.test(verb)) return verb.slice(0,-1)+'ies';
+    return verb+'s';
+  }
+  computeDoSentence(sent, subject, tense){
+    const Subj = PRONOUNS[subject];
+    const third = this.isThird(subject);
+    const verb = sent.verb;
+    const past = sent.pastForm || (verb.endsWith('e') ? verb+'d' : verb+(verb?'ed':''));
+    const full = (sent.complement||'') + (sent.timeMarker||'');
+    const wh = sent.wh ? sent.wh+' ' : '';
+    if(tense==='presente'){
+      const aux = third ? 'does' : 'do';
+      const auxNeg = third ? "doesn't" : "don't";
+      const verbAff = third ? this.thirdPersonS(verb) : verb;
+      return {
+        afirmativa: `${Subj} ${verbAff}${full?' '+full:''}.`,
+        negativa: `${Subj} ${auxNeg} ${verb}${full?' '+full:''}.`,
+        pergunta: `${wh}${this.cap(aux)} ${subject==='i'?'I':subject} ${verb}${full?' '+full:''}?`
+      };
+    }
+    return {
+      afirmativa: `${Subj} ${past}${full?' '+full:''}.`,
+      negativa: `${Subj} didn't ${verb}${full?' '+full:''}.`,
+      pergunta: `${wh}Did ${subject==='i'?'I':subject} ${verb}${full?' '+full:''}?`
+    };
+  }
+  computeBeSentence(sent, subject, tense){
+    const Subj = PRONOUNS[subject];
+    const forms = { presente:{i:'am',he:'is',she:'is',you:'are',we:'are',they:'are'}, passado:{i:'was',he:'was',she:'was',you:'were',we:'were',they:'were'} };
+    const be = forms[tense][subject];
+    const negMap = { am:"'m not", is:"isn't", are:"aren't", was:"wasn't", were:"weren't" };
+    const full = (sent.complement||'') + (sent.timeMarker||'');
+    const subjLower = subject==='i' ? 'I' : subject;
+    if(subject==='i' && tense==='presente'){
+      return { afirmativa:`I'm ${full}.`, negativa:`I'm not ${full}.`, pergunta:`Am I ${full}?` };
+    }
+    return {
+      afirmativa: `${Subj} ${be} ${full}.`,
+      negativa: `${Subj} ${be}${negMap[be]} ${full}.`.replace(be+' '+negMap[be], be+negMap[be]),
+      pergunta: `${this.cap(be)} ${subjLower} ${full}?`
+    };
+  }
+  getComputedSentence(sent, subject, tense){
+    return sent.type==='be' ? this.computeBeSentence(sent, subject, tense) : this.computeDoSentence(sent, subject, tense);
+  }
+
+  togglePrintSelected(id){
+    this.setState((s)=>{
+      const cur = s.printSelected||[];
+      const next = cur.includes(id) ? cur.filter((x)=>x!==id) : [...cur, id];
+      this.writeLS('toolkit_printables_selected', next);
+      return {printSelected:next};
+    });
+  }
+  doPrint(){
+    if(!this.state.printSelected || this.state.printSelected.length===0){ this.setState({printWarning:true}); return; }
+    this.setState({printWarning:false});
+    setTimeout(()=>window.print(), 60);
+  }
+
+  computeTopicStatus(id, data){
+    if(id==='dodoesdid'){
+      const total = data.MICROLESSONS.length;
+      const c = Object.values(this.state.understood||{}).filter(Boolean).length;
+      return c>=total ? 'mastered' : (c>0 ? 'review' : 'none');
+    }
+    if(id==='whwords'){
+      const total = data.WH_WORDS.length;
+      const c = Object.values(this.state.whChecked||{}).filter(Boolean).length;
+      return c>=total ? 'mastered' : (c>0 ? 'review' : 'none');
+    }
+    if(id==='interview'){
+      const total = data.INTERVIEW_BLOCKS.length;
+      const c = Object.values(this.state.interviewAnswers||{}).filter((v)=>v && v.trim()).length;
+      return c>=total ? 'mastered' : (c>0 ? 'review' : 'none');
+    }
+    return 'none';
+  }
+
+  renderVals(){
+    const data = this.state.data;
+    const theme = this.state.theme;
+    const view = this.state.view;
+
+    const navDefs = [
+      {id:'home', label:'Início'}, {id:'duvidas', label:'Dúvidas'}, {id:'lab', label:'Laboratório'},
+      {id:'auxiliares', label:'Auxiliares'}, {id:'whwords', label:'WH-words'},
+      {id:'interviews', label:'Entrevistas'}, {id:'printables', label:'Printables'}
+    ];
+    const navItems = navDefs.map((n)=>({
+      label:n.label, onClick:()=>this.setView(n.id),
+      style:`border:none;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Baloo 2',sans-serif;${view===n.id ? 'background:var(--vinho);color:#fff;' : 'background:transparent;color:var(--ink);'}`
+    }));
+
+    let topicsView = [], masteredCount = 0;
+    if(data){
+      topicsView = data.TOPICS.map((t)=>{
+        const status = this.computeTopicStatus(t.id, data);
+        const labels = {mastered:'🟢 Dominado', review:'🟡 Em revisão', none:'⚪ Ainda não estudado'};
+        return {...t, status, statusLabel:labels[status]};
+      });
+      masteredCount = topicsView.filter((t)=>t.status==='mastered').length;
+    }
+
+    const sectionLabels = {duvidas:'Dúvidas que travaram você', lab:'Laboratório de Frases', auxiliares:'Auxiliares e Modais', whwords:'WH-words', interviews:'English for Interviews', printables:'Printables'};
+    const lastSection = this.state.lastSection;
+    const continueLabel = lastSection ? `Continuar em: ${sectionLabels[lastSection]}` : 'Começar pelas Dúvidas';
+    const cardBase = 'text-align:left;border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--card);cursor:pointer;';
+    const cardFeatured = 'text-align:left;border:2px solid var(--vinho);border-radius:16px;padding:20px;background:var(--card);cursor:pointer;grid-column:1/-1;';
+    const homeCards = [
+      {icon:'🧠', title:'Dúvidas que travaram a Amanda', subtitle:'O núcleo do toolkit — não é gramática solta.', click:()=>this.setView('duvidas'), cardStyle:cardFeatured},
+      {icon:'🔊', title:'Áudios da aula', subtitle:'Qualquer microaula com áudio pendente.', click:()=>this.setView('duvidas'), cardStyle:cardBase},
+      {icon:'🎯', title:'English for Interviews', subtitle:'Blocos prontos para entrevista.', click:()=>this.setView('interviews'), cardStyle:cardBase},
+      {icon:'🖨️', title:'Printables', subtitle:'Folhas para imprimir e colar na parede.', click:()=>this.setView('printables'), cardStyle:cardBase},
+      {icon:'🧩', title:'Montando a Frase', subtitle:'Desmonte e remonte frases reais.', click:()=>this.setView('lab'), cardStyle:cardBase},
+      {icon:'⚙️', title:'Auxiliares e Modais', subtitle:'Do/Does/Did, To Be, Modais, Have.', click:()=>this.setView('auxiliares'), cardStyle:cardBase},
+      {icon:'▶️', title:continueLabel, subtitle:'Volta para onde você parou.', click:()=>this.setView(lastSection||'duvidas'), cardStyle:cardBase}
+    ];
+
+    const styleAudioBtn = "background:var(--periwinkle);color:#fff;border:none;border-radius:8px;padding:9px 14px;font-size:13px;font-weight:700;cursor:pointer";
+    const styleAudioBtnSm = "background:transparent;border:2px solid var(--periwinkle);color:var(--periwinkle);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer";
+
+    const chipStyle = (active)=>`display:inline-flex;flex-direction:column;padding:8px 12px;border-radius:10px;border:2px solid ${active?'var(--periwinkle)':'var(--line)'};background:var(--card);color:var(--ink);cursor:pointer;font-size:13px;font-weight:600`;
+
+    // ---- Dúvidas ----
+    let microlessonsView = [];
+    if(data){
+      const altTopic = data.ALT_EXPLANATIONS;
+      microlessonsView = data.MICROLESSONS.map((l, i)=>{
+        const ui = this.state.duvidasUI[l.id] || {};
+        const alts = altTopic[l.topic] || [];
+        const currentAlt = ui.altIndex!=null ? alts[ui.altIndex % Math.max(alts.length,1)] : null;
+        const understood = !!this.state.understood[l.id];
+        const activeChip = ui.activeChip;
+        const brokenPieces = l.broken.map((pair, idx)=>({
+          word:pair[0], onClick:()=>this.toggleChip('duvida', l.id, idx), style:chipStyle(activeChip===idx)
+        }));
+        const activeRole = activeChip!=null ? l.broken[activeChip][1] : null;
+        const exerciseChecked = !!ui.exerciseChecked;
+        const exampleSentence = l.transform.pergunta || l.broken.map((p)=>p[0]).join(' ');
+        const listening = l.listening ? {...l.listening} : null;
+        const recording = this.state.recordings[l.id] || {status:'idle'};
+        const recordLabel = recording.status==='recording' ? '⏹️ Parar gravação' : (recording.status==='done' ? '🎙️ Gravar novamente' : '🎙️ Grave sua versão');
+        return {
+          ...l, badge:`Dúvida ${i+1} —`,
+          expanded: !!ui.expanded, expandIcon: ui.expanded ? '▲' : '▼',
+          toggleExpand:()=>this.toggleExpand(l.id),
+          activeChip, activeRole, brokenPieces,
+          understood, understoodLabel: understood ? '✅ Entendido' : 'Agora entendi',
+          understoodBtnStyle: understood
+            ? 'background:#3F8F5F;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:14px'
+            : 'background:var(--vinho);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:14px',
+          toggleUnderstood:()=>this.markUnderstood(l.id),
+          hasAlt: alts.length>0, currentAlt, onCycleAlt:()=>this.cycleAlt(l.id, l.topic),
+          myExplanation: this.state.myExplanations[l.id] || '',
+          onMyExplanationChange:(e)=>this.setMyExplanation(l.id, e.target.value),
+          exerciseInput: ui.exerciseInput || '',
+          onExerciseInput:(e)=>this.setExerciseInput(l.id, e.target.value),
+          exerciseChecked, exerciseCorrect: !!ui.exerciseCorrect, exerciseIncorrect: exerciseChecked && !ui.exerciseCorrect,
+          onCheckExercise:()=>this.checkExercise(l.id, ui.exerciseInput, l.mini.answer, l.technical, l.topic),
+          onPlayPt:()=>this.speak(l.shortAnswer, 'pt-BR', 1),
+          onPlaySlow:()=>this.speak(l.broken.map((p)=>p[0]).join(', '), (this.props&&this.props.englishVoice)||'en-US', this.props&&this.props.slowRate || 0.7),
+          onPlayNatural:()=>this.speak(exampleSentence, (this.props&&this.props.englishVoice)||'en-US', 1),
+          repeatPhase: this.state.repeatFlow && this.state.repeatFlow.id===l.id ? this.state.repeatFlow.phase : null,
+          repeatPhaseLabel: this.state.repeatFlow && this.state.repeatFlow.id===l.id ? this.state.repeatFlow.phase : '',
+          onRepeatFlow:()=>this.startRepeatFlow(l.id, exampleSentence),
+          listening, listeningRevealed: !!this.state.listeningRevealed[l.id],
+          onPlayListening: listening ? ()=>this.speak(listening.transcript, 'en-US', 1) : null,
+          onRevealListening:()=>this.onRevealListening(l.id),
+          recording, recordLabel, recordingUnavailable: recording.status==='unavailable',
+          onRecordClick:()=>this.onRecordClick(l.id)
+        };
+      });
+    }
+
+    // ---- Error log ----
+    const errorLog = this.state.errorLog || [];
+    const groupsMap = {};
+    errorLog.forEach((e)=>{
+      const k = e.type || 'geral';
+      if(!groupsMap[k]) groupsMap[k] = {type:k, count:0, given:e.given, correct:e.correct, explanation:e.explanation};
+      groupsMap[k].count++; groupsMap[k].given = e.given; groupsMap[k].correct = e.correct; groupsMap[k].explanation = e.explanation;
+    });
+    const errorGroups = Object.values(groupsMap);
+
+    // ---- Lab ----
+    let labView = [];
+    if(data){
+      labView = data.LAB_SENTENCES.map((s)=>{
+        const ui = this.state.labUI[s.id] || {subject:s.subjectDefault, tense:'presente', form:'pergunta', showTranslation:false};
+        const computed = this.getComputedSentence(s, ui.subject, ui.tense);
+        const currentSentence = computed[ui.form] || computed.pergunta;
+        const activeChip = ui.activeChip;
+        const piecesView = s.pieces.map((pair, idx)=>({ word:pair[0], onClick:()=>this.toggleChip('lab', s.id, idx), style:chipStyle(activeChip===idx) }));
+        const activeRole = activeChip!=null ? s.pieces[activeChip][1] : null;
+        const formDefs = [['afirmativa','Afirmativa'],['negativa','Negativa'],['pergunta','Pergunta']];
+        const formOptions = formDefs.map(([id,label])=>({
+          label, onClick:()=>this.setLabField(s.id,'form',id),
+          style:`border:none;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;${ui.form===id?'background:var(--vinho);color:#fff;':'background:var(--bg);color:var(--ink);'}`
+        }));
+        const tenseDefs = [['presente','Presente'],['passado','Passado']];
+        const tenseOptions = tenseDefs.map(([id,label])=>({
+          label, onClick:()=>this.setLabField(s.id,'tense',id),
+          style:`border:none;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;${ui.tense===id?'background:var(--periwinkle);color:#fff;':'background:var(--bg);color:var(--ink);'}`
+        }));
+        const subjectOptions = SUBJECTS.map((sub)=>({
+          label:PRONOUNS[sub], onClick:()=>this.setLabField(s.id,'subject',sub),
+          style:`border:none;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer;${ui.subject===sub?'background:var(--berry);color:#fff;':'background:var(--bg);color:var(--ink);'}`
+        }));
+        return {
+          ...s, currentSentence, piecesView, activeRole,
+          formOptions, tenseOptions, subjectOptions,
+          onPlay:()=>this.speak(currentSentence, (this.props&&this.props.englishVoice)||'en-US', 1),
+          showTranslation: !!ui.showTranslation,
+          translationToggleLabel: ui.showTranslation ? 'Ocultar tradução' : 'Mostrar tradução',
+          onToggleTranslation:()=>this.setLabField(s.id,'showTranslation', !ui.showTranslation),
+          translationText: ui.subject===s.subjectDefault ? s.translation : 'Tradução disponível para a frase base — troque de volta o sujeito para ver.'
+        };
+      });
+    }
+
+    // ---- Auxiliares ----
+    let auxGroupsView = [];
+    if(data){
+      auxGroupsView = data.AUX_GROUPS.map((g)=>{
+        const gui = this.state.auxUI[g.id] || {};
+        const itemsView = g.items.map((item, idx)=>{
+          const itemKey = g.id+'-'+idx;
+          const exInput = this.state.auxExerciseInput[itemKey] || '';
+          const exChecked = !!this.state.auxExerciseChecked[itemKey];
+          return {
+            ...item,
+            exerciseInput: exInput,
+            onExerciseInput:(e)=>this.setState((s)=>({auxExerciseInput:{...s.auxExerciseInput,[itemKey]:e.target.value}, auxExerciseChecked:{...s.auxExerciseChecked,[itemKey]:false}})),
+            exerciseChecked: exChecked,
+            exerciseFeedback: exChecked ? (this.normalize(exInput)===this.normalize(item.mini&&item.mini.answer) ? '✅ Isso mesmo.' : `Resposta esperada: ${item.mini&&item.mini.answer}`) : '',
+            onCheckExercise:()=>{
+              const ok = this.normalize(exInput)===this.normalize(item.mini&&item.mini.answer);
+              if(!ok) this.logError({type:item.word, given:exInput, correct:item.mini&&item.mini.answer, explanation:item.rule||item.func});
+              this.setState((s)=>({auxExerciseChecked:{...s.auxExerciseChecked,[itemKey]:true}}));
+            },
+            onPlay:()=>this.speak(item.profExample||item.question||item.affirmative||item.word, (this.props&&this.props.englishVoice)||'en-US', 1)
+          };
+        });
+        return { ...g, expanded: !!gui.expanded, expandIcon: gui.expanded?'▲':'▼', toggle:()=>this.setState((s)=>({auxUI:{...s.auxUI,[g.id]:{...gui, expanded: !gui.expanded}}})), itemsView };
+      });
+    }
+
+    // ---- WH words ----
+    let whWordsView = [], whWordsForPrint = [];
+    if(data){
+      whWordsView = data.WH_WORDS.map((w)=>({
+        ...w, checked: !!this.state.whChecked[w.word],
+        onToggle:()=>this.setState((s)=>{ const c={...s.whChecked,[w.word]: !s.whChecked[w.word]}; this.writeLS('toolkit_wh_checked', c); return {whChecked:c}; })
+      }));
+      whWordsForPrint = data.WH_WORDS.map((w)=>({word:w.word, busca:w.busca, example:w.example}));
+    }
+
+    // ---- Interviews ----
+    let interviewsView = [];
+    if(data){
+      interviewsView = data.INTERVIEW_BLOCKS.map((b)=>{
+        const myAnswer = this.state.interviewAnswers[b.id] || '';
+        return {
+          ...b, keywordsView: b.keywords||[],
+          myAnswer, onMyAnswerChange:(e)=>this.setState((s)=>{ const a={...s.interviewAnswers,[b.id]:e.target.value}; this.writeLS('toolkit_interview_answers', a); return {interviewAnswers:a}; }),
+          onPlay:()=>this.speak(b.natural, (this.props&&this.props.englishVoice)||'en-US', 1),
+          copyLabel:'📋 Copiar', onCopy:()=>{ try{ navigator.clipboard.writeText(myAnswer||b.natural); }catch(e){} }
+        };
+      });
+    }
+
+    // ---- Printables ----
+    let printablesView = [];
+    if(data){
+      const selected = this.state.printSelected||[];
+      printablesView = data.PRINTABLES.map((p)=>({
+        ...p, checked: selected.includes(p.id), isGrid: !!p.grid,
+        onToggle:()=>this.togglePrintSelected(p.id),
+        printClass: selected.includes(p.id) ? 'print-selected' : ''
+      }));
+    }
+
+    return {
+      theme, themeIcon: theme==='light' ? '🌙' : '☀️', toggleTheme:()=>this.toggleTheme(),
+      isHome: view==='home', isDuvidas: view==='duvidas', isLab: view==='lab', isAux: view==='auxiliares',
+      isWh: view==='whwords', isInterviews: view==='interviews', isPrintables: view==='printables',
+      navItems, topicsView, masteredCount, homeCards,
+      microlessonsView, styleAudioBtn, styleAudioBtnSm,
+      errorPanelOpen: this.state.errorPanelOpen, toggleErrorPanel:()=>this.toggleErrorPanel(),
+      errorCount: errorLog.length, hasErrors: errorGroups.length>0, noErrors: errorGroups.length===0,
+      errorGroups, errorPanelIcon: this.state.errorPanelOpen ? '▲' : '▼',
+      labView, auxGroupsView, whWordsView, whWordsForPrint, interviewsView, printablesView,
+      printWarning: this.state.printWarning, doPrint:()=>this.doPrint(),
+      speechUnsupported: this.state.speechUnsupported
+    };
+  }
+}
+
+</script>
+</body>
+</html>
