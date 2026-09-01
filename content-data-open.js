@@ -21,7 +21,8 @@ export const PART_1_OPEN_META = {
     "interview/Entrevistas"
   ],
   "gate": "não implementado nesta entrega — content-data-open.js é conteúdo apenas, sem lógica de acesso",
-  "note": "Não editar pedagogicamente este arquivo diretamente. Qualquer correção de conteúdo deve primeiro ser feita nos .md de origem, depois regerada aqui."
+  "note": "Não editar pedagogicamente este arquivo diretamente. Qualquer correção de conteúdo deve primeiro ser feita nos .md de origem, depois regerada aqui.",
+  "revision": "v2 — correções fechadas pelo Codex após conferência da entrega v1: (1) Etapa 0 construída por completo (deixou de ser stub); (2) 4º tipo de atividade adicionado à Lição 1 do Módulo 1 (associar); (3) encerramento da Parte 1 movido do Checkpoint 2 para o Checkpoint 3, com texto cobrindo as competências reais dos 3 módulos."
 };
 
 export const STAGE_0 = {
@@ -29,11 +30,50 @@ export const STAGE_0 = {
   "label": "Etapa 0: Comece aqui",
   "required_day": 1,
   "part": "part_1_open",
-  "status": "structure_only_no_lesson_content",
+  "status": "complete",
   "objective": "Aluno entende o produto, testa áudio, responde a uma atividade sem nota, localiza a revisão. Não introduz conteúdo de inglês novo — usa exemplos das lições seguintes apenas como demonstração.",
-  "source": "MAPA-15-LICOES-5-CHECKPOINTS.md (única fonte encontrada; é uma frase de objetivo, não uma lição desenvolvida)",
-  "lessons": [],
-  "note": "Não existe, em nenhum documento aprovado ou candidato desta sessão, diálogo, atividade, produção ou critério de avanço escritos para a Etapa 0 — só a frase de objetivo acima. Não inventei conteúdo para preencher isso (instrução explícita: não reescrever/inventar pedagogicamente). Ver CONFLITOS-E-LACUNAS.md, item 1."
+  "source": "MAPA-15-LICOES-5-CHECKPOINTS.md (objetivo original, preservado verbatim) + demonstração construída sobre module_1_lesson_1 (Módulo 1, Lição 1), já aprovada — nenhum conteúdo de inglês novo foi introduzido aqui, conforme o próprio objetivo exige.",
+  "intro": "Antes de começar o Módulo 1, esta etapa rápida mostra como o English Tool funciona: como ouvir o áudio, como uma atividade é corrigida, e onde ficam os itens que você errou para revisar depois. Não vale nota e não ensina nenhum conteúdo novo de inglês — os exemplos usados aqui são os mesmos da Lição 1.",
+  "steps": [
+    {
+      "id": "stage_0_step_audio_test",
+      "order": 1,
+      "type": "audio_test",
+      "title": "Teste o áudio",
+      "instruction": "Toque o áudio abaixo e confirme que consegue ouvir com clareza. Você pode repetir quantas vezes quiser.",
+      "demo_audio_id": "audio_module_1_lesson_1_opening_line_1",
+      "demo_source_note": "Reaproveita o áudio já existente da abertura da Lição 1 (Módulo 1) — não é um áudio novo."
+    },
+    {
+      "id": "stage_0_step_demo_activity",
+      "order": 2,
+      "type": "demo_no_grade",
+      "title": "Experimente uma atividade (sem nota)",
+      "instruction": "Esta é uma demonstração de como as atividades funcionam no English Tool. Ela não vale nota e não conta para nenhum critério de avanço — sirva-se dela só para conhecer o formato.",
+      "demo_item": {
+        "prompt": "Você chega a uma reunião às 9h.",
+        "options": [
+          "Good night",
+          "Good morning",
+          "See you"
+        ],
+        "answer": 1,
+        "feedback": "Good morning. É uma chegada pela manhã."
+      },
+      "demo_source_note": "Mesmo item de module_1_lesson_1_practice_1 (primeira atividade da Lição 1) — reaproveitado como demonstração, não é um item novo nem soma ao progresso daquela lição.",
+      "criterion": "sem_nota"
+    },
+    {
+      "id": "stage_0_step_find_review",
+      "order": 3,
+      "type": "orientation",
+      "title": "Onde fica a revisão",
+      "instruction": "Sempre que você errar um item essencial em uma lição ou checkpoint, ele entra automaticamente na fila de Revisão. Essa fila fica disponível na tela inicial do English Tool, fora de qualquer módulo específico, e reúne itens de todo o seu percurso — não é preciso voltar à lição original para revisar."
+    }
+  ],
+  "criterion": null,
+  "criterion_note": "Etapa 0 não tem critério de avanço nem produção — é orientação, não é avaliada (\"sem nota\", conforme o objetivo).",
+  "lessons": []
 };
 
 export const MODULE_1 = {
@@ -496,6 +536,31 @@ export const MODULE_1 = {
               "feedback": "V."
             }
           ]
+        },
+        {
+          "id": "module_1_lesson_1_practice_4",
+          "title": "Associe",
+          "type": "associar",
+          "note": "novo — adiciona o 4º tipo de atividade à lição, alinhando-a ao padrão das demais 8 lições (correção Codex)",
+          "instruction": "Ligue a expressão ao momento em que ela é usada.",
+          "columnA": [
+            "Good morning",
+            "Good evening",
+            "Good night",
+            "See you later"
+          ],
+          "columnB": [
+            "ao se despedir, sem prazo definido para o reencontro",
+            "ao chegar ou cumprimentar à noite",
+            "da manhã até perto do meio-dia",
+            "ao se despedir antes de dormir"
+          ],
+          "answer": {
+            "Good morning": "da manhã até perto do meio-dia",
+            "Good evening": "ao chegar ou cumprimentar à noite",
+            "Good night": "ao se despedir antes de dormir",
+            "See you later": "ao se despedir, sem prazo definido para o reencontro"
+          }
         }
       ],
       "your_turn": {
@@ -3159,8 +3224,7 @@ export const MODULE_2 = {
       "objective_items_required": 9,
       "text": "acertar pelo menos 9 dos 12 itens objetivos do checkpoint (6 da Parte A + 6 da Parte B, mesmo formato do Checkpoint 1); concluir a produção final com os cinco elementos solicitados; refazer os itens essenciais registrados na revisão, incluindo o item reaplicado do Checkpoint 1 (Parte B, item 4).",
       "non_blocking_note": "Se ainda não alcançar o critério, o módulo não será apagado nem reiniciado. O English Tool mostrará quais lições revisar e oferecerá uma nova tentativa apenas com os pontos necessários."
-    },
-    "part_end_note": "Fim da Parte 1: ao concluir o Checkpoint 2, você encerra a Parte 1 do English Tool — você já consegue iniciar uma interação, se apresentar, trocar dados básicos, fazer perguntas simples e manter uma conversa breve com apoio."
+    }
   },
   "source": "ENGLISH-TOOL-MODULO-2-CANDIDATO-APROVACAO.md"
 };
@@ -4337,7 +4401,8 @@ export const MODULE_3 = {
       "objective_items_required": 9,
       "text": "acertar pelo menos 9 dos 12 itens objetivos do checkpoint (6 da Parte A + 6 da Parte B); concluir a produção final com os cinco elementos solicitados; refazer os itens essenciais registrados na revisão, incluindo o item reaplicado do Checkpoint 2 (Parte B, item 4).",
       "non_blocking_note": "Se ainda não alcançar o critério, o módulo não será apagado nem reiniciado. O English Tool mostrará quais lições revisar e oferecerá uma nova tentativa apenas com os pontos necessários."
-    }
+    },
+    "part_end_note": "Fim da Parte 1: ao concluir o Checkpoint 3, você encerra a Parte 1 do English Tool — você já consegue iniciar uma interação, se apresentar e apresentar outra pessoa, trocar dados básicos (nome soletrado, telefone, e-mail), fazer perguntas essenciais e falar de preferências para manter uma conversa breve, e organizar tempo e planos: dizer horas e datas, marcar um compromisso, descrever sua rotina, e convidar, aceitar ou recusar de forma educada — tudo com apoio."
   },
   "source": "ENGLISH-TOOL-MODULO-3-RECONSTRUIDO.md",
   "notes": [

@@ -1,0 +1,185 @@
+RELATORIO DE ENTREGA - PARTE 1 ABERTA (English Toolkit / PWA)
+Preparado por Gabi. 01/09/2026. VERSAO 2 (correcoes fechadas pelo Codex).
+
+===============================================================
+0. O QUE MUDOU NESTA V2 (Codex conferiu a v1 e fechou 3 correcoes)
+===============================================================
+
+1. ETAPA 0: deixou de ser stub. Construida por completo (3 passos:
+   teste de audio, atividade de demonstracao sem nota, orientacao sobre
+   onde fica a revisao). Objetivo original preservado verbatim. Nenhum
+   conteudo de ingles novo introduzido - reaproveita audio e item ja
+   existentes da Licao 1 do Modulo 1 apenas como demonstracao. Escopo
+   dos Modulos 1, 2 e 3 nao foi alterado.
+
+2. LICAO 1 DO MODULO 1: adicionado 4o tipo de atividade
+   (module_1_lesson_1_practice_4, tipo "associar"), para igualar ao
+   padrao das outras 8 licoes. Conteudo derivado do que ja estava na
+   propria licao (liga cumprimento/despedida ao momento de uso), sem
+   estrutura ou vocabulario novo. ID estavel, integrada ao mesmo array
+   guided_practice (mesmo mecanismo de progresso). Sem audio novo -
+   nao era necessario (atividade de leitura, nao de escuta; expressoes
+   ja tem audio em outros pontos da licao).
+
+3. ENCERRAMENTO DA PARTE 1: removida a frase "Fim da Parte 1" do
+   Checkpoint 2. Adicionada ao Checkpoint 3, com texto novo cobrindo as
+   competencias reais dos 3 modulos (baseado nas frases de "outcome" ja
+   aprovadas de cada modulo, nenhuma competencia inventada).
+
+===============================================================
+1. O QUE FOI ENTREGUE (v2, integral)
+===============================================================
+
+Arquivo estruturado: content-data-open.js
+- Etapa 0 completa (nao mais stub)
+- Modulo 1: Entrar em uma conversa (3 licoes + Checkpoint 1) - Licao 1
+  agora com 4 tipos de atividade
+- Modulo 2: Trocar informacoes e manter a conversa (3 licoes +
+  Checkpoint 2) - sem mais o "Fim da Parte 1"
+- Modulo 3: Organizar tempo, rotina e planos (3 licoes + Checkpoint 3) -
+  agora com o "Fim da Parte 1", texto revisado
+- 285 itens de audio sintetizado (Web Speech API, en-US, sem .mp3) -
+  contagem inalterada em relacao a v1, porque nenhuma das 3 correcoes
+  exigiu audio novo
+- IDs estaveis em todos os niveis (etapa, passo de etapa, modulo,
+  licao, componente, atividade, producao, checkpoint, revisao, audio)
+- required_day: 1 em Etapa 0 e Modulos 1, 2, 3
+- Nenhum gate de acesso implementado - e conteudo puro
+- Nenhuma alteracao no Supabase, no PWA, no content-data.js, no
+  store.js ou no service worker
+
+Onde esta o arquivo completo:
+- Fonte de verdade (verificada e com historico de commit):
+  https://github.com/mndfrnc/english-toolkit/blob/main/content-data-open.js
+  branch main (ver secao 6 para o commit exato desta v2)
+- No Google Drive, esta pasta tem uma copia curta do content-data-open.js
+  contendo so o cabecalho + uma nota explicando por que o conteudo
+  completo nao foi duplicado aqui (motivo tecnico - risco de erro de
+  transcricao em arquivo de ~215 KB, nao e um arquivo faltando por
+  descuido).
+
+===============================================================
+2. INVENTARIO RESUMIDO (v2)
+===============================================================
+
+Etapa 0 (stage_0) - Comece aqui
+  3 passos: stage_0_step_audio_test, stage_0_step_demo_activity,
+  stage_0_step_find_review. Sem nota, sem criterio de avanco.
+
+Modulo 1 (module_1) - Entrar em uma conversa
+  Licao 1 - Cumprimentar e se despedir (module_1_lesson_1) - 4 tipos de
+    atividade (escolha_por_contexto, ordenar, verdadeiro_falso,
+    associar - este ultimo novo na v2)
+  Licao 2 - Dizer quem voce e (module_1_lesson_2) - 4 tipos
+  Licao 3 - Apresentar outra pessoa (module_1_lesson_3) - 4 tipos
+  Checkpoint 1 (module_1_checkpoint) - Partes A+B+C, criterio 9/12 + producao
+
+Modulo 2 (module_2) - Trocar informacoes e manter a conversa
+  Licao 4 - Soletrar e informar dados pessoais (module_2_lesson_1) - 4 tipos
+  Licao 5 - Fazer perguntas essenciais (module_2_lesson_2) - 4 tipos
+  Licao 6 - Falar de preferencias e sustentar small talk (module_2_lesson_3) - 4 tipos
+  Checkpoint 2 (module_2_checkpoint) - Partes A+B+C, criterio 9/12 + producao,
+    reaplica erro do Checkpoint 1. NAO tem mais "Fim da Parte 1".
+
+Modulo 3 (module_3) - Organizar tempo, rotina e planos
+  Licao 7 - Horas, datas e compromissos (module_3_lesson_1) - 4 tipos
+  Licao 8 - Rotina e frequencia (module_3_lesson_2) - 4 tipos
+  Licao 9 - Hobbies, convites e habilidades (module_3_lesson_3) - 4 tipos
+  Checkpoint 3 (module_3_checkpoint) - Partes A+B+C, criterio 9/12 + producao,
+    reaplica erro do Checkpoint 2. AGORA tem "Fim da Parte 1".
+
+Detalhe completo (tabelas por licao, cobertura de audio por regra,
+checklist de QA) esta em INVENTARIO-PARTE-1-ABERTA.md, nesta mesma pasta.
+
+===============================================================
+3. FONTES UTILIZADAS
+===============================================================
+
+- PADRAO-PEDAGOGICO-UNICO.md
+- MAPA-15-LICOES-5-CHECKPOINTS.md
+- ENGLISH-TOOL-MODULO-1-REVISADO.md
+- ENGLISH-TOOL-MODULO-2-CANDIDATO-APROVACAO.md
+- ENGLISH-TOOL-MODULO-3-RECONSTRUIDO.md
+- Instrucoes do Codex desta rodada (para as 3 correcoes - nao introduziu
+  nenhuma fonte de conteudo pedagogico nova, so aprovou construir a
+  Etapa 0, adicionar a 4a atividade e mover o texto de encerramento)
+
+Nenhum outro documento foi usado como fonte de conteudo pedagogico.
+Modulos 4 e 5 e o topico Entrevistas continuam deliberadamente excluidos.
+
+===============================================================
+4. CONFLITOS E LACUNAS (v2)
+===============================================================
+
+Itens 1, 2 e 3 da v1 foram RESOLVIDOS nesta v2 (ver secao 0 acima e
+CONFLITOS-E-LACUNAS.md para o detalhe de cada resolucao). Nao abri
+nenhuma decisao nova para a Amanda - as 3 correcoes seguiram
+exatamente o que o Codex fechou.
+
+Itens ainda registrados (nao bloqueantes, apenas documentados):
+4. Decisao de escopo (documentada, nao uma alteracao de conteudo) sobre
+   quais frases entram como audio "essencial" - detalhada no inventario.
+5. content-data.js (existente) e content-data-open.js (novo) nao se
+   comunicam - nenhuma logica de mesclagem foi criada, como pedido.
+
+Nenhum conflito factual novo impediu a execucao desta rodada.
+
+===============================================================
+5. POR QUE O .JS COMPLETO NAO FOI DUPLICADO NO DRIVE
+===============================================================
+
+content-data-open.js tem ~215 KB e mais de 6700 linhas nesta v2.
+Reproduzir esse volume de texto manualmente dentro desta sessao de
+chat, caractere por caractere, carrega risco real de erro de
+transcricao silencioso. Em vez de arriscar entregar uma copia
+corrompida no Drive, o arquivo completo, ja validado (node --check,
+81 IDs estruturais + 285 audios sem duplicata, zero mismatch de texto
+falado vs. exibido), foi commitado e enviado ao GitHub, que e a fonte
+de verdade:
+
+https://github.com/mndfrnc/english-toolkit/blob/main/content-data-open.js
+
+A copia deste arquivo dentro da pasta do Drive contem so o cabecalho e
+uma nota apontando para o GitHub - nao e um arquivo incompleto por
+descuido, e uma escolha deliberada para nao arriscar a integridade dos
+dados.
+
+===============================================================
+6. ARQUIVOS ALTERADOS E COMMIT
+===============================================================
+
+Arquivos alterados nesta rodada (repositorio mndfrnc/english-toolkit):
+  content-data-open.js
+  INVENTARIO-PARTE-1-ABERTA.md
+  CONFLITOS-E-LACUNAS.md
+  RELATORIO-ENTREGA-PARTE-1-ABERTA.txt (este arquivo)
+
+Nenhum outro arquivo do repositorio foi tocado (content-data.js,
+support.js, store.js, sw.js, supabase-client.js, manifest.json,
+index.html, assets/, CNAME, NOTICE.md, SESSION-LOG.md permanecem
+inalterados).
+
+Commit: [preenchido apos o push - ver GitHub, branch main, mensagem
+"Corrige Parte 1 aberta: Etapa 0 completa, 4a atividade na Licao 1,
+encerramento movido para o Checkpoint 3"]
+
+===============================================================
+7. CAMINHOS EXATOS
+===============================================================
+
+GitHub (fonte de verdade, main):
+  content-data-open.js
+  INVENTARIO-PARTE-1-ABERTA.md
+  CONFLITOS-E-LACUNAS.md
+  https://github.com/mndfrnc/english-toolkit
+
+Google Drive (esta entrega, versoes substituidas):
+  Pasta: 02 - English Toolkit / Entrega PWA - Parte 1 Aberta
+  - content-data-open.js (cabecalho + nota, ver secao 5)
+  - INVENTARIO-PARTE-1-ABERTA.md (copia integral v2)
+  - CONFLITOS-E-LACUNAS.md (copia integral v2)
+  - RELATORIO-ENTREGA-PARTE-1-ABERTA.txt (este arquivo, v2)
+
+Nao implementei o PWA. Nao alterei o Supabase. Nao abri nenhuma decisao
+nova para a Amanda. Bruno e o responsavel pelo v4 recebem esta entrega
+apos validacao.
