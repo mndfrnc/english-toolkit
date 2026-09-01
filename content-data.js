@@ -10,15 +10,68 @@ export const PALETTE = {
 
 // Os 8 tópicos-base usados para progresso (Home + em qualquer outro módulo que faça referência).
 export const TOPICS = [
-  { id:'greetings', label:'Cumprimentos e apresentação pessoal' },
-  { id:'tobe', label:'Verbo To Be' },
-  { id:'personalinfo', label:'Dados pessoais' },
-  { id:'smalltalk', label:'Small talk e perguntas abertas' },
-  { id:'likes', label:'Like/love/hate + gerúndio' },
-  { id:'dodoesdid', label:'Auxiliares Do/Does/Did' },
-  { id:'whwords', label:'WH-words' },
-  { id:'interview', label:'Inglês para entrevistas' }
+  { id:'greetings', label:'Cumprimentos e apresentação pessoal', kind:'practice', practiceId:'greetings' },
+  { id:'tobe', label:'Verbo To Be', kind:'practice', practiceId:'tobe' },
+  { id:'personalinfo', label:'Dados pessoais', kind:'practice', practiceId:'personalinfo' },
+  { id:'smalltalk', label:'Small talk e perguntas abertas', kind:'practice', practiceId:'smalltalk' },
+  { id:'likes', label:'Like/love/hate + gerúndio', kind:'practice', practiceId:'likes' },
+  { id:'dodoesdid', label:'Auxiliares Do/Does/Did', kind:'duvidas' },
+  { id:'whwords', label:'WH-words', kind:'whwords' },
+  { id:'interview', label:'Inglês para entrevistas', kind:'interview' }
 ];
+
+// Estrutura pedagógica mínima para os 5 tópicos que ainda não tinham módulo
+// próprio (necessária para que o progresso desses tópicos seja real, não
+// travado em "ainda não estudado"). Conteúdo compatível com o material-base
+// (regras já documentadas de to be, do/does/did, gerúndio após preposição) —
+// nenhum dado pessoal ou profissional novo foi inventado aqui.
+export const PRACTICE_TOPICS = {
+  greetings: { title:'Cumprimentos e apresentação pessoal', shortLabel:'Cumprimentos',
+    intro:'Saudações formais/informais e como se apresentar (nome, origem, profissão).',
+    drills:[
+      { id:'g1', prompt:'Complete (formal): "Good afternoon! ___ nice to meet you."', answer:"It's", explanation:'"It\'s nice to meet you" é a resposta padrão e educada ao ser apresentado.' },
+      { id:'g2', prompt:'Complete (informal, entre amigos): "Hey! ___ up?"', answer:"What's", explanation:'"What\'s up?" é uma saudação informal comum entre amigos ou colegas próximos.' },
+      { id:'g3', prompt:'Complete: "Hi, I\'m Amanda. I\'m ___ Brazil." (origem)', answer:'from', explanation:'Usamos "from" para indicar origem: I\'m from Brazil.' },
+      { id:'g4', prompt:'Complete a pergunta sobre profissão: "___ do you do?"', answer:'What', explanation:'"What do you do?" pergunta qual é a profissão ou ocupação da pessoa.' },
+      { id:'g5', prompt:'Complete a resposta a uma apresentação: "___ to meet you too!"', answer:'Nice', explanation:'"Nice to meet you (too)" é a resposta padrão ao ser apresentado.' }
+    ] },
+  tobe: { title:'Verbo To Be', shortLabel:'To Be',
+    intro:'To Be é "folgado": nunca precisa de do/does/did.',
+    drills:[
+      { id:'t1', prompt:'Complete: "I ___ a marketing professional."', answer:'am', explanation:'Com "I", o to be no presente é "am".' },
+      { id:'t2', prompt:'Complete: "She ___ interested in AI tools."', answer:'is', explanation:'Com he/she/it, o to be no presente é "is".' },
+      { id:'t3', prompt:'Complete: "They ___ available for a call."', answer:'are', explanation:'Com you/we/they, o to be no presente é "are".' },
+      { id:'t4', prompt:'Complete a negativa: "He ___ here right now."', answer:"isn't", explanation:'Negativa de "is" = "isn\'t" — sem precisar de do/does.' },
+      { id:'t5', prompt:'Complete a pergunta: "___ you ready for the interview?"', answer:'Are', explanation:'To Be vai sozinho para o início da pergunta: Are you...?' }
+    ] },
+  personalinfo: { title:'Dados pessoais', shortLabel:'Dados pessoais',
+    intro:'Soletração, telefone e endereço em inglês.',
+    drills:[
+      { id:'p1', prompt:'Complete: "Could you ___ your last name for me?" (soletrar)', answer:'spell', explanation:'"Spell" = soletrar. "Could you spell that?" é um pedido comum e educado.' },
+      { id:'p2', prompt:'Complete: "What\'s your phone ___?"', answer:'number', explanation:'"Phone number" = número de telefone.' },
+      { id:'p3', prompt:'Complete: "I live ___ 120 Main Street."', answer:'at', explanation:'Usamos "at" antes de um endereço específico: I live at 120 Main Street.' },
+      { id:'p4', prompt:'Complete: "My ___ code is 50000." (código postal)', answer:'postal', explanation:'"Postal code" = CEP / código postal.' },
+      { id:'p5', prompt:'Complete: "You can reach me ___ this email address."', answer:'at', explanation:'"Reach me at [email]" é a forma natural de dar um contato.' }
+    ] },
+  smalltalk: { title:'Small talk e perguntas abertas', shortLabel:'Small talk',
+    intro:'Perguntas abertas para manter uma conversa casual.',
+    drills:[
+      { id:'s1', prompt:'Complete: "___ has your week been?"', answer:'How', explanation:'"How has your week been?" é uma pergunta aberta comum de small talk.' },
+      { id:'s2', prompt:'Complete: "___ do you think about remote work?"', answer:'What', explanation:'"What do you think about...?" pede uma opinião.' },
+      { id:'s3', prompt:'Complete a resposta a "How are you?": "I\'m doing ___, thanks!"', answer:'well', explanation:'"I\'m doing well" é uma resposta natural e comum.' },
+      { id:'s4', prompt:'Complete a pergunta de volta: "I\'m good, thanks! And ___?"', answer:'you', explanation:'"And you?" devolve a pergunta de forma natural.' },
+      { id:'s5', prompt:'Complete: "___ was your weekend?"', answer:'How', explanation:'"How was your weekend?" é uma abertura clássica de small talk.' }
+    ] },
+  likes: { title:'Like/love/hate + gerúndio', shortLabel:'Likes',
+    intro:'Depois de preposição, o verbo sempre vai para -ing.',
+    drills:[
+      { id:'l1', prompt:'Complete: "I love ___ (travel)."', answer:'traveling', explanation:'Depois de like/love/hate, o verbo geralmente vai para -ing.' },
+      { id:'l2', prompt:'Complete: "She hates ___ (wait) in line."', answer:'waiting', explanation:'"Hate" + verbo-ing: she hates waiting.' },
+      { id:'l3', prompt:'Complete: "I\'m into ___ (learn) new tools."', answer:'learning', explanation:'Depois de preposição ("into"), o verbo SEMPRE vai para -ing.' },
+      { id:'l4', prompt:'Complete: "They like ___ (watch) series after work."', answer:'watching', explanation:'"Like" + verbo-ing também é comum e natural.' },
+      { id:'l5', prompt:'Complete: "He wants ___ (learn) English." (want pede to+infinitivo)', answer:'to learn', explanation:'"Want" é sempre seguido de to+infinitivo, nunca -ing: he wants to learn.' }
+    ] }
+};
 
 // ---------- Dúvidas que travaram a Amanda (Dúvidas 1–8, do/does/did) ----------
 export const MICROLESSONS = [
@@ -112,10 +165,10 @@ export const MICROLESSONS = [
   logicPt:'Regra do "ladrão": quando did aparece, ele rouba o passado só para si; o verbo principal fica na forma base.',
   technical:'Estrutura: Did + sujeito + verbo BASE + complemento? (nunca -ed ou irregular).',
   metaphor:'"Ladrão do passado" — o did rouba a marca de tempo e não deixa o verbo principal levar nada.',
-  broken:[['Did','auxiliar de passado'],['you','sujeito'],['watch','verbo base, não "watched"'],['the race','complemento']],
+  broken:[['Did','auxiliar de passado'],['you','sujeito'],['watch','verbo base, não "watched"'],['the new episode','complemento']],
   ptComparison:'Em português marcamos o passado só uma vez também, mas mudando o próprio verbo, sem auxiliar extra.',
-  commonError:'"Did you watched the race?" — dobrar a marca de passado.',
-  transform:{ afirmativa:'You watched the race.', negativa:"You didn't watch the race.", pergunta:'Did you watch the race?', resposta:'' },
+  commonError:'"Did you watched the new episode?" — dobrar a marca de passado.',
+  transform:{ afirmativa:'You watched the new episode.', negativa:"You didn't watch the new episode.", pergunta:'Did you watch the new episode?', resposta:'' },
   mini:{ prompt:'Corrija: "Did she worked yesterday?"', answer:'Did she work yesterday?' },
   extra:{ prompt:'Corrija: "Did they went home?"', answer:'Did they go home?' },
   listening:null },
@@ -132,7 +185,231 @@ export const MICROLESSONS = [
   transform:{ afirmativa:'Did you eat breakfast? / Did you go there? / Did you see it?', negativa:'', pergunta:'', resposta:'' },
   mini:{ prompt:'Corrija: "Did you bought the tickets?"', answer:'Did you buy the tickets?' },
   extra:{ prompt:'Repita o padrão com "came" e "had".', answer:'Did you come...? / Did you have...?' },
-  listening:{ file:'audio/did_listening_01.mp3', transcript:'Did you watch the race?', q:'Qual é o verbo principal desta frase?', a:'Watch.' } }
+  listening:{ file:'audio/did_listening_01.mp3', transcript:'Did you watch the new episode?', q:'Qual é o verbo principal desta frase?', a:'Watch.' } },
+
+{ id:'d9', topic:'tobe', title:'Por que o verbo "to be" não precisa de do/does/did?',
+  question:'Por que to be é diferente de todos os outros verbos?',
+  shortAnswer:'Porque to be já tem "força" própria para ir sozinho ao início da pergunta — ele não precisa de ajuda.',
+  logicPt:'É uma exceção do inglês: to be, modais e o have auxiliar já carregam tempo/pessoa sozinhos.',
+  technical:'"To be" é um verbo "auxiliar-capaz": ele mesmo se move para a posição de pergunta, sem precisar de do/does/did.',
+  metaphor:'To be é "folgado" — ele não pede ajuda a ninguém.',
+  broken:[['Is','to be'],['he','sujeito'],['tired','complemento']],
+  ptComparison:'Em português, o verbo "ser/estar" também muda de posição sozinho em perguntas formais ("És tu o responsável?") — não é tão estranho quanto parece.',
+  commonError:'"Do you are tired?" — juntar do com to be, redundante e errado.',
+  transform:{ afirmativa:'You are tired.', negativa:"You aren't tired.", pergunta:'Are you tired?', resposta:'' },
+  mini:{ prompt:'Corrija: "Does she is happy?"', answer:'Is she happy?' },
+  extra:{ prompt:'Corrija: "Do they are ready?"', answer:'Are they ready?' },
+  listening:null },
+
+{ id:'d10', topic:'tobe', title:'Por que "Are you tired?" está correto e "Do you are tired?" está errado?',
+  question:'Essa eu confundo direto — por que não pode juntar do com are?',
+  shortAnswer:'Porque "are" (parte do to be) já faz o trabalho que o do faria — juntar os dois duplica a mesma função.',
+  logicPt:'Cada frase só pode ter UM organizador de pergunta: ou é to be sozinho, ou é do/does/did + verbo comum, nunca os dois juntos.',
+  technical:'Teste rápido: se o verbo principal é uma forma de to be (am/is/are/was/were), NUNCA use do/does/did.',
+  metaphor:'São dois "porteiros" diferentes — só um pode abrir a porta da pergunta por vez.',
+  broken:[['Are','to be'],['you','sujeito'],['tired','complemento']],
+  ptComparison:'Nenhum paralelo direto em português aqui — é uma regra puramente estrutural do inglês.',
+  commonError:'"Do you are tired?", "Does he is here?", "Did they were happy?" — todos com o mesmo erro.',
+  transform:{ afirmativa:'You are tired.', negativa:"You aren't tired.", pergunta:'Are you tired?', resposta:'' },
+  mini:{ prompt:'Corrija: "Do you are ready?"', answer:'Are you ready?' },
+  extra:{ prompt:'Corrija: "Does he is here?"', answer:'Is he here?' },
+  listening:null },
+
+{ id:'d11', topic:'modais', title:'Por que can/could/should/would também não usam do/does/did?',
+  question:'Can, could, should, would também são "folgados" como o to be?',
+  shortAnswer:'Sim — os modais são outro grupo que vai sozinho para o início da pergunta, igual ao to be.',
+  logicPt:'Modais já carregam a ideia de capacidade/conselho/hipótese sozinhos; juntar com do/does/did seria redundante.',
+  technical:'Regra: modal + sujeito + verbo BASE + complemento — nunca "do + modal".',
+  metaphor:'Modais são da mesma "turma folgada" do to be.',
+  broken:[['Can','modal'],['you','sujeito'],['speak','verbo base'],['English','complemento']],
+  ptComparison:'Em português, "você pode falar inglês?" também não tem um "faz" escondido — aqui o paralelo ajuda.',
+  commonError:'"Do you can speak English?", "Does she should go?" — nunca combine do/does/did com modal.',
+  transform:{ afirmativa:'You can speak English.', negativa:"You can't speak English.", pergunta:'Can you speak English?', resposta:'' },
+  mini:{ prompt:'Corrija: "Do you should study more?"', answer:'Should you study more?' },
+  extra:{ prompt:'Complete com o modal certo: "___ you like some coffee?"', answer:'Would' },
+  listening:null },
+
+{ id:'d12', topic:'have', title:'Quando have significa "ter" e quando funciona como auxiliar?',
+  question:'Have às vezes parece "ter" e às vezes parece outra coisa — como eu diferencio?',
+  shortAnswer:'Se depois do have vem um SUBSTANTIVO, é posse. Se vem um VERBO NO PARTICÍPIO, é auxiliar de tempo perfeito.',
+  logicPt:'Teste rápido: have + substantivo = "ter"; have + particípio = auxiliar (indica experiência/resultado).',
+  technical:'Estrutura do tempo perfeito: have/has + particípio — não significa exatamente "ter", indica ação passada com relevância no presente.',
+  metaphor:'Have-posse é o "dono de um objeto"; have-auxiliar é o "crachá de experiência".',
+  broken:[['I','sujeito'],['have','auxiliar'],['worked','particípio'],['here','complemento']],
+  ptComparison:'Em português, o "ter" auxiliar também existe: "Eu tenho trabalhado muito" é a mesma lógica de "I have worked a lot" — aqui a tradução literal ajuda.',
+  commonError:'Confundir os dois e aplicar a regra do do/does no have-auxiliar: "Do you have worked here?" em vez de "Have you worked here?"',
+  transform:{ afirmativa:'I have worked here.', negativa:"I haven't worked here.", pergunta:'Have you worked here?', resposta:'' },
+  mini:{ prompt:'Classifique: "She has a new laptop." vs. "She has worked here for years."', answer:'Posse / auxiliar de tempo perfeito.' },
+  extra:{ prompt:'Classifique: "He has two dogs." / "He has traveled a lot."', answer:'Posse / auxiliar.' },
+  listening:{ file:'audio/have_listening_01.mp3', transcript:'Have you worked here?', q:'Have aqui é posse ou auxiliar?', a:'Auxiliar.' } },
+
+{ id:'d13', topic:'have', title:'Qual é a diferença entre "I have a car." e "I have worked here."?',
+  question:'As duas frases têm "have", mas parecem diferentes — por quê?',
+  shortAnswer:'Na primeira, have é o verbo principal (posse). Na segunda, have é auxiliar, e o verbo principal de verdade é "worked".',
+  logicPt:'A pista visual é o que vem depois do have: substantivo (car) = posse; particípio (worked) = auxiliar.',
+  technical:'"I have a car." = presente simples, posse. "I have worked here." = present perfect, auxiliar + particípio.',
+  metaphor:'No primeiro, have segura um objeto na mão; no segundo, have está de mãos livres, só carregando o tempo verbal.',
+  broken:[['I','sujeito'],['have','auxiliar'],['worked','verbo principal, particípio'],['here','complemento']],
+  ptComparison:'Em português a diferença também aparece: "eu tenho um carro" (posse) vs. "eu tenho trabalhado aqui" (auxiliar) — os dois "tenho" soam parecidos, mas fazem trabalhos diferentes.',
+  commonError:'Tentar negar as duas frases da mesma forma sem perceber a diferença de estrutura.',
+  transform:{ afirmativa:'I have a car. / I have worked here.', negativa:"I don't have a car. / I haven't worked here.", pergunta:'', resposta:'' },
+  mini:{ prompt:'Classifique e negue: "They have a house." (posse)', answer:"They don't have a house." },
+  extra:{ prompt:'Classifique e negue: "We have traveled a lot." (auxiliar)', answer:"We haven't traveled a lot." },
+  listening:null },
+
+{ id:'d14', topic:'toing', title:'Por que "I\'m into reading" está correto?',
+  question:'Por que "reading" e não "to read" aqui?',
+  shortAnswer:'Porque depois de uma preposição (into), o verbo em inglês sempre vira -ing — nunca fica no infinitivo com "to".',
+  logicPt:'"Into" é preposição; depois de preposição, o verbo funciona como um substantivo, por isso ganha -ing.',
+  technical:'Regra fixa: preposição + verbo = sempre -ing (gerúndio), sem exceção.',
+  metaphor:'Depois de uma preposição, o verbo "se veste" de substantivo — e o traje de substantivo do verbo é o -ing.',
+  broken:[["I'm",'sujeito + to be'],['into','preposição'],['reading','verbo-ing, obrigatório']],
+  ptComparison:'Em português, "sou fã de ler" também usa o infinitivo — aqui não há paralelo direto, é uma regra só do inglês.',
+  commonError:'"I\'m into to read." (usar "to" depois de preposição).',
+  transform:{ afirmativa:"I'm into reading. / I'm crazy about cooking.", negativa:'', pergunta:'', resposta:'' },
+  mini:{ prompt:'Complete: "He\'s into (play) ___ video games."', answer:'playing' },
+  extra:{ prompt:'Complete: "They\'re afraid of (fly) ___."', answer:'flying' },
+  listening:null },
+
+{ id:'d15', topic:'toing', title:'Por que "I\'m into to read" está errado?',
+  question:'Essa eu ainda erro — por que não pode usar "to" aqui?',
+  shortAnswer:'Porque "to" + verbo (infinitivo) nunca vem depois de uma preposição em inglês — a regra é sempre preposição + verbo-ing.',
+  logicPt:'É a mesma regra da Dúvida 14, vista pelo lado do erro: o "to" quebra a estrutura preposição+substantivo que o inglês exige aqui.',
+  technical:'"Into" já é preposição; colocar "to" depois criaria duas partículas de ligação seguidas, o que o inglês não permite nessa posição.',
+  metaphor:'Você não pode vestir o verbo de "substantivo" (-ing) e de "ação pura" (to+verbo) ao mesmo tempo — escolha um traje.',
+  broken:[['into','preposição'],['reading','substantivo-ing, correto']],
+  ptComparison:'Sem paralelo direto em português.',
+  commonError:'"I\'m into to cook.", "She\'s crazy about to travel." — mesmo erro em outros verbos de gosto+preposição.',
+  transform:{ afirmativa:"I'm into cooking. / She's crazy about traveling.", negativa:'', pergunta:'', resposta:'' },
+  mini:{ prompt:'Corrija: "He\'s tired of to wait."', answer:"He's tired of waiting." },
+  extra:{ prompt:'Corrija: "We\'re afraid of to fly."', answer:"We're afraid of flying." },
+  listening:null },
+
+{ id:'d16', topic:'toing', title:'Qual é a diferença entre read, to read e reading?',
+  question:'Read, to read, reading — quando uso cada um?',
+  shortAnswer:'Read é a forma base (depois de do/does/did e modais). To read é infinitivo (propósito ou depois de certos verbos). Reading é gerúndio (depois de preposições e em tempos contínuos).',
+  logicPt:'Cada forma tem um "encaixe" gramatical específico — não são intercambiáveis livremente.',
+  technical:'Base: "Do you read?" / Infinitivo: "I want to read." / Gerúndio: "I\'m into reading." ou "I\'m reading now."',
+  metaphor:'São três roupas diferentes para o mesmo verbo — cada ocasião pede uma roupa certa.',
+  broken:[['Does','auxiliar'],['she','sujeito'],['read','verbo base']],
+  ptComparison:'Em português, "ler" muda de forma dependendo do contexto também (lendo, para ler, leia) — a lógica de "roupa certa para cada ocasião" existe nos dois idiomas, só os encaixes são diferentes.',
+  commonError:'Misturar as três formas: "I want reading." (errado, "want" pede to+verbo: "I want to read.")',
+  transform:{ afirmativa:"She wants to read. / She's reading. / She's into reading.", negativa:'', pergunta:'Does she read?', resposta:'' },
+  mini:{ prompt:'Complete as três formas para "travel": base, infinitivo, gerúndio.', answer:"Do you travel? / I want to travel. / I'm into traveling." },
+  extra:{ prompt:'Escolha a forma certa: "He\'s afraid of ___ (fail)."', answer:'failing' },
+  listening:null },
+
+{ id:'d17', topic:'grammarfoundations', title:'O que é sujeito?',
+  question:'O que exatamente é "sujeito" numa frase?',
+  shortAnswer:'É quem faz (ou é) a ação — a "pessoa/coisa principal" da frase.',
+  logicPt:'Antes de traduzir qualquer palavra, pergunte: quem está fazendo isso?',
+  technical:'Sujeito = substantivo ou pronome que concorda com o verbo principal e determina sua conjugação (I/you/we/they vs. he/she/it).',
+  metaphor:'O sujeito é o "dono da cena" — tudo na frase gira em torno dele.',
+  broken:[['She','sujeito'],['works','verbo'],['here','complemento']],
+  ptComparison:'Igual em português: "Ela trabalha aqui" — "ela" também é o sujeito, na mesma posição.',
+  commonError:'Confundir o sujeito com a primeira palavra da frase em frases invertidas ("In Recife, she works." — "Recife" não é o sujeito, "she" é).',
+  transform:{ afirmativa:'My sister loves pizza.', negativa:'', pergunta:'Does he live in São Paulo?', resposta:'' },
+  mini:{ prompt:'Identifique o sujeito: "My sister loves pizza."', answer:'My sister' },
+  extra:{ prompt:'Aponte o sujeito: "Where do your parents live?"', answer:'your parents' },
+  listening:null },
+
+{ id:'d18', topic:'grammarfoundations', title:'O que é verbo principal?',
+  question:'Qual é o verbo "de verdade" da frase, quando tem mais de uma palavra de ação?',
+  shortAnswer:'É a palavra que carrega o SIGNIFICADO da ação — os auxiliares (do/does/did/have) só organizam a frase, não descrevem a ação.',
+  logicPt:'Pergunte: se eu tirar os auxiliares, qual palavra ainda diz o que está acontecendo?',
+  technical:'Verbo principal = verbo lexical, portador do significado semântico da frase.',
+  metaphor:'O verbo principal é o "ator"; os auxiliares são a "produção" por trás das câmeras.',
+  broken:[['Does','auxiliar'],['she','sujeito'],['work','verbo principal'],['here','complemento']],
+  ptComparison:'Em português, geralmente só existe um verbo mesmo — é por isso que separar os dois em inglês pode confundir.',
+  commonError:'Achar que o auxiliar é o verbo principal e tentar traduzi-lo com significado próprio.',
+  transform:{ afirmativa:'', negativa:'', pergunta:'Did you call your mom?', resposta:'' },
+  mini:{ prompt:'Aponte o verbo principal: "Did you call your mom?"', answer:'call' },
+  extra:{ prompt:'Aponte: "I haven\'t finished the report."', answer:'finished' },
+  listening:null },
+
+{ id:'d19', topic:'grammarfoundations', title:'O que é verbo auxiliar?',
+  question:'E o auxiliar, o que ele realmente faz?',
+  shortAnswer:'É a palavra que organiza a estrutura da frase (pergunta, negativa, tempo) sem, na maioria das vezes, ter significado próprio.',
+  logicPt:'O auxiliar "empresta" a posição gramatical que o verbo principal não pode ocupar sozinho em perguntas/negativas.',
+  technical:'Auxiliares mais comuns: do/does/did (Present/Past Simple), have/has/had (perfeito), am/is/are/was/were (contínuo e voz passiva).',
+  metaphor:'O auxiliar é o "crachá de acesso" que libera a pergunta ou a negativa.',
+  broken:[['Do','auxiliar'],['you','sujeito'],['like','verbo principal'],['pizza','complemento']],
+  ptComparison:'Português não tem essa peça separada — por isso ela é a mais estranha para brasileiros.',
+  commonError:'Tentar traduzir o auxiliar palavra por palavra, mesmo quando ele não carrega significado.',
+  transform:{ afirmativa:'', negativa:'', pergunta:'Does she travel often?', resposta:'' },
+  mini:{ prompt:'Identifique o auxiliar: "Does she travel often?"', answer:'does' },
+  extra:{ prompt:'Identifique: "Have you seen this movie?"', answer:'have' },
+  listening:null },
+
+{ id:'d20', topic:'grammarfoundations', title:'O que é complemento?',
+  question:'E o resto da frase, depois do verbo, é tudo "complemento"?',
+  shortAnswer:'Sim — é tudo que completa o sentido da ação: objeto, lugar, tempo, modo.',
+  logicPt:'Pergunte: o que vem depois do verbo e completa a informação da frase?',
+  technical:'Complemento = objeto direto/indireto, advérbio, ou qualquer termo que complete o predicado.',
+  metaphor:'Se o verbo é a ação, o complemento é "os detalhes da cena" (onde, quando, com quem, o quê).',
+  broken:[['She','sujeito'],['works','verbo'],['in marketing','complemento de área'],['at a startup','complemento de lugar']],
+  ptComparison:'Praticamente igual em português: "Ela trabalha em marketing numa startup" segue a mesma lógica de complementos.',
+  commonError:'Confundir complemento com sujeito em frases mais longas ("In the morning, she works." — "in the morning" é complemento de tempo, não sujeito).',
+  transform:{ afirmativa:'I study English at home every day.', negativa:'', pergunta:'', resposta:'' },
+  mini:{ prompt:'Aponte o(s) complemento(s): "I study English at home every day."', answer:'English / at home / every day' },
+  extra:{ prompt:'Aponte: "They traveled to Italy last summer."', answer:'to Italy / last summer' },
+  listening:null },
+
+{ id:'d21', topic:'grammarfoundations', title:'Como identificar a função de uma palavra antes de tentar traduzi-la?',
+  question:'Antes de traduzir, como eu sei se a palavra é auxiliar, verbo principal, etc.?',
+  shortAnswer:'Primeiro pergunte "que trabalho essa palavra está fazendo na frase" — só depois pergunte "o que ela significa".',
+  logicPt:'Ordem de raciocínio: (1) qual é o verbo principal? (2) existe um auxiliar do lado? (3) o resto é complemento?',
+  technical:'Análise sintática básica antes da tradução lexical evita o erro de tentar traduzir palavra por palavra.',
+  metaphor:'Primeiro monte o esqueleto da frase (função), depois vista a roupa (significado).',
+  broken:[['Have','auxiliar'],['you','sujeito'],['worked','verbo principal'],['here','complemento']],
+  ptComparison:'Em português, como a estrutura é mais parecida com a tradução literal, esse passo intermediário costuma ser pulado — mas em inglês ele é essencial.',
+  commonError:'Traduzir "have" automaticamente como "ter" mesmo quando ele é auxiliar.',
+  transform:{ afirmativa:'', negativa:'', pergunta:'Does she manage the team?', resposta:'' },
+  mini:{ prompt:'Em "Does she manage the team?", ache primeiro o verbo principal, depois o auxiliar, depois o sujeito.', answer:'manage (principal) · does (auxiliar) · she (sujeito)' },
+  extra:{ prompt:'Aplique a ordem em: "Did you send the email?"', answer:'send (principal) · did (auxiliar) · you (sujeito)' },
+  listening:null },
+
+{ id:'d22', topic:'grammarfoundations', title:'Por que eu entendo as palavras isoladamente, mas travo ao montar a frase?',
+  question:'Eu sei o significado de cada palavra, mas não consigo juntar tudo na ordem certa — por quê?',
+  shortAnswer:'Porque vocabulário e estrutura são habilidades diferentes: saber o que uma palavra significa não ensina automaticamente onde ela vai na frase.',
+  logicPt:'Isso é comum para quem aprendeu muito por leitura/contexto — absorve significado, mas não necessariamente a ordem de produção.',
+  technical:'A solução não é aprender mais palavras, é praticar a ORDEM fixa das peças (sujeito → auxiliar → verbo → complemento) até virar automático.',
+  metaphor:'Você já tem todas as peças do LEGO — o que falta é o manual de montagem, não peças novas.',
+  broken:[['sujeito','1º'],['auxiliar','2º'],['verbo','3º'],['complemento','4º']],
+  ptComparison:'Em português, a ordem das peças já é automática para você; em inglês, esse automatismo ainda está em construção.',
+  commonError:'Tentar resolver isso estudando mais vocabulário, em vez de praticar montagem de frases.',
+  transform:{ afirmativa:'', negativa:'', pergunta:'', resposta:'' },
+  mini:{ prompt:'Card conceitual: revisite o Laboratório de Frases diariamente, por poucos minutos.', answer:'Sem resposta certa/errada — é um lembrete de prática.' },
+  extra:{ prompt:'Escreva com suas palavras: por que ordem e vocabulário são coisas diferentes?', answer:'Use o campo "Minha explicação com minhas palavras" abaixo.' },
+  listening:null },
+
+{ id:'d23', topic:'grammarfoundations', title:'Como transformar uma afirmativa em negativa e depois em pergunta?',
+  question:'Existe um passo a passo fixo para transformar a frase?',
+  shortAnswer:'Sim: (1) identifique o auxiliar ou to be; (2) para negativa, acrescente "not" logo depois dele; (3) para pergunta, mova esse mesmo elemento para o início.',
+  logicPt:'O "elemento que se move" é sempre o mesmo: to be, auxiliar (do/does/did/have) ou modal — nunca o verbo principal.',
+  technical:'Afirmativa → localizar auxiliar/to be → Negativa = auxiliar + not + verbo base → Pergunta = auxiliar + sujeito + verbo base.',
+  metaphor:'O auxiliar é uma peça móvel — fica no meio na afirmativa, ganha um "not" do lado na negativa, e pula pro início na pergunta.',
+  broken:[['She','sujeito'],['works','verbo'],['here','complemento']],
+  ptComparison:'Em português, a negativa é mais simples (só "não" antes do verbo), e a pergunta muda só a entonação — por isso o inglês parece ter "passos extras".',
+  commonError:'Esquecer de voltar o verbo principal para a forma base ao negar/perguntar ("She doesn\'t works here.")',
+  transform:{ afirmativa:'She works here.', negativa:"She doesn't work here.", pergunta:'Does she work here?', resposta:'' },
+  mini:{ prompt:'Pratique: "They travel a lot." → negativa → pergunta.', answer:"They don't travel a lot. / Do they travel a lot?" },
+  extra:{ prompt:'Pratique: "He has a car." → negativa → pergunta (have aqui é posse).', answer:"He doesn't have a car. / Does he have a car?" },
+  listening:null },
+
+{ id:'d24', topic:'grammarfoundations', title:'Como saber qual palavra carrega o presente, a terceira pessoa e o passado?',
+  question:'Cada tempo/pessoa "mora" em uma palavra diferente — como eu identifico qual?',
+  shortAnswer:'Presente (I/you/we/they): mora no próprio verbo. Terceira pessoa (he/she/it): mora no -s/-es/-ies (afirmativa) ou no "does". Passado: mora no -ed/irregular (afirmativa) ou no "did".',
+  logicPt:'Regra visual: só UM lugar por frase pode carregar a marca de tempo/pessoa — nunca dois ao mesmo tempo.',
+  technical:'Presente afirmativa = verbo puro (ou +s na 3ª pessoa); presente pergunta = do/does + verbo base; passado afirmativa = verbo+ed/irregular; passado pergunta = did + verbo base.',
+  metaphor:'É como uma "bagagem" — ou o verbo carrega a mala do tempo, ou o auxiliar carrega por ele, nunca os dois com bagagem ao mesmo tempo.',
+  broken:[['She','sujeito'],['works','verbo + s, 3ª pessoa'],['here','complemento']],
+  ptComparison:'Português marca tudo direto no verbo (trabalha/trabalhou) sem precisar de auxiliar — por isso esse "revezamento" é a parte mais estranha do inglês para brasileiros.',
+  commonError:'Marcar tempo/pessoa duas vezes: "Does she works?", "Did she worked?"',
+  transform:{ afirmativa:'He plays tennis. / He played tennis.', negativa:'', pergunta:'Does he play tennis? / Did he play tennis?', resposta:'' },
+  mini:{ prompt:'Identifique onde está a marca: "He plays tennis." vs. "Does he play tennis?"', answer:'No verbo (-s) / no does' },
+  extra:{ prompt:'Identifique: "They visited Rome." vs. "Did they visit Rome?"', answer:'No verbo (-ed) / no did' },
+  listening:null }
 ];
 
 // ---------- Explicações alternativas ("Explique de outro jeito") — Seção E ----------
@@ -141,6 +418,31 @@ export const ALT_EXPLANATIONS = {
     { label:'Metáfora visual', text:'Do/does/did são o "crachá de acesso" que a frase precisa mostrar para virar pergunta ou negativa — sem crachá, não entra.' },
     { label:'Comparação com português', text:'Em português a pergunta muda só a entonação da voz ("Você trabalha aqui?"); em inglês, essa "mudança" precisa aparecer fisicamente como uma palavra (do/does/did).' },
     { label:'Engenharia da frase', text:'Toda frase tem um "slot" fixo logo depois do sujeito reservado para marcar tempo+pessoa. No presente, o slot é preenchido pelo verbo (afirmativa) ou por do/does (pergunta/negativa). No passado, por -ed (afirmativa) ou did (pergunta/negativa). Nunca os dois ao mesmo tempo.' }
+  ],
+  whwords: [
+    { label:'Metáfora visual', text:'A WH-word é uma etiqueta colada na frente da caixa, dizendo que tipo de resposta está faltando (lugar, tempo, pessoa...) antes mesmo de abrir a caixa.' },
+    { label:'Comparação com português', text:'"Onde", "quando", "por que" também vêm no início da pergunta em português — o que muda é que o inglês ainda exige o auxiliar (do/does/did ou to be) depois da WH-word.' },
+    { label:'Engenharia da frase', text:'WH-word ocupa sempre a posição 1 da frase; ela não altera nada da estrutura de pergunta que vem depois — é só um "prefixo" que se soma à estrutura comum (auxiliar+sujeito+verbo).' }
+  ],
+  tobe: [
+    { label:'Metáfora visual', text:'To be é o único verbo que "abre a própria porta" — não bate na casa de do/does/did pedindo carona.' },
+    { label:'Comparação com português', text:'"És tu o responsável?" (embora raro) mostra que em português o verbo "ser" também pode se mover sozinho para o início — o inglês faz isso o tempo todo, não só em registros formais.' },
+    { label:'Engenharia da frase', text:'Am/is/are/was/were carregam sozinhos tempo+pessoa; por isso, na pergunta, eles simplesmente trocam de posição com o sujeito, sem precisar de nenhuma peça auxiliar extra.' }
+  ],
+  have: [
+    { label:'Metáfora visual', text:'"Have" tem dois uniformes — de dono de objeto (posse) e de carregador de experiência (auxiliar). O uniforme muda dependendo do que vem depois dele.' },
+    { label:'Comparação com português', text:'"Eu tenho um carro" (posse) e "eu tenho trabalhado muito" (auxiliar) — os dois "tenho" existem em português também, com a mesma divisão de papéis.' },
+    { label:'Engenharia da frase', text:'Have/has + substantivo = posse (comporta-se como verbo comum, pede do/does para perguntar). Have/has + particípio = auxiliar de tempo perfeito (comporta-se como to be, vai sozinho para o início da pergunta).' }
+  ],
+  modais: [
+    { label:'Metáfora visual', text:'Os modais são "primos" do to be — da mesma família "folgada", não pedem ajuda a do/does/did.' },
+    { label:'Comparação com português', text:'"Você pode", "você deveria", "você poderia" também vão para o início da pergunta em português sem precisar de um "faz" extra — aqui o paralelo com o inglês é direto.' },
+    { label:'Engenharia da frase', text:'Modal + sujeito + verbo BASE + complemento — o modal ocupa a posição que do/does/did ocupariam, então nunca aparecem juntos na mesma frase.' }
+  ],
+  toing: [
+    { label:'Metáfora visual', text:'"To+verbo" é o verbo em roupa de trabalho (ação/propósito); "verbo-ing" é o verbo em roupa de festa (substantivo, usado depois de preposições ou em ações contínuas).' },
+    { label:'Comparação com português', text:'O infinitivo em português ("para ler") e o gerúndio ("lendo") também mudam de contexto de uso — mas as regras não coincidem exatamente com o inglês, por isso vale sempre conferir a regra específica (ex.: depois de preposição, é sempre -ing).' },
+    { label:'Engenharia da frase', text:'Regra fixa e sem exceção: depois de qualquer preposição (into, about, of, for...), o verbo SEMPRE vai de -ing. Depois de certos verbos (want, need, decide), vai de to+infinitivo. Depois de outros (enjoy, avoid, keep), vai sempre de -ing, mesmo sem preposição.' }
   ]
 };
 
@@ -183,9 +485,9 @@ export const AUX_GROUPS = [
         listening:{ transcript:'Does she work here?', q:'Presente ou passado?', a:'Presente.' } },
       { word:'DID', literal:'Não tem sozinho — é a forma de passado de "do".', func:'Organiza pergunta/negativa no passado, para QUALQUER sujeito.',
         rule:'Did + sujeito + verbo base + complemento? — o did carrega sozinho o passado.',
-        affirmative:'You watched the race.', negative:"You didn't watch the race.", question:'Did you watch the race?', shortAnswer:'Yes, I did. / No, I didn\'t.',
+        affirmative:'You watched the new episode.', negative:"You didn't watch the new episode.", question:'Did you watch the new episode?', shortAnswer:'Yes, I did. / No, I didn\'t.',
         ptComparison:'Não existe estrutura parecida — em português a pergunta no passado só muda a entonação.',
-        commonError:'"Did you watched the race?" — o verbo NÃO pode ficar no passado depois do did.',
+        commonError:'"Did you watched the new episode?" — o verbo NÃO pode ficar no passado depois do did.',
         profExample:'Did you manage a team before?', dailyExample:'Did you sleep well?',
         mini:{ prompt:'Transforme para pergunta: "She traveled to Italy."', answer:'Did she travel to Italy?' } }
     ] },
@@ -296,22 +598,162 @@ export const INTERVIEW_BLOCKS = [
     keywords:['Could you tell me','flexibility'] }
 ];
 
-// ---------- Printables (Folhas 1–4) ----------
+// ---------- Printables — redesign completo (Requisito 3) ----------
+// Cada folha é uma página A4. "blocks" é uma lista normalizada de elementos visuais
+// (rows/flow/columns/items/grid/answerGroups/note) que o template percorre de forma
+// genérica — assim toda folha nova só precisa de dados, não de markup novo.
+// accent referencia uma cor da paleta berries & clouds (var(--<accent>)).
 export const PRINTABLES = [
-  { id:'f1', title:'Folha 1 — Ordem básica da frase', lines:[
-    'Afirmação: Sujeito + Verbo + Complemento — "She works here."',
-    'Negação (to be): Sujeito + To Be + NOT + Complemento — "She is not tired."',
-    'Negação (outros verbos): Sujeito + Do/Does/Did + NOT + Verbo — "She does not work here."',
-    'Pergunta: (Auxiliar/To Be) + Sujeito + Verbo + Complemento + ? — "Does she work here?"' ] },
-  { id:'f2', title:'Folha 2 — To Be x Outros Verbos', lines:[
-    'To Be é "folgado": vai sozinho para o início da pergunta. Is she tired? / Was he here?',
-    'Outros verbos são "tímidos": precisam de do/does/did. Does she work? / Did he arrive?' ] },
-  { id:'f3', title:'Folha 3 — Do / Does / Did', lines:[
-    'DO — I/you/we/they, presente. Do you like it?',
-    'DOES — he/she/it, presente (verbo perde o -s). Does she work here?',
-    'DID — qualquer sujeito, passado ("ladrão do passado": verbo volta à forma base). Did you watch the race?' ] },
-  { id:'f4', title:'Folha 4 — WH-words', grid:true }
+  { id:'f1', accent:'vinho', kindLabel:'Consulta rápida', title:'Estrutura da Frase', subtitle:'Os 4 moldes que toda frase em inglês segue',
+    blocks:[
+      { t:'rows', heading:'Afirmação', rows:[{label:'Sujeito + Verbo + Complemento', example:'She works here.'}] },
+      { t:'rows', heading:'Negação (to be)', rows:[{label:'Sujeito + To Be + not + Complemento', example:'She is not tired.'}] },
+      { t:'rows', heading:'Negação (outros verbos)', rows:[{label:'Sujeito + Do/Does/Did + not + Verbo', example:'She does not work here.'}] },
+      { t:'rows', heading:'Pergunta', rows:[{label:'(Auxiliar/To Be) + Sujeito + Verbo + Complemento?', example:'Does she work here?'}] },
+      { t:'flow', steps:['Sujeito','Auxiliar / To Be','Verbo','Complemento'] }
+    ] },
+
+  { id:'f2', accent:'periwinkle', kindLabel:'Consulta rápida', title:'To Be × Outros Verbos', subtitle:'Quem é "folgado" e quem é "tímido"',
+    blocks:[
+      { t:'columns',
+        left:{ title:'TO BE — "folgado"', note:'Vai sozinho para o início da pergunta.', rows:[
+          {tag:'Afirmativa', text:'She is tired.'},{tag:'Negativa', text:"She isn't tired."},{tag:'Pergunta', text:'Is she tired?'}
+        ]},
+        right:{ title:'OUTROS VERBOS — "tímidos"', note:'Precisam de do/does/did.', rows:[
+          {tag:'Afirmativa', text:'She works here.'},{tag:'Negativa', text:"She doesn't work here."},{tag:'Pergunta', text:'Does she work here?'}
+        ]} }
+    ] },
+
+  { id:'f3', accent:'berry', kindLabel:'Consulta rápida', title:'Do / Does / Did', subtitle:'Quando usar cada um',
+    blocks:[
+      { t:'rows', heading:'DO', rows:[{label:'I / you / we / they, presente', example:'Do you like it?'}] },
+      { t:'rows', heading:'DOES', rows:[{label:'he / she / it, presente (verbo perde o -s)', example:'Does she work here?'}] },
+      { t:'rows', heading:'DID', rows:[{label:'qualquer sujeito, passado — verbo volta à forma base', example:'Did you watch the new episode?'}] },
+      { t:'note', text:'🕵️ "Ladrão do passado": quando did aparece, ele rouba o passado só para si — o verbo principal nunca leva -ed.' },
+      { t:'flow', steps:['Presente → do / does','Passado → did (sempre + verbo base)'] }
+    ] },
+
+  { id:'f4', accent:'skyblue', kindLabel:'Consulta rápida', title:'WH-words', subtitle:'Qual informação cada uma busca',
+    blocks:[ { t:'grid' } ] },
+
+  { id:'f5', accent:'vinho', kindLabel:'Prática', title:'Pratique: Do / Does / Did', subtitle:'Complete os espaços — escreva à mão',
+    blocks:[ { t:'items', items:[
+      {n:1, prompt:'What ___ you do?'}, {n:2, prompt:'___ she work here?'},
+      {n:3, prompt:'She ___ have a car. (negativa)'}, {n:4, prompt:'___ you have a car?'},
+      {n:5, prompt:'___ you watch the new episode? (passado)'}, {n:6, prompt:'Did you ___ the new episode? (watch, forma base)'},
+      {n:7, prompt:'They ___ travel much. (negativa)'}, {n:8, prompt:'___ he play tennis?'}
+    ] } ] },
+
+  { id:'f6', accent:'periwinkle', kindLabel:'Prática', title:'Pratique: WH-words', subtitle:'Complete com a WH-word certa',
+    blocks:[ { t:'items', items:[
+      {n:1, prompt:'___ do you do?'}, {n:2, prompt:'___ do you work?'}, {n:3, prompt:'___ did you start this job?'},
+      {n:4, prompt:'___ do you report to?'}, {n:5, prompt:'___ do you want this job?'}, {n:6, prompt:'___ tool do you prefer?'},
+      {n:7, prompt:'___ idea was this campaign?'}, {n:8, prompt:'___ do you handle deadlines?'}
+    ] } ] },
+
+  { id:'f7', accent:'berry', kindLabel:'Gabarito', title:'Folha de Respostas', subtitle:'Confira as folhas de prática (F5 e F6)',
+    blocks:[ { t:'answerGroups', groups:[
+      { sheet:'F5 — Pratique: Do / Does / Did', answers:['1. do','2. Does',"3. doesn't",'4. Do','5. Did','6. watch',"7. don't",'8. Does'] },
+      { sheet:'F6 — Pratique: WH-words', answers:['1. What','2. Where','3. When','4. Who','5. Why','6. Which','7. Whose','8. How'] }
+    ] } ] },
+
+  { id:'f8', accent:'pink', kindLabel:'Consulta rápida', title:'10 Verbos Comuns', subtitle:'Afirmativa, pergunta no presente e no passado',
+    blocks:[
+      { t:'rows', heading:'Afirmativa (she/he)', rows:[
+        {label:'have', example:'has'},{label:'want', example:'wants'},{label:'know', example:'knows'},{label:'go', example:'goes'},{label:'like', example:'likes'},
+        {label:'see', example:'sees'},{label:'eat', example:'eats'},{label:'need', example:'needs'},{label:'work', example:'works'},{label:'speak', example:'speaks'}
+      ] },
+      { t:'rows', heading:'Pergunta no presente (does she ___?)', rows:[
+        {label:'have', example:'want'},{label:'know', example:'go'},{label:'like', example:'see'},{label:'eat', example:'need'},{label:'work', example:'speak'}
+      ] },
+      { t:'rows', heading:'Pergunta no passado (did she ___?)', rows:[
+        {label:'have', example:'want'},{label:'know', example:'go'},{label:'like', example:'see'},{label:'eat', example:'need'},{label:'work', example:'speak'}
+      ] }
+    ] },
+
+  { id:'f9', accent:'cloud', kindLabel:'Consulta rápida', title:'Expressões Comuns', subtitle:'Quantificadores, conectores e expressões com verbo',
+    blocks:[
+      { t:'rows', heading:'Quantificadores', rows:[
+        {label:'kind of / sort of / type of', example:'mais ou menos, tipo assim'},
+        {label:'a lot of', example:'muito / bastante'},
+        {label:'a couple of', example:'um par de, alguns'},
+        {label:'a few / a little', example:'poucos / pouco'}
+      ] },
+      { t:'rows', heading:'Conectores', rows:[
+        {label:'actually', example:'na verdade'},
+        {label:'by the way', example:'a propósito'},
+        {label:'in fact', example:'de fato'}
+      ] },
+      { t:'rows', heading:'Expressões com verbo', rows:[
+        {label:'get used to', example:'acostumar-se com'},
+        {label:'take care of', example:'cuidar de'},
+        {label:'look forward to', example:'esperar ansiosamente por'},
+        {label:'in charge of', example:'responsável por'},
+        {label:'make sense', example:'fazer sentido'}
+      ] }
+    ] },
+
+  { id:'f10', accent:'skyblue', kindLabel:'Consulta rápida', title:'Respostas Essenciais para Entrevista', subtitle:'Só o esqueleto de cada frase — preencha com seus dados',
+    blocks:[ { t:'items', items: INTERVIEW_BLOCKS.map((b)=>({ n:b.id, prompt:b.structure })) } ] },
+
+  { id:'f11', accent:'vinho', kindLabel:'Consulta rápida', title:'Uma Palavra, Dois Trabalhos', subtitle:'A mesma palavra muda de função dependendo do contexto',
+    blocks:[
+      { t:'columns', left:{ title:'DO — verbo principal', note:'"fazer"', rows:[{tag:'Exemplo', text:'I do my homework.'}] },
+        right:{ title:'DO — auxiliar', note:'organiza pergunta/negativa', rows:[{tag:'Exemplo', text:'Do you like it?'}] } },
+      { t:'columns', left:{ title:'HAVE — posse', note:'"ter"', rows:[{tag:'Exemplo', text:'I have a car.'}] },
+        right:{ title:'HAVE — auxiliar', note:'tempo perfeito', rows:[{tag:'Exemplo', text:'I have worked here.'}] } },
+      { t:'columns', left:{ title:'BE — verbo principal', note:'"ser/estar"', rows:[{tag:'Exemplo', text:'She is a teacher.'}] },
+        right:{ title:'BE — auxiliar', note:'contínuo', rows:[{tag:'Exemplo', text:'She is working now.'}] } },
+      { t:'columns', left:{ title:'CAN — significado', note:'capacidade', rows:[{tag:'Exemplo', text:'I can speak English.'}] },
+        right:{ title:'CAN — função modal', note:'nunca usa do/does', rows:[{tag:'Exemplo', text:'Can you help me?'}] } }
+    ] },
+
+  { id:'f12', accent:'periwinkle', kindLabel:'Consulta rápida', title:'Quem Carrega a Informação?', subtitle:'Cada tempo/função "mora" em um lugar fixo da frase',
+    blocks:[ { t:'rows', heading:'', rows:[
+      {label:'Pergunta no presente', example:'do / does'},
+      {label:'Pergunta no passado', example:'did'},
+      {label:'Terceira pessoa afirmativa', example:'verbo + s/es/ies'},
+      {label:'Passado afirmativo regular', example:'verbo + ed'},
+      {label:'Capacidade', example:'can'},
+      {label:'Conselho', example:'should'},
+      {label:'Hipótese/polidez', example:'would'},
+      {label:'Estado/identidade', example:'be'},
+      {label:'Experiência/resultado', example:'have + particípio'}
+    ] } ] },
+
+  { id:'f13', accent:'berry', kindLabel:'Consulta rápida', title:'O Mapa de "What do you do?"', subtitle:'A pergunta mais confusa do toolkit, peça por peça',
+    blocks:[
+      { t:'flow', steps:['What','do','you','do','in Recife?'] },
+      { t:'rows', heading:'Cada peça', rows:[
+        {label:'informação', example:'What'},{label:'auxiliar', example:'do'},{label:'sujeito', example:'you'},
+        {label:'verbo principal', example:'do'},{label:'complemento', example:'in Recife'}
+      ] },
+      { t:'note', text:'Os dois "do" têm funções diferentes: o primeiro só organiza a pergunta; o segundo é o verbo de verdade ("fazer/atuar como").' }
+    ] },
+
+  { id:'f14', accent:'cloud', kindLabel:'Consulta rápida', title:'WH-word Não Substitui Auxiliar', subtitle:'O "do" continua ali em todas as versões',
+    blocks:[ { t:'rows', heading:'Comparação', rows:[
+      {label:'Base', example:'Do you work remotely?'},
+      {label:'+ lugar', example:'Where do you work?'},
+      {label:'+ motivo', example:'Why do you work remotely?'},
+      {label:'+ o que faz', example:'What do you do?'}
+    ] },
+    { t:'note', text:'Repare que o "do" se repete em todas — a WH-word só se soma à estrutura, nunca a substitui.' } ] }
 ];
+
+// ---------- Critérios de progresso (Requisito 1) ----------
+// Lista única, por tópico, das atividades "essenciais". Um tópico só chega a "Dominado"
+// quando TODAS as atividades daqui foram tentadas e pelo menos 75% delas foram acertadas.
+export const ESSENTIAL_ACTIVITIES = {
+  greetings: PRACTICE_TOPICS.greetings.drills.map((d)=>d.id),
+  tobe: PRACTICE_TOPICS.tobe.drills.map((d)=>d.id),
+  personalinfo: PRACTICE_TOPICS.personalinfo.drills.map((d)=>d.id),
+  smalltalk: PRACTICE_TOPICS.smalltalk.drills.map((d)=>d.id),
+  likes: PRACTICE_TOPICS.likes.drills.map((d)=>d.id),
+  dodoesdid: MICROLESSONS.filter((m)=>m.topic==='dodoesdid').map((m)=>m.id),
+  whwords: WH_WORDS.map((w)=>w.word),
+  interview: INTERVIEW_BLOCKS.map((b)=>'iv'+b.id)
+};
 
 export const AUDIO_MANIFEST_FALLBACK = [
   { id:'do-explicacao-pt', module:'dodoesdid', type:'explanation', language:'pt-BR', file:'audio/do_explicacao_pt.mp3',
