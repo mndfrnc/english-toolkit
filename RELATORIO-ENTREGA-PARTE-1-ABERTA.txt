@@ -159,9 +159,10 @@ support.js, store.js, sw.js, supabase-client.js, manifest.json,
 index.html, assets/, CNAME, NOTICE.md, SESSION-LOG.md permanecem
 inalterados).
 
-Commit: [preenchido apos o push - ver GitHub, branch main, mensagem
-"Corrige Parte 1 aberta: Etapa 0 completa, 4a atividade na Licao 1,
-encerramento movido para o Checkpoint 3"]
+Commit: c92aca5 (branch main)
+Mensagem: "Corrige Parte 1 aberta: Etapa 0 completa, 4a atividade na
+Licao 1, encerramento movido para o Checkpoint 3"
+Commit anterior (v1, para comparacao): c57dde4
 
 ===============================================================
 7. CAMINHOS EXATOS
