@@ -49,7 +49,8 @@ export const STAGE_0 = {
       "order": 2,
       "type": "demo_no_grade",
       "title": "Experimente uma atividade (sem nota)",
-      "instruction": "Esta é uma demonstração de como as atividades funcionam no English Tool. Ela não vale nota e não conta para nenhum critério de avanço — sirva-se dela só para conhecer o formato. Nas lições de verdade, toda atividade vem depois de uma explicação (a seção \"Entenda\") — aqui pulamos direto para a atividade só para você ver como ela se parece.",
+      "instruction": "Esta é uma demonstração de como as atividades funcionam no English Tool. Ela não vale nota e não conta para nenhum critério de avanço. Nas lições de verdade, toda atividade vem depois de uma explicação completa (a seção \"Entenda\"); aqui pulamos direto para a atividade só para você ver como ela se parece.",
+      "mini_explanation": "Good morning é usado de manhã (Bom dia). Good afternoon é usado à tarde (Boa tarde). Good night é usado à noite, para se despedir ou desejar boa noite (Boa noite).",
       "demo_item": {
         "prompt": "Você chega a uma reunião às 9h.",
         "options": [
