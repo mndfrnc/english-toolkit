@@ -34,6 +34,11 @@ export const STAGE_0 = {
   "objective": "Aluno entende o produto, testa áudio, responde a uma atividade sem nota, localiza a revisão. Não introduz conteúdo de inglês novo — usa exemplos das lições seguintes apenas como demonstração.",
   "source": "MAPA-15-LICOES-5-CHECKPOINTS.md (objetivo original, preservado verbatim) + demonstração construída sobre module_1_lesson_1 (Módulo 1, Lição 1), já aprovada — nenhum conteúdo de inglês novo foi introduzido aqui, conforme o próprio objetivo exige.",
   "intro": "Antes de começar o Módulo 1, esta etapa rápida mostra como o English Tool funciona: como ouvir o áudio, como uma atividade é corrigida, e onde ficam os itens que você errou para revisar depois. Não vale nota e não ensina nenhum conteúdo novo de inglês — os exemplos usados aqui são os mesmos da Lição 1.",
+  "apostila_download": {
+    "label": "📄 Baixe sua apostila e siga sua jornada",
+    "url": "assets/apostilas/apostila-parte-1.pdf",
+    "note": "Apostila completa da Parte 1 (Módulos 1, 2 e 3) em PDF, para acompanhar junto com o English Tool."
+  },
   "steps": [
     {
       "id": "stage_0_step_audio_test",

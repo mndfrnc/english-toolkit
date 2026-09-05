@@ -210,6 +210,10 @@ a:hover{color:var(--vinho)}
 <sc-if value="{{ jornadaView.stage0.expanded }}" hint-placeholder-val="{{ false }}">
 <div style="padding:0 20px 20px;display:flex;flex-direction:column;gap:14px">
 <div style="font-size:14px;color:var(--inkSoft);line-height:1.5">{{ jornadaView.stage0.intro }}</div>
+<sc-if value="{{ jornadaView.stage0.apostilaDownload }}" hint-placeholder-val="{{ false }}">
+<a href="{{ jornadaView.stage0.apostilaDownload.url }}" download target="_blank" rel="noopener" style="display:block;text-align:center;background:var(--vinho);color:#fff;border:2px solid var(--ink);border-radius:10px;padding:14px;font-weight:700;font-size:15px;text-decoration:none;box-shadow:3px 3px 0 var(--ink);font-family:'Manrope',sans-serif">{{ jornadaView.stage0.apostilaDownload.label }}</a>
+<sc-if value="{{ jornadaView.stage0.apostilaDownload.note }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:var(--inkSoft);text-align:center;margin-top:-6px">{{ jornadaView.stage0.apostilaDownload.note }}</div></sc-if>
+</sc-if>
 <sc-for list="{{ jornadaView.stage0.stepsView }}" as="st" hint-placeholder-count="3">
 <div style="background:var(--bg);border:2px dashed var(--ink);border-radius:10px;padding:14px 16px">
 <div style="font-weight:700;font-size:14px;margin-bottom:6px">{{ st.title }}</div>
@@ -1609,7 +1613,8 @@ class Component extends DCLogic {
       }
       return { kind:'info', title:st.title, instruction:st.instruction };
     });
-    return { expanded, toggle:()=>this.toggleJornadaModule('stage_0'), label:stage0.label, objective:stage0.objective, intro:stage0.intro, stepsView };
+    const apostilaDownload = stage0.apostila_download || null;
+    return { expanded, toggle:()=>this.toggleJornadaModule('stage_0'), label:stage0.label, objective:stage0.objective, intro:stage0.intro, apostilaDownload, stepsView };
   }
   buildJornadaView(){
     const part1 = this.state.part1Data, part2 = this.state.part2Data;
