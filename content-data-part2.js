@@ -266,7 +266,7 @@ export const MODULE_4 = {
           "type": "escolha_por_contexto",
           "items": [
             {
-              "prompt": "The book is ___ the table.",
+              "prompt": "The book is ___ the table. (o livro está sobre a mesa)",
               "options": [
                 "on",
                 "under"
@@ -274,7 +274,7 @@ export const MODULE_4 = {
               "answer": 0
             },
             {
-              "prompt": "The shoes are ___ the bed.",
+              "prompt": "The shoes are ___ the bed. (os sapatos estão embaixo da cama)",
               "options": [
                 "under",
                 "next to"
@@ -282,7 +282,7 @@ export const MODULE_4 = {
               "answer": 0
             },
             {
-              "prompt": "The chair is ___ the table.",
+              "prompt": "The chair is ___ the table. (a cadeira está ao lado da mesa)",
               "options": [
                 "in",
                 "next to"
@@ -290,7 +290,7 @@ export const MODULE_4 = {
               "answer": 1
             },
             {
-              "prompt": "The garden is ___ the house.",
+              "prompt": "The garden is ___ the house. (o jardim fica atrás da casa)",
               "options": [
                 "behind",
                 "on"
@@ -330,7 +330,7 @@ export const MODULE_4 = {
           "id": "module_4_lesson_1_practice_4",
           "title": "Associe",
           "type": "associar",
-          "instruction": "Ligue a preposição à imagem descrita.",
+          "instruction": "Ligue cada preposição à descrição correspondente.",
           "columnA": [
             "in",
             "under",
@@ -680,11 +680,13 @@ export const MODULE_4 = {
       "your_turn": {
         "id": "module_4_lesson_2_production",
         "type": "producao_livre",
-        "instruction": "Descreva um objeto seu (real ou inventado) em três frases.",
+        "instruction": "Descreva um objeto seu (real ou inventado) em três frases. Depois, descreva também uma pessoa real ou inventada.",
         "template": [
           "I have __________.",
           "It's __________ and __________.",
-          "I like it because __________."
+          "I like it because __________.",
+          "He/She is __________ and __________.",
+          "He/She has __________."
         ],
         "criterion": "tentativa_registrada"
       },
@@ -715,8 +717,8 @@ export const MODULE_4 = {
         "recycles": [
           "module_1_lesson_3"
         ],
-        "instruction": "Complete reciclando adjetivos de personalidade (Módulo 1, Lição 3), agora aplicados a um objeto:",
-        "template": "My phone is ___ (new/creative) and practical.",
+        "instruction": "Complete usando um adjetivo adequado para descrever um objeto:",
+        "template": "My phone is ___ and practical.",
         "possible_answer": "new"
       },
       "check_progress": {
@@ -754,7 +756,7 @@ export const MODULE_4 = {
             },
             {
               "speaker": "Vendedor",
-              "en": "It's twenty dollars. Do you need any other size?",
+              "en": "It's twenty dollars. Do you need it in another size?",
               "audio_id": "audio_module_4_lesson_3_opening_line_3"
             },
             {
@@ -774,7 +776,7 @@ export const MODULE_4 = {
           "type": "summary",
           "text": "Yara pergunta o preço da camisa: vinte dólares. Ela pergunta se tem tamanho médio, e o vendedor confirma que sim."
         },
-        "pattern_note": "Repare em some nas afirmativas (\"we have some\") e any nas perguntas (\"any other size\", \"any in medium\")."
+        "pattern_note": "Repare em some na afirmativa (\"we have some\") e any na pergunta (\"any in medium\")."
       },
       "understand": [
         {
@@ -787,21 +789,27 @@ export const MODULE_4 = {
             ],
             "rows": [
               [
-                "How much",
-                "coisas incontáveis (dinheiro, água, tempo)",
+                "How much + substantivo incontável",
+                "quantidade de coisas incontáveis",
+                "How much water do you need?"
+              ],
+              [
+                "How much is/are + item",
+                "preço",
                 "How much is this shirt?"
               ],
               [
-                "How many",
-                "coisas contáveis (que têm plural)",
-                "How many shirts do you have?"
+                "How many + substantivo no plural",
+                "quantidade de coisas contáveis",
+                "How many shirts do you need?"
               ]
             ]
           },
           "atencao": {
             "title": "\"money\" não tem plural",
             "text": "Palavras como money, water e time não têm plural em inglês — você não diz \"moneys\". Por isso usam how much, nunca how many."
-          }
+          },
+          "note": "Em geral, usamos some em afirmativas e any em perguntas e negativas. Some também é comum em pedidos e ofertas, como em ‘Can I have some water?’"
         },
         {
           "title": "Some e any",
@@ -834,7 +842,7 @@ export const MODULE_4 = {
         },
         {
           "word": "size (small, medium, large)",
-          "example": "Do you have a large size?",
+          "example": "Do you have this in a large size?",
           "audio_id": "audio_module_4_lesson_3_word_example_2"
         },
         {
@@ -1151,8 +1159,8 @@ export const MODULE_4 = {
             "answer": "I don't work on Sundays."
           },
           {
-            "prompt": "The cat is on the bed.",
-            "note": "descrever \"embaixo\" com a preposição errada de propósito",
+            "prompt": "A imagem mostra o gato embaixo da cama: The cat is on the bed.",
+            "note": "trocar on por under",
             "answer": "The cat is under the bed."
           },
           {
@@ -1179,8 +1187,8 @@ export const MODULE_4 = {
     ],
     "completion_criterion": {
       "objective_items_total": 11,
-      "objective_items_required": 8,
-      "text": "acertar pelo menos 8 dos 11 itens objetivos do checkpoint (5 da Parte A + 6 da Parte B); concluir a produção final com os cinco elementos solicitados; refazer os itens essenciais registrados na revisão, incluindo o item reaplicado do Checkpoint 3 (Parte B, item 4).",
+      "objective_items_required": 9,
+      "text": "acertar pelo menos 9 dos 11 itens objetivos do checkpoint (5 da Parte A + 6 da Parte B); concluir a produção final com os cinco elementos solicitados; refazer os itens essenciais registrados na revisão, incluindo o item reaplicado do Checkpoint 3 (Parte B, item 4).",
       "non_blocking_note": "Se ainda não alcançar o critério, o módulo não será apagado nem reiniciado. O English Tool mostrará quais lições revisar e oferecerá uma nova tentativa apenas com os pontos necessários."
     }
   },
@@ -1235,7 +1243,7 @@ export const MODULE_5 = {
           "type": "summary",
           "text": "Ana pergunta o que Davi está fazendo agora. Ele está cozinhando o jantar. Ana está assistindo a um filme — ela geralmente cozinha nesse horário, mas hoje não."
         },
-        "pattern_note": "Repare no contraste: \"I'm cooking\" (agora) e \"I usually cook\" (rotina), na mesma fala de Ana."
+        "pattern_note": "Repare no contraste entre \"I'm cooking\", dito por Davi para falar do momento atual, e \"I usually cook\", dito por Ana para falar de rotina."
       },
       "understand": [
         {
@@ -2210,6 +2218,25 @@ export const MODULE_5 = {
               "answer": "This park is bigger than that park."
             }
           ]
+        },
+        {
+          "id": "module_5_lesson_3_practice_5",
+          "title": "Complete com mine, yours ou Marco's",
+          "type": "completar",
+          "items": [
+            {
+              "prompt": "This is my bag. This bag is ___.",
+              "answer": "mine"
+            },
+            {
+              "prompt": "Is this your phone? Is this ___?",
+              "answer": "yours"
+            },
+            {
+              "prompt": "This is Marco's jacket. It is ___ jacket.",
+              "answer": "Marco's"
+            }
+          ]
         }
       ],
       "your_turn": {
@@ -2231,6 +2258,11 @@ export const MODULE_5 = {
           "label": "Comparativos",
           "detail": "completar três frases",
           "skill": "escrita"
+        },
+        {
+          "label": "Posse",
+          "detail": "completar três frases com mine, yours ou Marco's",
+          "skill": "leitura/gramática"
         },
         {
           "label": "Ouça e compare",
@@ -2281,8 +2313,8 @@ export const MODULE_5 = {
           "this one",
           "bigger than"
         ],
-        "text_template": "A: __________ right now?\nB: I'm resting. My back __________.\nA: __________ rest too. Which bag do you want, __________ or that one?\nB: __________ that one. This one is __________.",
-        "answer": "What are you doing right now? / I'm resting. My back hurts. / I need to rest too. Which bag do you want, this one or that one? / This one — that one is bigger than this one."
+        "text_template": "A: __________ right now?\nB: I'm resting. My back __________.\nA: __________ rest too. Which bag do you want, __________ or that one?\nB: That one. It's __________ this one.",
+        "answer": "What are you doing right now? / I'm resting. My back hurts. / I need to rest too. Which bag do you want, this one or that one? / That one. It's bigger than this one."
       },
       {
         "id": "module_5_checkpoint_part_b",
@@ -2664,7 +2696,7 @@ export const PART_2_AUDIO = [
     "type": "opening_line",
     "language": "en-US",
     "rate": 1,
-    "text": "It's twenty dollars. Do you need any other size?"
+    "text": "It's twenty dollars. Do you need it in another size?"
   },
   {
     "id": "audio_module_4_lesson_3_opening_line_4",
@@ -2688,7 +2720,7 @@ export const PART_2_AUDIO = [
     "type": "opening_full",
     "language": "en-US",
     "rate": 1,
-    "text": "Can I help you? Yes, please. How much is this shirt? It's twenty dollars. Do you need any other size? Do you have any in medium? Yes, we have some in medium."
+    "text": "Can I help you? Yes, please. How much is this shirt? It's twenty dollars. Do you need it in another size? Do you have any in medium? Yes, we have some in medium."
   },
   {
     "id": "audio_module_4_lesson_3_word_example_1",
@@ -2704,7 +2736,7 @@ export const PART_2_AUDIO = [
     "type": "word_example",
     "language": "en-US",
     "rate": 1,
-    "text": "Do you have a large size?"
+    "text": "Do you have this in a large size?"
   },
   {
     "id": "audio_module_4_lesson_3_word_example_3",
