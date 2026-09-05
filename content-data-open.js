@@ -49,7 +49,7 @@ export const STAGE_0 = {
       "order": 2,
       "type": "demo_no_grade",
       "title": "Experimente uma atividade (sem nota)",
-      "instruction": "Esta é uma demonstração de como as atividades funcionam no English Tool. Ela não vale nota e não conta para nenhum critério de avanço — sirva-se dela só para conhecer o formato.",
+      "instruction": "Esta é uma demonstração de como as atividades funcionam no English Tool. Ela não vale nota e não conta para nenhum critério de avanço — sirva-se dela só para conhecer o formato. Nas lições de verdade, toda atividade vem depois de uma explicação (a seção \"Entenda\") — aqui pulamos direto para a atividade só para você ver como ela se parece.",
       "demo_item": {
         "prompt": "Você chega a uma reunião às 9h.",
         "options": [
