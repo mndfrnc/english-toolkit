@@ -134,6 +134,12 @@ a:hover{color:var(--vinho)}
 <p style="margin:0;font-size:15px;line-height:1.6;color:var(--inkSoft)">Este é o seu painel de estudo. Ele não substitui o curso, ele organiza o que você já viu e testa se realmente colou. Comece por onde parou ou escolha um módulo abaixo.</p>
 </div>
 
+<button onClick="{{ jornadaCard.click }}" style="{{ jornadaCard.cardStyle }};width:100%;margin-bottom:24px;display:block">
+<div style="font-size:28px;margin-bottom:6px">{{ jornadaCard.icon }}</div>
+<div style="font-weight: 700; font-size: 17px; color: #000000; margin-bottom: 4px">{{ jornadaCard.title }}</div>
+<div style="font-size:13px;color:var(--inkSoft)">{{ jornadaCard.subtitle }}</div>
+</button>
+
 <div style="background:var(--card);border:2.5px solid var(--ink);border-radius:16px;padding:24px;margin-bottom:24px;box-shadow:4px 4px 0 var(--line)">
 <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px">
 <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:var(--ink);font-size:26px;margin:0">Seu progresso</h2>
@@ -1648,7 +1654,7 @@ class Component extends DCLogic {
     return {
       theme, themeIcon: theme==='light' ? '🌙' : '☀️', toggleTheme:()=>this.toggleTheme(),
       isHome:false, isJornada:false, isDuvidas:false, isFundamentos:false, isLab:false, isAux:false, isWh:false, isInterviews:false, isPrintables:false,
-      navItems, topicsView:[], masteredCount:0, homeCards:[],
+      navItems, topicsView:[], masteredCount:0, homeCards:[], jornadaCard:null,
       revisionsView:[], hasRevisions:false, noRevisions:true, revisionCount:0, confirmClear:false, notConfirmClear:true,
       onAskClear:()=>{}, onConfirmClear:()=>{}, onCancelClear:()=>{},
       microlessonsView:[], fundamentosView:[], styleAudioBtn:'', styleAudioBtnSm:'',
@@ -1707,8 +1713,8 @@ class Component extends DCLogic {
     const cardBase = 'text-align:left;border:2.5px solid var(--ink);border-radius:14px;padding:20px;background:var(--card);cursor:pointer;box-shadow:4px 4px 0 var(--line);';
     const cardFeatured = 'text-align:left;border:3px solid var(--vinho);border-radius:14px;padding:20px;background:var(--card);cursor:pointer;grid-column:1/-1;box-shadow:5px 5px 0 var(--vinho);';
     const hasInterviews = this.state.hasInterviews;
+    const jornadaCard = {icon:'🗺️', title:'Sua jornada', subtitle:'Etapa 0 e Módulos 1 a 3 — Módulos 4 e 5 liberam no 7º dia.', click:()=>this.setView('jornada'), cardStyle:cardFeatured};
     const homeCards = [
-      {icon:'🗺️', title:'Sua jornada', subtitle:'Etapa 0 e Módulos 1 a 3 — Módulos 4 e 5 liberam no 7º dia.', click:()=>this.setView('jornada'), cardStyle:cardFeatured},
       {icon:'🧠', title:'Dúvidas gerais\n', subtitle:'O núcleo do toolkitnão é gramática solta.', click:()=>this.setView('duvidas'), cardStyle:cardBase},
       {icon:'📗', title:'Fundamentos', subtitle:'Cumprimentos, To Be, dados pessoais, small talk, likes.', click:()=>this.setView('fundamentos'), cardStyle:cardBase},
       hasInterviews
@@ -1919,7 +1925,7 @@ class Component extends DCLogic {
       resetError: this.state.resetError, resetButtonLabel: this.state.resetLoading ? 'Salvando...' : 'Salvar nova senha', onResetSubmit:()=>this.onResetSubmit(),
       isHome: !gated && view==='home', isJornada: !gated && view==='jornada', isDuvidas: !gated && view==='duvidas', isFundamentos: !gated && view==='fundamentos', isLab: !gated && view==='lab', isAux: !gated && view==='auxiliares',
       isWh: !gated && view==='whwords', isInterviews: !gated && view==='interviews' && hasInterviews, isPrintables: !gated && view==='printables',
-      navItems, jornadaView, topicsView, masteredCount, homeCards,
+      navItems, jornadaView, jornadaCard, topicsView, masteredCount, homeCards,
       revisionsView, hasRevisions, noRevisions: !hasRevisions, revisionCount: revisionsView.length,
       confirmClear: this.state.confirmClearRevisions, notConfirmClear: !this.state.confirmClearRevisions,
       onAskClear:()=>this.askClearRevisions(), onConfirmClear:()=>this.confirmClearRevisionsNow(), onCancelClear:()=>this.cancelClearRevisions(),
