@@ -1618,8 +1618,8 @@ class Component extends DCLogic {
       modules.push({ kind:'module', view:this.buildModuleView(part2.MODULE_4, false) });
       modules.push({ kind:'module', view:this.buildModuleView(part2.MODULE_5, false) });
     } else {
-      modules.push({ kind:'module', view:{ id:'module_4', label:m4Title, locked:true, lockLabel:'🔒 Disponível no 8º dia', expanded:false, toggle:()=>{}, lessonsView:[], checkpointView:null } });
-      modules.push({ kind:'module', view:{ id:'module_5', label:m5Title, locked:true, lockLabel:'🔒 Disponível no 8º dia', expanded:false, toggle:()=>{}, lessonsView:[], checkpointView:null } });
+      modules.push({ kind:'module', view:{ id:'module_4', label:m4Title, locked:true, lockLabel:'🔒 Disponível no 7º dia', expanded:false, toggle:()=>{}, lessonsView:[], checkpointView:null } });
+      modules.push({ kind:'module', view:{ id:'module_5', label:m5Title, locked:true, lockLabel:'🔒 Disponível no 7º dia', expanded:false, toggle:()=>{}, lessonsView:[], checkpointView:null } });
     }
     return { stage0: part1 ? this.buildStage0View(part1.STAGE_0) : null, modules,
       gateLoading:this.state.gateLoading, unlocked, part2Loading: !unlocked===false && !part2 };
@@ -1708,7 +1708,7 @@ class Component extends DCLogic {
     const cardFeatured = 'text-align:left;border:3px solid var(--vinho);border-radius:14px;padding:20px;background:var(--card);cursor:pointer;grid-column:1/-1;box-shadow:5px 5px 0 var(--vinho);';
     const hasInterviews = this.state.hasInterviews;
     const homeCards = [
-      {icon:'🗺️', title:'Sua jornada', subtitle:'Etapa 0 e Módulos 1 a 3 — Módulos 4 e 5 liberam no 8º dia.', click:()=>this.setView('jornada'), cardStyle:cardFeatured},
+      {icon:'🗺️', title:'Sua jornada', subtitle:'Etapa 0 e Módulos 1 a 3 — Módulos 4 e 5 liberam no 7º dia.', click:()=>this.setView('jornada'), cardStyle:cardFeatured},
       {icon:'🧠', title:'Dúvidas gerais\n', subtitle:'O núcleo do toolkitnão é gramática solta.', click:()=>this.setView('duvidas'), cardStyle:cardBase},
       {icon:'📗', title:'Fundamentos', subtitle:'Cumprimentos, To Be, dados pessoais, small talk, likes.', click:()=>this.setView('fundamentos'), cardStyle:cardBase},
       hasInterviews
