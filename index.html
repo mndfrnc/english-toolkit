@@ -11,6 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
 <meta name="theme-color" content="#E6532F">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}</script>
@@ -64,7 +66,9 @@ a:hover{color:var(--vinho)}
 <input value="{{ loginEmail }}" onChange="{{ onLoginEmailChange }}" type="email" placeholder="voce@exemplo.com" style="width:100%;padding:11px 13px;border-radius:8px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);font-size:15px;margin-bottom:14px;font-family:'Manrope',sans-serif">
 <label style="font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--inkSoft);display:block;margin-bottom:6px;font-family:'Manrope',sans-serif">Senha</label>
 <input value="{{ loginPassword }}" onChange="{{ onLoginPasswordChange }}" type="password" placeholder="••••••••" style="width:100%;padding:11px 13px;border-radius:8px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);font-size:15px;margin-bottom:6px;font-family:'Manrope',sans-serif">
-<button onClick="{{ onForgotClick }}" style="background:none;border:none;padding:0;margin-bottom:14px;color:var(--periwinkle);font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;text-decoration:underline">Esqueci minha senha</button>
+<div style="margin-bottom:14px">
+<button onClick="{{ onForgotClick }}" style="background:none;border:none;padding:0;color:var(--periwinkle);font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;text-decoration:underline">Esqueci minha senha</button>
+</div>
 <sc-if value="{{ loginError }}" hint-placeholder-val="{{ false }}"><div style="color:#fff;background:var(--vinho);border:2px solid var(--ink);border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:14px;font-family:'Manrope',sans-serif;font-weight:600">{{ loginError }}</div></sc-if>
 <button onClick="{{ onLoginSubmit }}" style="width:100%;background:var(--vinho);color:#fff;border:2px solid var(--ink);border-radius:10px;padding:12px;font-weight:700;font-size:15px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);font-family:'Manrope',sans-serif">{{ loginButtonLabel }}</button>
 </sc-if>
@@ -91,6 +95,25 @@ a:hover{color:var(--vinho)}
 <input value="{{ newPassword2 }}" onChange="{{ onNewPassword2Change }}" type="password" placeholder="••••••••" style="width:100%;padding:11px 13px;border-radius:8px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);font-size:15px;margin-bottom:14px;font-family:'Manrope',sans-serif">
 <sc-if value="{{ resetError }}" hint-placeholder-val="{{ false }}"><div style="color:#fff;background:var(--vinho);border:2px solid var(--ink);border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:14px;font-family:'Manrope',sans-serif;font-weight:600">{{ resetError }}</div></sc-if>
 <button onClick="{{ onResetSubmit }}" style="width:100%;background:var(--vinho);color:#fff;border:2px solid var(--ink);border-radius:10px;padding:12px;font-weight:700;font-size:15px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);font-family:'Manrope',sans-serif">{{ resetButtonLabel }}</button>
+</sc-if>
+<sc-if value="{{ isSignupView }}" hint-placeholder-val="{{ false }}">
+<h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:var(--ink);font-size:24px;margin:6px 0 8px;letter-spacing:-0.01em">Criar conta</h1>
+<sc-if value="{{ signupDone }}" hint-placeholder-val="{{ false }}">
+<p style="font-size:13px;color:var(--inkSoft);margin:0 0 20px;font-family:'Manrope',sans-serif;line-height:1.5">Conta criada! Confira sua caixa de entrada — e também a pasta de spam/lixo eletrônico — para confirmar seu e-mail e depois voltar para entrar.</p>
+<button onClick="{{ onBackToLogin }}" style="width:100%;background:var(--vinho);color:#fff;border:2px solid var(--ink);border-radius:10px;padding:12px;font-weight:700;font-size:15px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);font-family:'Manrope',sans-serif">Ir para o login</button>
+</sc-if>
+<sc-if value="{{ signupNotDone }}" hint-placeholder-val="{{ true }}">
+<p style="font-size:13px;color:var(--inkSoft);margin:0 0 18px;font-family:'Manrope',sans-serif;line-height:1.5">Você chegou aqui pelo link enviado após a compra. Crie uma senha para acessar o English Tool.</p>
+<label style="font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--inkSoft);display:block;margin-bottom:6px;font-family:'Manrope',sans-serif">E-mail</label>
+<input value="{{ signupEmail }}" onChange="{{ onSignupEmailChange }}" type="email" placeholder="voce@exemplo.com" style="width:100%;padding:11px 13px;border-radius:8px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);font-size:15px;margin-bottom:14px;font-family:'Manrope',sans-serif">
+<label style="font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--inkSoft);display:block;margin-bottom:6px;font-family:'Manrope',sans-serif">Criar senha</label>
+<input value="{{ signupPassword }}" onChange="{{ onSignupPasswordChange }}" type="password" placeholder="••••••••" style="width:100%;padding:11px 13px;border-radius:8px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);font-size:15px;margin-bottom:14px;font-family:'Manrope',sans-serif">
+<label style="font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--inkSoft);display:block;margin-bottom:6px;font-family:'Manrope',sans-serif">Confirmar senha</label>
+<input value="{{ signupPassword2 }}" onChange="{{ onSignupPassword2Change }}" type="password" placeholder="••••••••" style="width:100%;padding:11px 13px;border-radius:8px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);font-size:15px;margin-bottom:6px;font-family:'Manrope',sans-serif">
+<sc-if value="{{ signupError }}" hint-placeholder-val="{{ false }}"><div style="color:#fff;background:var(--vinho);border:2px solid var(--ink);border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:14px;font-family:'Manrope',sans-serif;font-weight:600">{{ signupError }}</div></sc-if>
+<button onClick="{{ onSignupSubmit }}" style="width:100%;background:var(--vinho);color:#fff;border:2px solid var(--ink);border-radius:10px;padding:12px;font-weight:700;font-size:15px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);font-family:'Manrope',sans-serif;margin-bottom:10px">{{ signupButtonLabel }}</button>
+</sc-if>
+<button onClick="{{ onBackToLogin }}" style="width:100%;background:var(--card);color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:10px;font-weight:700;font-size:13px;cursor:pointer;font-family:'Manrope',sans-serif">Voltar para o login</button>
 </sc-if>
 </div>
 </div>
@@ -163,6 +186,266 @@ a:hover{color:var(--vinho)}
 </button>
 </sc-for>
 </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isJornada }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:820px;margin:0 auto;padding:24px 20px">
+<div style="display:inline-flex;align-items:center;background:var(--vinho);color:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;font-family:'Manrope',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;box-shadow:2px 2px 0 var(--ink)">Percurso completo</div>
+<h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:var(--ink);font-size:36px;margin:0 0 8px;letter-spacing:-0.01em">🗺️ Sua jornada</h1>
+<p style="font-size:15px;color:var(--inkSoft);line-height:1.6;margin:0 0 24px">Etapa 0 e Módulos 1 a 3 já estão liberados. Módulos 4 e 5 (e a Parte 2 da apostila) abrem automaticamente 7 dias depois do seu primeiro acesso.</p>
+
+<sc-if value="{{ jornadaView.stage0 }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--card);border:2.5px solid var(--ink);border-radius:14px;margin-bottom:16px;overflow:hidden;box-shadow:4px 4px 0 var(--line)">
+<button onClick="{{ jornadaView.stage0.toggle }}" style="width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+<span style="font-weight:800;font-size:17px;color:var(--ink)">{{ jornadaView.stage0.label }}</span>
+<span style="font-size:18px;color:var(--periwinkle)">{{ jornadaView.stage0.expanded }}</span>
+</button>
+<sc-if value="{{ jornadaView.stage0.expanded }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 20px 20px;display:flex;flex-direction:column;gap:14px">
+<div style="font-size:14px;color:var(--inkSoft);line-height:1.5">{{ jornadaView.stage0.intro }}</div>
+<sc-for list="{{ jornadaView.stage0.stepsView }}" as="st" hint-placeholder-count="3">
+<div style="background:var(--bg);border:2px dashed var(--ink);border-radius:10px;padding:14px 16px">
+<div style="font-weight:700;font-size:14px;margin-bottom:6px">{{ st.title }}</div>
+<div style="font-size:13px;color:var(--inkSoft);margin-bottom:10px">{{ st.instruction }}</div>
+<sc-if value="{{ st.onPlay }}" hint-placeholder-val="{{ false }}"><button onClick="{{ st.onPlay }}" style="{{ styleAudioBtnSm }}">🔊 Ouvir</button></sc-if>
+<sc-if value="{{ st.prompt }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:13px;font-weight:700;margin:8px 0">{{ st.prompt }}</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ st.optionsView }}" as="opt" hint-placeholder-count="3"><button onClick="{{ opt.onClick }}" style="{{ opt.style }}">{{ opt.label }}</button></sc-for>
+</div>
+<sc-if value="{{ st.checked }}" hint-placeholder-val="{{ false }}"><div style="margin-top:8px;font-size:13px;color:var(--inkSoft)">{{ st.feedback }}</div></sc-if>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-for list="{{ jornadaView.modules }}" as="mEntry" hint-placeholder-count="5">
+<div style="background:var(--card);border:2.5px solid var(--ink);border-radius:14px;margin-bottom:16px;overflow:hidden;box-shadow:4px 4px 0 var(--line)">
+<button onClick="{{ mEntry.view.toggle }}" style="width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+<span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px;color:var(--ink)">{{ mEntry.view.label }}</span>
+<sc-if value="{{ mEntry.view.locked }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;font-weight:700;color:var(--vinho)">{{ mEntry.view.lockLabel }}</span></sc-if>
+</button>
+<sc-if value="{{ mEntry.view.expanded }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 20px 20px;display:flex;flex-direction:column;gap:14px">
+<sc-if value="{{ mEntry.view.outcome }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:var(--inkSoft);line-height:1.5"><strong style="color:var(--ink)">Ao final: </strong>{{ mEntry.view.outcome }}</div></sc-if>
+
+<sc-for list="{{ mEntry.view.lessonsView }}" as="l" hint-placeholder-count="3">
+<div style="background:var(--bg);border:2px solid var(--ink);border-radius:12px;overflow:hidden">
+<button onClick="{{ l.toggle }}" style="width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px">
+<span style="font-weight:700;font-size:15px">{{ l.label }}</span>
+<span style="color:var(--periwinkle)">{{ l.expanded }}</span>
+</button>
+<sc-if value="{{ l.expanded }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 16px 18px;display:flex;flex-direction:column;gap:14px">
+
+<sc-if value="{{ l.opening }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-size:12px;font-weight:700;color:var(--periwinkle);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px">Diálogo de abertura</div>
+<sc-for list="{{ l.opening.dialogue.linesView }}" as="dl" hint-placeholder-count="4">
+<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px">
+<span><strong>{{ dl.speaker }}:</strong> {{ dl.en }}</span>
+<button onClick="{{ dl.onPlay }}" style="background:transparent;border:none;color:var(--periwinkle);cursor:pointer;font-size:15px">🔊</button>
+</div>
+</sc-for>
+<div style="margin-top:8px;display:flex;gap:8px"><button onClick="{{ l.opening.dialogue.onPlayFull }}" style="{{ styleAudioBtnSm }}">🔊 Ouvir tudo</button></div>
+<sc-if value="{{ l.opening.dialogue.summaryText }}" hint-placeholder-val="{{ false }}"><div style="margin-top:8px;font-size:13px;color:var(--inkSoft)">{{ l.opening.dialogue.summaryText }}</div></sc-if>
+<sc-if value="{{ l.opening.dialogue.patternNote }}" hint-placeholder-val="{{ false }}"><div style="margin-top:8px;font-size:13px;font-style:italic;color:var(--inkSoft)">💡 {{ l.opening.dialogue.patternNote }}</div></sc-if>
+</div>
+</sc-if>
+
+<sc-for list="{{ l.understandBlocks }}" as="ub" hint-placeholder-count="2">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px">
+<div style="font-weight:700;font-size:15px;margin-bottom:6px">{{ ub.title }}</div>
+<sc-if value="{{ ub.intro }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:var(--inkSoft);margin-bottom:8px">{{ ub.intro }}</div></sc-if>
+<sc-if value="{{ ub.table }}" hint-placeholder-val="{{ false }}">
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:8px">
+<thead><tr><sc-for list="{{ ub.table.columns }}" as="col" hint-placeholder-count="3"><th style="text-align:left;padding:5px 8px;border-bottom:2px solid var(--ink)">{{ col }}</th></sc-for></tr></thead>
+<tbody>
+<sc-for list="{{ ub.table.rowsView }}" as="row" hint-placeholder-count="3">
+<tr><sc-for list="{{ row }}" as="cell" hint-placeholder-count="3"><td style="padding:5px 8px;border-bottom:1px solid var(--line)">{{ cell }}</td></sc-for></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</sc-if>
+<sc-if value="{{ ub.dica }}" hint-placeholder-val="{{ false }}"><div style="background:var(--cloud);color:#1a1a1a;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:8px">💡 {{ ub.dica }}</div></sc-if>
+<sc-if value="{{ ub.atencao }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--vinho);color:#fff;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:8px">
+<strong>⚠️ {{ ub.atencao.title }}</strong><div style="margin-top:4px">{{ ub.atencao.text }}</div>
+</div>
+</sc-if>
+<sc-for list="{{ ub.examplesView }}" as="ex" hint-placeholder-count="2">
+<div style="display:flex;gap:8px;align-items:center;font-size:13px;padding:3px 0"><button onClick="{{ ex.onPlay }}" style="background:transparent;border:none;color:var(--periwinkle);cursor:pointer">🔊</button><span>{{ ex.text }}</span></div>
+</sc-for>
+<sc-for list="{{ ub.modelSentencesView }}" as="ms" hint-placeholder-count="2">
+<div style="display:flex;gap:8px;align-items:center;font-size:13px;padding:3px 0;font-weight:600"><button onClick="{{ ms.onPlay }}" style="background:transparent;border:none;color:var(--periwinkle);cursor:pointer">🔊</button><span>{{ ms.text }}</span></div>
+</sc-for>
+<sc-if value="{{ ub.subsection }}" hint-placeholder-val="{{ false }}">
+<div style="margin-top:10px;border-top:1px dashed var(--line);padding-top:10px">
+<div style="font-weight:700;font-size:13px;margin-bottom:4px">{{ ub.subsection.title }}</div>
+<sc-if value="{{ ub.subsection.table }}" hint-placeholder-val="{{ false }}">
+<table style="width:100%;border-collapse:collapse;font-size:13px">
+<thead><tr><sc-for list="{{ ub.subsection.table.columns }}" as="col2" hint-placeholder-count="2"><th style="text-align:left;padding:4px 8px;border-bottom:2px solid var(--ink)">{{ col2 }}</th></sc-for></tr></thead>
+<tbody><sc-for list="{{ ub.subsection.table.rowsView }}" as="row2" hint-placeholder-count="3"><tr><sc-for list="{{ row2 }}" as="cell2" hint-placeholder-count="2"><td style="padding:4px 8px;border-bottom:1px solid var(--line)">{{ cell2 }}</td></sc-for></tr></sc-for></tbody>
+</table>
+</sc-if>
+</div>
+</sc-if>
+</div>
+</sc-for>
+
+<sc-if value="{{ l.words }}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="font-size:12px;font-weight:700;color:var(--periwinkle);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px">Palavras para usar</div>
+<sc-for list="{{ l.words }}" as="w" hint-placeholder-count="4">
+<div style="display:flex;justify-content:space-between;gap:8px;padding:4px 0;font-size:13px"><span><strong>{{ w.word }}</strong> — {{ w.example }}</span><button onClick="{{ w.onPlay }}" style="background:transparent;border:none;color:var(--periwinkle);cursor:pointer">🔊</button></div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-for list="{{ l.seeItWorking }}" as="siw" hint-placeholder-count="2">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px">
+<div style="font-weight:700;font-size:13px;margin-bottom:6px">{{ siw.title }}</div>
+<sc-for list="{{ siw.linesView }}" as="sl" hint-placeholder-count="2"><div style="font-size:13px;padding:2px 0"><strong>{{ sl.speaker }}:</strong> {{ sl.en }}</div></sc-for>
+<sc-if value="{{ siw.itemsQA }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ siw.itemsQA }}" as="qa" hint-placeholder-count="2"><div style="font-size:13px;padding:2px 0">{{ qa.en }} — {{ qa.pt }}</div></sc-for></sc-if>
+<sc-if value="{{ siw.modelText }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;font-style:italic">{{ siw.modelText }}</div></sc-if>
+<sc-if value="{{ siw.onPlayFull }}" hint-placeholder-val="{{ false }}"><button onClick="{{ siw.onPlayFull }}" style="margin-top:6px;{{ styleAudioBtnSm }}">🔊 Ouvir</button></sc-if>
+<sc-if value="{{ siw.note }}" hint-placeholder-val="{{ false }}"><div style="margin-top:6px;font-size:12px;color:var(--inkSoft)">{{ siw.note }}</div></sc-if>
+</div>
+</sc-for>
+
+<sc-for list="{{ l.practicesView }}" as="p" hint-placeholder-count="2">
+<div style="background:var(--bg);border:2px dashed var(--ink);border-radius:10px;padding:14px 16px">
+<div style="font-weight:700;font-size:14px;margin-bottom:6px">✏️ {{ p.title }}</div>
+<sc-if value="{{ p.instruction }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:var(--inkSoft);margin-bottom:8px">{{ p.instruction }}</div></sc-if>
+<sc-if value="{{ p.passage }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;margin-bottom:8px;padding:8px;background:var(--card);border-radius:8px"><button onClick="{{ p.passage.onPlay }}" style="background:transparent;border:none;color:var(--periwinkle);cursor:pointer;margin-right:6px">🔊</button>{{ p.passage.text }}</div></sc-if>
+<sc-if value="{{ p.wordBank }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><sc-for list="{{ p.wordBank }}" as="wb" hint-placeholder-count="4"><span style="background:var(--cloud);color:#1a1a1a;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600">{{ wb }}</span></sc-for></div></sc-if>
+
+<sc-if value="{{ p.isChoice }}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ p.itemsView }}" as="it" hint-placeholder-count="3">
+<div style="margin-bottom:10px">
+<div style="font-size:13px;margin-bottom:6px">{{ it.prompt }}</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ it.optionsView }}" as="opt2" hint-placeholder-count="3"><button onClick="{{ opt2.onClick }}" style="{{ opt2.style }}">{{ opt2.label }}</button></sc-for></div>
+<sc-if value="{{ it.incorrect }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:var(--vinho);margin-top:4px">{{ it.feedback }}</div></sc-if>
+</div>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{ p.isTF }}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ p.itemsView }}" as="tf" hint-placeholder-count="3">
+<div style="margin-bottom:10px">
+<div style="font-size:13px;margin-bottom:6px">{{ tf.statement }}</div>
+<div style="display:flex;gap:6px"><button onClick="{{ tf.onTrue }}" style="{{ tf.trueStyle }}">Verdadeiro</button><button onClick="{{ tf.onFalse }}" style="{{ tf.falseStyle }}">Falso</button></div>
+<sc-if value="{{ tf.checked }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:var(--inkSoft);margin-top:4px">{{ tf.feedback }}</div></sc-if>
+</div>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{ p.isText }}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ p.itemsView }}" as="tx" hint-placeholder-count="3">
+<div style="margin-bottom:10px">
+<div style="font-size:13px;margin-bottom:6px">{{ tx.prompt }}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><input value="{{ tx.value }}" onChange="{{ tx.onChange }}" placeholder="sua resposta" style="flex:1;min-width:160px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13px"><button onClick="{{ tx.onCheck }}" style="background:var(--periwinkle);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13px">Verificar</button></div>
+<sc-if value="{{ tx.correct }}" hint-placeholder-val="{{ false }}"><div style="color:#3F8F5F;font-weight:700;font-size:13px;margin-top:6px">✅ Isso mesmo.</div></sc-if>
+<sc-if value="{{ tx.incorrect }}" hint-placeholder-val="{{ false }}"><div style="color:var(--vinho);font-weight:700;font-size:13px;margin-top:6px">Resposta esperada: {{ tx.correctAnswer }}</div></sc-if>
+</div>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{ p.isDialogueFill }}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ p.linesView }}" as="dfl" hint-placeholder-count="3">
+<div style="margin-bottom:10px">
+<div style="font-size:13px;font-weight:700;margin-bottom:4px">{{ dfl.speaker }}:</div>
+<div style="font-size:13px;margin-bottom:6px;color:var(--inkSoft)">{{ dfl.en }}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><input value="{{ dfl.exercise.value }}" onChange="{{ dfl.exercise.onChange }}" placeholder="reescreva a fala completa" style="flex:1;min-width:200px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13px"><button onClick="{{ dfl.exercise.onCheck }}" style="background:var(--periwinkle);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13px">Verificar</button></div>
+<sc-if value="{{ dfl.exercise.correct }}" hint-placeholder-val="{{ false }}"><div style="color:#3F8F5F;font-weight:700;font-size:13px;margin-top:6px">✅ Isso mesmo.</div></sc-if>
+<sc-if value="{{ dfl.exercise.incorrect }}" hint-placeholder-val="{{ false }}"><div style="color:var(--vinho);font-weight:700;font-size:13px;margin-top:6px">Esperado: {{ dfl.exercise.correctAnswer }}</div></sc-if>
+</div>
+</sc-for>
+</sc-if>
+
+<sc-if value="{{ p.isReveal }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ p.shuffled }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px"><sc-for list="{{ p.shuffled }}" as="sf" hint-placeholder-count="4"><span style="background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px">{{ sf }}</span></sc-for></div></sc-if>
+<button onClick="{{ p.onToggleReveal }}" style="{{ styleAudioBtnSm }}">{{ p.revealed }}</button>
+<sc-if value="{{ p.revealed }}" hint-placeholder-val="{{ false }}"><div style="margin-top:8px;font-size:13px;color:var(--inkSoft)">{{ p.revealText }}</div></sc-if>
+</sc-if>
+</div>
+</sc-for>
+
+<sc-if value="{{ l.yourTurn }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:14px 16px">
+<div style="font-weight:700;font-size:14px;margin-bottom:6px">🖊️ Sua vez</div>
+<div style="font-size:13px;color:var(--inkSoft);margin-bottom:8px">{{ l.yourTurn.instruction }}</div>
+<sc-if value="{{ l.yourTurn.template }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:var(--inkSoft);margin-bottom:8px;font-style:italic"><sc-for list="{{ l.yourTurn.template }}" as="tl" hint-placeholder-count="3"><div>{{ tl }}</div></sc-for></div></sc-if>
+<textarea value="{{ l.yourTurn.value }}" onChange="{{ l.yourTurn.onChange }}" placeholder="Escreva aqui..." style="width:100%;min-height:70px;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit;font-size:14px"></textarea>
+<sc-if value="{{ l.yourTurn.attempted }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:#3F8F5F;margin-top:6px">✅ Tentativa registrada.</div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ l.review }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--periwinkle);color:#fff;border-radius:10px;padding:12px 16px;font-size:13px">
+<strong>🔄 Revisão: </strong>{{ l.review.instruction }} <em>{{ l.review.template }}</em>
+</div>
+</sc-if>
+
+<sc-if value="{{ l.checkProgress }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:var(--inkSoft)">Critério: {{ l.checkProgress.criterion }}</div></sc-if>
+</div>
+</sc-if>
+</div>
+</sc-for>
+
+<sc-if value="{{ mEntry.view.checkpointView }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--vinho);color:#fff;border-radius:12px;padding:16px 18px">
+<div style="font-weight:800;font-size:16px;margin-bottom:6px">{{ mEntry.view.checkpointView.label }}</div>
+<div style="font-size:13px;margin-bottom:12px;opacity:0.9">{{ mEntry.view.checkpointView.instruction }}</div>
+<sc-for list="{{ mEntry.view.checkpointView.partsView }}" as="cp" hint-placeholder-count="3">
+<div style="background:#fff;color:var(--ink);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+<div style="font-weight:700;font-size:14px;margin-bottom:6px">{{ cp.label }}</div>
+<sc-if value="{{ cp.instruction }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:var(--inkSoft);margin-bottom:8px">{{ cp.instruction }}</div></sc-if>
+<sc-if value="{{ cp.isProduction }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ cp.production.requirements }}" hint-placeholder-val="{{ false }}"><ul style="font-size:13px;color:var(--inkSoft);margin:0 0 8px;padding-left:18px"><sc-for list="{{ cp.production.requirements }}" as="req" hint-placeholder-count="4"><li>{{ req }}</li></sc-for></ul></sc-if>
+<textarea value="{{ cp.production.value }}" onChange="{{ cp.production.onChange }}" placeholder="Escreva ou descreva sua gravação aqui..." style="width:100%;min-height:80px;padding:10px 12px;border-radius:8px;border:1px solid var(--line);font-family:inherit;font-size:14px"></textarea>
+<sc-if value="{{ cp.production.attempted }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:#3F8F5F;margin-top:6px">✅ Tentativa registrada.</div></sc-if>
+</sc-if>
+<sc-if value="{{ cp.practice.isText }}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ cp.practice.itemsView }}" as="tx2" hint-placeholder-count="4">
+<div style="margin-bottom:10px">
+<div style="font-size:13px;margin-bottom:6px">{{ tx2.prompt }}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><input value="{{ tx2.value }}" onChange="{{ tx2.onChange }}" placeholder="sua resposta" style="flex:1;min-width:160px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);font-size:13px"><button onClick="{{ tx2.onCheck }}" style="background:var(--periwinkle);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13px">Verificar</button></div>
+<sc-if value="{{ tx2.correct }}" hint-placeholder-val="{{ false }}"><div style="color:#3F8F5F;font-weight:700;font-size:13px;margin-top:6px">✅ Isso mesmo.</div></sc-if>
+<sc-if value="{{ tx2.incorrect }}" hint-placeholder-val="{{ false }}"><div style="color:var(--vinho);font-weight:700;font-size:13px;margin-top:6px">Esperado: {{ tx2.correctAnswer }}</div></sc-if>
+</div>
+</sc-for>
+</sc-if>
+<sc-if value="{{ cp.practice.isDialogueFill }}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ cp.practice.linesView }}" as="dfl2" hint-placeholder-count="4">
+<div style="margin-bottom:10px">
+<div style="font-size:13px;font-weight:700;margin-bottom:4px">{{ dfl2.speaker }}:</div>
+<div style="font-size:13px;margin-bottom:6px;color:var(--inkSoft)">{{ dfl2.en }}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><input value="{{ dfl2.exercise.value }}" onChange="{{ dfl2.exercise.onChange }}" placeholder="reescreva a fala completa" style="flex:1;min-width:200px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);font-size:13px"><button onClick="{{ dfl2.exercise.onCheck }}" style="background:var(--periwinkle);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13px">Verificar</button></div>
+<sc-if value="{{ dfl2.exercise.correct }}" hint-placeholder-val="{{ false }}"><div style="color:#3F8F5F;font-weight:700;font-size:13px;margin-top:6px">✅ Isso mesmo.</div></sc-if>
+<sc-if value="{{ dfl2.exercise.incorrect }}" hint-placeholder-val="{{ false }}"><div style="color:var(--vinho);font-weight:700;font-size:13px;margin-top:6px">Esperado: {{ dfl2.exercise.correctAnswer }}</div></sc-if>
+</div>
+</sc-for>
+</sc-if>
+<sc-if value="{{ cp.practice.isReveal }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ cp.practice.onToggleReveal }}" style="{{ styleAudioBtnSm }}">{{ cp.practice.revealed }}</button>
+<sc-if value="{{ cp.practice.revealed }}" hint-placeholder-val="{{ false }}"><div style="margin-top:8px;font-size:13px;color:var(--inkSoft)">{{ cp.practice.revealText }}</div></sc-if>
+</sc-if>
+</div>
+</sc-for>
+<sc-if value="{{ mEntry.view.checkpointView.completionText }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;opacity:0.9">{{ mEntry.view.checkpointView.completionText }}</div></sc-if>
+</div>
+</sc-if>
+</div>
+</sc-if>
+</div>
+</sc-for>
 </div>
 </sc-if>
 
@@ -624,7 +907,7 @@ a:hover{color:var(--vinho)}
 </sc-if>
 </sc-for>
 
-<div style="position:absolute;bottom:8mm;right:15mm;font-size:9px;color:#aaa">app.englishtool.com.br</div>
+<div style="position:absolute;bottom:8mm;right:15mm;font-size:9px;color:#aaa">englishtool.com.br</div>
 </div>
 </div>
 </div>
@@ -654,7 +937,7 @@ class Component extends DCLogic {
     theme:'light', view:'home', data:null,
     duvidasUI:{}, understood:{}, myExplanations:{},
     labUI:{}, auxUI:{}, fundamentosExpand:{},
-    interviewAnswers:{},
+    interviewAnswers:{}, hasInterviews:false,
     printSelected:['f1','f2','f3','f4'], printWarning:false,
     lastSection:null,
     repeatFlow:null, recordings:{}, listeningRevealed:{},
@@ -666,22 +949,60 @@ class Component extends DCLogic {
     supabaseConfigured:false, authUser:null, authOptimistic:false, showLoginGate:false,
     loginEmail:'', loginPassword:'', loginError:null, loginLoading:false,
     authView:'login', forgotEmail:'', forgotError:null, forgotLoading:false, forgotSent:false,
-    newPassword:'', newPassword2:'', resetError:null, resetLoading:false
+    newPassword:'', newPassword2:'', resetError:null, resetLoading:false,
+    signupEmail:'', signupPassword:'', signupPassword2:'', signupError:null, signupLoading:false, signupDone:false,
+    part1Data:null, part2Data:null, part2Unlocked:false, gateLoading:false, gateError:false, firstAccessAt:null,
+    jornadaExpand:{}, jornadaLessonExpand:{}, jornadaChoices:{}, jornadaTF:{}, jornadaReveal:{}, productionInputs:{}
   };
 
   componentDidMount(){
-    Promise.all([import('./content-data.js'), import('./store.js'), import('./supabase-client.js')])
-      .then(([contentMod, storeMod, supaMod])=>{
+    Promise.all([import('./content-data.js'), import('./store.js'), import('./supabase-client.js'), import('./content-data-open.js')])
+      .then(([contentMod, storeMod, supaMod, part1Mod])=>{
         this.storage = storeMod.Store;
         this.sync = storeMod.Sync;
         this.supaMod = supaMod;
         this.migrateLegacy();
         this.loadPersisted();
-        this.setState({data:contentMod});
+        this.setState({data:contentMod, part1Data:part1Mod});
         this.loadAudioManifest(contentMod);
         this.initAuth(supaMod, contentMod);
       })
       .catch((e)=>console.error('Toolkit assets failed to load', e));
+    // Fluxo de criação de conta vindo do e-mail da Cakto: ?criar-conta=1 (e opcionalmente &email=...)
+    try{
+      const params = new URLSearchParams(window.location.search);
+      if(params.get('criar-conta')==='1'){
+        this.setState({authView:'signup', signupEmail: params.get('email')||''});
+      }
+    }catch(e){}
+  }
+
+  // ---------- Gate de acesso (168h / 7 dias completos) ----------
+  // first_access_at é gravado pelo servidor (default now() no Postgres) na primeira
+  // inserção; o horário do navegador nunca é usado para definir esse valor. Erro
+  // 23505 (linha já existe) é esperado e ignorado — qualquer outro erro é logado.
+  ensureAccessGate(client, userId){
+    this.setState({gateLoading:true, gateError:false});
+    client.from('user_access_gates').insert({user_id:userId})
+      .then(({error})=>{
+        if(error && error.code !== '23505') console.error('user_access_gates insert error:', error);
+        return client.from('user_access_gates').select('first_access_at').eq('user_id', userId).single();
+      })
+      .then(({data, error})=>{
+        if(error || !data){ console.error('user_access_gates select error:', error); this.setState({gateLoading:false, gateError:true}); return; }
+        const unlockAt = new Date(data.first_access_at).getTime() + 168*60*60*1000;
+        const unlocked = Date.now() >= unlockAt;
+        this.setState({gateLoading:false, firstAccessAt:data.first_access_at, unlockAt, part2Unlocked:unlocked});
+        if(unlocked) this.loadPart2();
+      })
+      .catch((e)=>{ console.error('user_access_gates failed:', e); this.setState({gateLoading:false, gateError:true}); });
+  }
+  // Parte 2 (Módulos 4-5) só é buscada depois de confirmado o desbloqueio —
+  // nunca antes, mesmo que os cards fiquem visíveis (bloqueados) desde o início.
+  loadPart2(){
+    if(this.state.part2Data || this._part2Loading) return;
+    this._part2Loading = true;
+    import('./content-data-part2.js').then((mod)=>this.setState({part2Data:mod})).catch((e)=>console.error('content-data-part2 failed to load', e));
   }
 
   // Local-first: se Supabase não está configurado (placeholders no supabase-client.js),
@@ -706,6 +1027,8 @@ class Component extends DCLogic {
         this.setState({authUser:user, showLoginGate:false, authOptimistic:false});
         this.sync.configure(client, user.id);
         this.sync.reconcileAll(contentMod).then(()=>this.loadPersisted());
+        this.loadEntitlements();
+        this.ensureAccessGate(client, user.id);
       } else {
         this.setState({authUser:null, showLoginGate:true, authOptimistic:false});
       }
@@ -723,13 +1046,23 @@ class Component extends DCLogic {
         this.setState({authUser:user, showLoginGate:false, loginLoading:false, loginPassword:''});
         this.sync.configure(this.supaClient, user.id);
         this.sync.reconcileAll(this.state.data).then(()=>this.loadPersisted());
+        this.loadEntitlements();
+        this.ensureAccessGate(this.supaClient, user.id);
       })
       .catch((e)=>this.setState({loginLoading:false, loginError:'Não foi possível entrar. Tente novamente.'}));
   }
   onLogout(){
     if(this.supaClient) this.supaClient.auth.signOut().catch(()=>{});
     if(this.sync) this.sync.teardown();
-    this.setState({authUser:null, showLoginGate:true, authOptimistic:false, authView:'login'});
+    this.setState({authUser:null, showLoginGate:true, authOptimistic:false, authView:'login', hasInterviews:false});
+  }
+  // Só leitura: a flag é gravada pelo backend (service_role) após a compra do
+  // upsell, nunca pelo cliente. Ausência de linha (ainda não comprou) = false.
+  loadEntitlements(){
+    if(!this.supaClient) return;
+    this.supaClient.from('entitlements').select('has_interviews').maybeSingle()
+      .then(({data})=>{ this.setState({hasInterviews: !!(data && data.has_interviews)}); })
+      .catch(()=>{});
   }
   onForgotClick(){ this.setState({authView:'forgot', forgotEmail:this.state.loginEmail, forgotError:null, forgotSent:false, loginError:null}); }
   onBackToLogin(){ this.setState({authView:'login', forgotError:null, resetError:null}); }
@@ -758,8 +1091,39 @@ class Component extends DCLogic {
         this.setState({authUser:user, showLoginGate:false, resetLoading:false, authView:'login', newPassword:'', newPassword2:''});
         this.sync.configure(this.supaClient, user.id);
         this.sync.reconcileAll(this.state.data).then(()=>this.loadPersisted());
+        this.ensureAccessGate(this.supaClient, user.id);
       })
       .catch(()=>this.setState({resetLoading:false, resetError:'Não foi possível salvar a nova senha. Tente novamente.'}));
+  }
+  onSignupEmailChange(e){ this.setState({signupEmail:e.target.value}); }
+  onSignupPasswordChange(e){ this.setState({signupPassword:e.target.value}); }
+  onSignupPassword2Change(e){ this.setState({signupPassword2:e.target.value}); }
+  onGoSignup(){ this.setState({authView:'signup', signupError:null, signupDone:false}); }
+  // Fluxo de criação de conta para o link enviado pela Cakto ("Acesso por e-mail").
+  // Usa exclusivamente a chave anon (signUp do cliente) — nenhuma credencial de
+  // service_role no navegador. Se a confirmação por e-mail estiver ativa no projeto
+  // Supabase, o Supabase já cuida de enviar o e-mail de confirmação.
+  onSignupSubmit(){
+    if(!this.supaClient) return;
+    if(!this.state.signupEmail){ this.setState({signupError:'Informe seu e-mail.'}); return; }
+    if(this.state.signupPassword.length < 6){ this.setState({signupError:'A senha precisa ter pelo menos 6 caracteres.'}); return; }
+    if(this.state.signupPassword !== this.state.signupPassword2){ this.setState({signupError:'As senhas não coincidem.'}); return; }
+    this.setState({signupLoading:true, signupError:null});
+    this.supaClient.auth.signUp({ email:this.state.signupEmail, password:this.state.signupPassword })
+      .then(({data, error})=>{
+        if(error){ this.setState({signupLoading:false, signupError:error.message}); return; }
+        if(data && data.session && data.user){
+          const user = data.user;
+          this.setState({authUser:user, showLoginGate:false, signupLoading:false});
+          this.sync.configure(this.supaClient, user.id);
+          this.sync.reconcileAll(this.state.data).then(()=>this.loadPersisted());
+          this.loadEntitlements();
+          this.ensureAccessGate(this.supaClient, user.id);
+        } else {
+          this.setState({signupLoading:false, signupDone:true});
+        }
+      })
+      .catch(()=>this.setState({signupLoading:false, signupError:'Não foi possível criar a conta. Tente novamente.'}));
   }
 
   // Tenta o arquivo externo audio_manifest.json (editável sem mexer no JS);
@@ -826,7 +1190,7 @@ class Component extends DCLogic {
     if(t.kind==='practice'){ this.setState((s)=>({fundamentosExpand:{...s.fundamentosExpand, [t.practiceId]:true}})); this.setView('fundamentos'); }
     else if(t.kind==='duvidas') this.setView('duvidas');
     else if(t.kind==='whwords') this.setView('whwords');
-    else if(t.kind==='interview') this.setView('interviews');
+    else if(t.kind==='interview' && this.state.hasInterviews) this.setView('interviews');
   }
 
   toggleTheme(){
@@ -1101,6 +1465,166 @@ class Component extends DCLogic {
     setTimeout(()=>window.print(), 60);
   }
 
+  // ---------- Jornada (Etapa 0 + Módulos 1-5, gate de 168h) ----------
+  speakEn(text, rate){ this.speak(text, (this.props&&this.props.englishVoice)||'en-US', rate||1); }
+  toggleJornadaModule(id){ this.setState((s)=>({jornadaExpand:{...s.jornadaExpand,[id]: !s.jornadaExpand[id]}})); }
+  toggleJornadaLesson(id){ this.setState((s)=>({jornadaLessonExpand:{...s.jornadaLessonExpand,[id]: !s.jornadaLessonExpand[id]}})); }
+  selectChoice(id, idx){ this.setState((s)=>({jornadaChoices:{...s.jornadaChoices, [id]:{selected:idx, checked:true}}})); }
+  selectTF(id, val){ this.setState((s)=>({jornadaTF:{...s.jornadaTF, [id]:{selected:val, checked:true}}})); }
+  toggleReveal(id){ this.setState((s)=>({jornadaReveal:{...s.jornadaReveal, [id]: !s.jornadaReveal[id]}})); }
+  setProduction(id, val){ this.setState((s)=>({productionInputs:{...s.productionInputs, [id]:val}})); }
+  choiceBtnStyle(selected, checked, isAnswer){
+    let bg='var(--card)', color='var(--ink)', border='var(--ink)';
+    if(checked && isAnswer){ bg='#3F8F5F'; color='#fff'; border='#3F8F5F'; }
+    else if(checked && selected){ bg='var(--vinho)'; color='#fff'; border='var(--vinho)'; }
+    else if(selected){ bg='var(--cloud)'; color='#1a1a1a'; }
+    return `border:2px solid ${border};border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;background:${bg};color:${color}`;
+  }
+  buildDialogueView(dialogue, translation, patternNote){
+    if(!dialogue) return null;
+    const linesView = dialogue.lines.map((l)=>({ speaker:l.speaker, en:l.en, onPlay:()=>this.speakEn(l.en), hasSlow:!!l.audio_id_slow, onPlaySlow: l.audio_id_slow ? ()=>this.speakEn(l.en, (this.props&&this.props.slowRate)||0.72) : null }));
+    const fullText = dialogue.lines.map((l)=>l.en).join(' ');
+    let translationLinesView = null, summaryText = null;
+    if(translation){
+      if(translation.type==='parallel') translationLinesView = translation.lines.map(([sp,pt])=>({speaker:sp, pt}));
+      else if(translation.type==='summary') summaryText = translation.text;
+    }
+    return { linesView, onPlayFull:()=>this.speakEn(fullText), translationLinesView, summaryText, patternNote };
+  }
+  buildPractice(concept, practice, pidx){
+    const id = practice.id || (concept+'_practice_'+pidx);
+    const isTF = practice.type==='verdadeiro_falso' && !!practice.items;
+    const isAssoc = !!practice.columnA;
+    const isOrdenar = !!practice.shuffled && !!practice.answer_order;
+    const isDialogueFill = !!practice.dialogue && Array.isArray(practice.answer);
+    const isChoice = !isTF && !!practice.items && !!practice.items[0] && !!practice.items[0].options;
+    const isText = !isTF && !isChoice && !!practice.items && !!practice.items[0] && typeof practice.items[0].answer !== 'undefined';
+    const isRevealString = !isAssoc && !isOrdenar && !isDialogueFill && typeof practice.answer === 'string';
+    const base = { id, title: practice.title || practice.label, instruction: practice.instruction || null, wordBank: practice.word_bank || null,
+      passage: practice.text ? { text: (practice.text.text||practice.text), onPlay:()=>this.speakEn(practice.text.text||practice.text) } : null,
+      isTF:false, isChoice:false, isText:false, isDialogueFill:false, isReveal:false };
+    if(isTF){
+      const itemsView = practice.items.map((it,i)=>{
+        const key=id+'_tf'+i; const cur=this.state.jornadaTF[key]||{};
+        return { statement:it.statement, checked:!!cur.checked, correct: cur.checked && cur.selected===it.answer, incorrect: cur.checked && cur.selected!==it.answer, feedback: it.feedback,
+          onTrue:()=>this.selectTF(key,true), onFalse:()=>this.selectTF(key,false),
+          trueStyle: this.choiceBtnStyle(cur.selected===true, cur.checked, it.answer===true), falseStyle: this.choiceBtnStyle(cur.selected===false, cur.checked, it.answer===false) };
+      });
+      return { ...base, isTF:true, itemsView };
+    }
+    if(isChoice){
+      const itemsView = practice.items.map((it,i)=>{
+        const key=id+'_c'+i; const cur=this.state.jornadaChoices[key]||{};
+        const optionsView = it.options.map((o,oi)=>({ label:o, onClick:()=>this.selectChoice(key,oi), style:this.choiceBtnStyle(cur.selected===oi, cur.checked, oi===it.answer) }));
+        return { prompt:it.prompt, optionsView, checked:!!cur.checked, correct: cur.checked && cur.selected===it.answer, incorrect: cur.checked && cur.selected!==it.answer, feedback: it.feedback||null };
+      });
+      return { ...base, isChoice:true, itemsView };
+    }
+    if(isText){
+      const itemsView = practice.items.map((it,i)=>{
+        const prompt = it.transform ? `${it.prompt} — ${it.transform}` : it.prompt;
+        return this.buildExercise(concept, id+'_t'+i, prompt, it.answer, it.feedback||null);
+      });
+      return { ...base, isText:true, itemsView };
+    }
+    if(isDialogueFill){
+      const linesView = practice.dialogue.lines.map((l,i)=>({ speaker:l.speaker, en:l.en, exercise:this.buildExercise(concept, id+'_dl'+i, l.en, practice.answer[i], null) }));
+      return { ...base, isDialogueFill:true, linesView };
+    }
+    let revealText = '';
+    if(isAssoc) revealText = practice.columnA.map((a)=>`${a} → ${practice.answer[a]}`).join('  |  ');
+    else if(isOrdenar) revealText = practice.answer_order.join('  →  ');
+    else if(isRevealString) revealText = practice.answer;
+    else if(Array.isArray(practice.answer)) revealText = practice.answer.join('  |  ');
+    return { ...base, isReveal:true, shuffled: practice.shuffled||null, revealText, revealed: !!this.state.jornadaReveal[id], onToggleReveal:()=>this.toggleReveal(id) };
+  }
+  buildProductionView(prod){
+    if(!prod) return null;
+    const value = this.state.productionInputs[prod.id] || '';
+    return { instruction:prod.instruction, template: prod.template||null, requirements: prod.requirements||null, note: prod.note||null,
+      value, onChange:(e)=>this.setProduction(prod.id, e.target.value), attempted: value.trim().length>0 };
+  }
+  buildLessonView(concept, lesson){
+    const opening = lesson.opening ? { instruction: lesson.opening.instruction, dialogue: this.buildDialogueView(lesson.opening.dialogue, lesson.opening.translation, lesson.opening.pattern_note) } : null;
+    const understandBlocks = (lesson.understand||[]).map((b)=>({
+      title:b.title, intro:b.intro||null, note:b.note||null,
+      table: b.table ? { columns:b.table.columns, rowsView:b.table.rows.map((r)=>r.slice(0,b.table.columns.length)) } : null,
+      dica: b.dica || null,
+      atencao: b.atencao ? { title:b.atencao.title, text:b.atencao.text, examplesView:(b.atencao.examples||[]).map((ex)=>({en:ex.en, pt:ex.pt})) } : null,
+      examplesView: (b.examples||[]).map((ex)=> ex.text ? {text:ex.text, onPlay:()=>this.speakEn(ex.text)} : (ex.en ? {text:ex.en+(ex.pt?(' — '+ex.pt):''), onPlay:()=>this.speakEn(ex.en)} : null)).filter(Boolean),
+      modelSentencesView: (b.model_sentences||[]).map((m)=>({text:m.text, onPlay:()=>this.speakEn(m.text)})),
+      subsection: b.subsection ? { title:b.subsection.title, intro:b.subsection.intro||null,
+        table: b.subsection.table ? { columns:b.subsection.table.columns, rowsView:b.subsection.table.rows } : null,
+        examplesView:(b.subsection.examples||[]).map((e)=>({text:e.text, onPlay:()=>this.speakEn(e.text)})) } : null
+    }));
+    const words = (lesson.words_to_use||[]).map((w)=>({ word:w.word, example:w.example, onPlay:()=>this.speakEn(w.example) }));
+    const seeItWorking = (lesson.see_it_working||[]).map((s)=>({
+      title:s.title, note:s.note||null,
+      linesView: s.dialogue ? s.dialogue.lines.map((l)=>({speaker:l.speaker, en:l.en, onPlay:()=>this.speakEn(l.en)})) : [],
+      onPlayFull: s.dialogue ? ()=>this.speakEn(s.dialogue.lines.map((l)=>l.en).join(' ')) : (s.model ? ()=>this.speakEn(s.model.text) : null),
+      modelText: s.model ? s.model.text : null,
+      itemsQA: s.items ? s.items.map((it)=>({en:it.en, pt:it.pt})) : null
+    }));
+    const practicesView = (lesson.guided_practice||[]).map((p,i)=>this.buildPractice(lesson.id, p, i));
+    const yourTurn = lesson.your_turn ? this.buildProductionView(lesson.your_turn) : null;
+    const review = lesson.review ? { instruction:lesson.review.instruction, template:lesson.review.template, possibleAnswer:lesson.review.possible_answer } : null;
+    const checkProgress = lesson.check_progress ? { canDo:lesson.check_progress.can_do, criterion:lesson.check_progress.criterion } : null;
+    const expanded = !!this.state.jornadaLessonExpand[lesson.id];
+    return { id:lesson.id, label:lesson.label, canDo:lesson.can_do||[], opening, understandBlocks, words, seeItWorking, practicesView, yourTurn, review, checkProgress,
+      ifStuck: lesson.if_stuck||null, expanded, toggle:()=>this.toggleJornadaLesson(lesson.id) };
+  }
+  buildCheckpointView(concept, checkpoint){
+    if(!checkpoint) return null;
+    const partsView = checkpoint.parts.map((part, pi)=>{
+      const built = this.buildPractice(concept+'_chk', {...part, id:part.id||(concept+'_chk_'+pi)}, pi);
+      const isProduction = part.type==='producao_livre';
+      return { label:part.label, instruction:part.instruction||null, isProduction, production: isProduction ? this.buildProductionView({...part, id:part.id}) : null, practice: isProduction ? null : built };
+    });
+    return { id:checkpoint.id, label:checkpoint.label, instruction:checkpoint.instruction, partsView,
+      completionText: checkpoint.completion_criterion ? checkpoint.completion_criterion.text : null };
+  }
+  buildModuleView(mod, locked, lockLabel){
+    const expanded = !!this.state.jornadaExpand[mod.id];
+    return { id:mod.id, label:mod.label, outcome:mod.outcome||null, howToUse:mod.how_to_use||null, locked, lockLabel,
+      expanded: expanded && !locked, toggle: locked ? ()=>{} : ()=>this.toggleJornadaModule(mod.id),
+      lessonsView: locked ? [] : (mod.lessons||[]).map((l)=>this.buildLessonView(mod.id, l)),
+      checkpointView: locked ? null : this.buildCheckpointView(mod.id, mod.checkpoint) };
+  }
+  buildStage0View(stage0){
+    if(!stage0) return null;
+    const expanded = !!this.state.jornadaExpand['stage_0'];
+    const stepsView = stage0.steps.map((st)=>{
+      if(st.type==='audio_test') return { kind:'audio', title:st.title, instruction:st.instruction, onPlay:()=>this.speakEn('Good morning! How are you?') };
+      if(st.type==='demo_no_grade'){
+        const key='stage0_demo'; const cur=this.state.jornadaChoices[key]||{};
+        const optionsView = st.demo_item.options.map((o,oi)=>({label:o, onClick:()=>this.selectChoice(key,oi), style:this.choiceBtnStyle(cur.selected===oi, cur.checked, oi===st.demo_item.answer)}));
+        return { kind:'demo', title:st.title, instruction:st.instruction, prompt:st.demo_item.prompt, optionsView, checked:!!cur.checked, feedback: st.demo_item.feedback };
+      }
+      return { kind:'info', title:st.title, instruction:st.instruction };
+    });
+    return { expanded, toggle:()=>this.toggleJornadaModule('stage_0'), label:stage0.label, objective:stage0.objective, intro:stage0.intro, stepsView };
+  }
+  buildJornadaView(){
+    const part1 = this.state.part1Data, part2 = this.state.part2Data;
+    const unlocked = this.state.part2Unlocked;
+    const modules = [];
+    if(part1){
+      modules.push({ kind:'module', view:this.buildModuleView(part1.MODULE_1, false) });
+      modules.push({ kind:'module', view:this.buildModuleView(part1.MODULE_2, false) });
+      modules.push({ kind:'module', view:this.buildModuleView(part1.MODULE_3, false) });
+    }
+    const m4Title = 'Módulo 4: Agir no mundo ao redor', m5Title = 'Módulo 5: Falar do agora e ganhar autonomia';
+    if(unlocked && part2){
+      modules.push({ kind:'module', view:this.buildModuleView(part2.MODULE_4, false) });
+      modules.push({ kind:'module', view:this.buildModuleView(part2.MODULE_5, false) });
+    } else {
+      modules.push({ kind:'module', view:{ id:'module_4', label:m4Title, locked:true, lockLabel:'🔒 Disponível no 8º dia', expanded:false, toggle:()=>{}, lessonsView:[], checkpointView:null } });
+      modules.push({ kind:'module', view:{ id:'module_5', label:m5Title, locked:true, lockLabel:'🔒 Disponível no 8º dia', expanded:false, toggle:()=>{}, lessonsView:[], checkpointView:null } });
+    }
+    return { stage0: part1 ? this.buildStage0View(part1.STAGE_0) : null, modules,
+      gateLoading:this.state.gateLoading, unlocked, part2Loading: !unlocked===false && !part2 };
+  }
+
   renderVals(){
     try{ return this._renderVals(); }
     catch(err){
@@ -1113,9 +1637,9 @@ class Component extends DCLogic {
     const theme = this.state.theme || 'light';
     const view = this.state.view || 'home';
     const navDefs = [
-      {id:'home', label:'Início'}, {id:'duvidas', label:'Dúvidas'}, {id:'fundamentos', label:'Fundamentos'}, {id:'lab', label:'Laboratório'},
+      {id:'home', label:'Início'}, {id:'jornada', label:'Jornada'}, {id:'duvidas', label:'Dúvidas'}, {id:'fundamentos', label:'Fundamentos'}, {id:'lab', label:'Laboratório'},
       {id:'auxiliares', label:'Auxiliares'}, {id:'whwords', label:'WH-words'},
-      {id:'interviews', label:'Entrevistas'}, {id:'printables', label:'Printables'}
+      {id:'printables', label:'Printables'}
     ];
     const navItems = navDefs.map((n)=>({
       label:n.label, onClick:()=>this.setView(n.id),
@@ -1123,7 +1647,7 @@ class Component extends DCLogic {
     }));
     return {
       theme, themeIcon: theme==='light' ? '🌙' : '☀️', toggleTheme:()=>this.toggleTheme(),
-      isHome:false, isDuvidas:false, isFundamentos:false, isLab:false, isAux:false, isWh:false, isInterviews:false, isPrintables:false,
+      isHome:false, isJornada:false, isDuvidas:false, isFundamentos:false, isLab:false, isAux:false, isWh:false, isInterviews:false, isPrintables:false,
       navItems, topicsView:[], masteredCount:0, homeCards:[],
       revisionsView:[], hasRevisions:false, noRevisions:true, revisionCount:0, confirmClear:false, notConfirmClear:true,
       onAskClear:()=>{}, onConfirmClear:()=>{}, onCancelClear:()=>{},
@@ -1132,9 +1656,12 @@ class Component extends DCLogic {
       printWarning:false, doPrint:()=>{}, speechUnsupported:false,
       showLoginGate:false, showLogoutButton:false, loginEmail:'', loginPassword:'', loginError:null, loginButtonLabel:'Entrar',
       onLoginEmailChange:()=>{}, onLoginPasswordChange:()=>{}, onLoginSubmit:()=>{}, onLogout:()=>{},
-      authView:'login', isLoginView:true, isForgotView:false, isResetView:false, onForgotClick:()=>{}, onBackToLogin:()=>{},
+      authView:'login', isLoginView:true, isForgotView:false, isResetView:false, isSignupView:false, onForgotClick:()=>{}, onBackToLogin:()=>{}, onGoSignup:()=>{},
       forgotEmail:'', onForgotEmailChange:()=>{}, forgotError:null, forgotSent:false, isForgotFormVisible:true, forgotButtonLabel:'Enviar link de recuperação', onForgotSubmit:()=>{},
-      newPassword:'', onNewPasswordChange:()=>{}, newPassword2:'', onNewPassword2Change:()=>{}, resetError:null, resetButtonLabel:'Salvar nova senha', onResetSubmit:()=>{}
+      newPassword:'', onNewPasswordChange:()=>{}, newPassword2:'', onNewPassword2Change:()=>{}, resetError:null, resetButtonLabel:'Salvar nova senha', onResetSubmit:()=>{},
+      signupEmail:'', signupPassword:'', signupPassword2:'', signupError:null, signupDone:false, signupNotDone:true, signupButtonLabel:'Criar conta',
+      onSignupEmailChange:()=>{}, onSignupPasswordChange:()=>{}, onSignupPassword2Change:()=>{}, onSignupSubmit:()=>{},
+      isJornada:false, jornadaView:[]
     };
   }
 
@@ -1144,14 +1671,16 @@ class Component extends DCLogic {
     const view = this.state.view;
 
     const navDefs = [
-      {id:'home', label:'Início'}, {id:'duvidas', label:'Dúvidas'}, {id:'fundamentos', label:'Fundamentos'}, {id:'lab', label:'Laboratório'},
+      {id:'home', label:'Início'}, {id:'jornada', label:'Jornada'}, {id:'duvidas', label:'Dúvidas'}, {id:'fundamentos', label:'Fundamentos'}, {id:'lab', label:'Laboratório'},
       {id:'auxiliares', label:'Auxiliares'}, {id:'whwords', label:'WH-words'},
-      {id:'interviews', label:'Entrevistas'}, {id:'printables', label:'Printables'}
+      {id:'printables', label:'Printables'}
     ];
     const navItems = navDefs.map((n)=>({
       label:n.label, onClick:()=>this.setView(n.id),
       style:`border:2px solid var(--ink);border-radius:10px;padding:7px 13px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;${view===n.id ? 'background:var(--vinho);color:#fff;box-shadow:2px 2px 0 var(--ink);' : 'background:var(--card);color:var(--ink);box-shadow:2px 2px 0 var(--line);'}`
     }));
+
+    const jornadaView = this.buildJornadaView();
 
     let topicsView = [], masteredCount = 0;
     if(data){
@@ -1177,10 +1706,14 @@ class Component extends DCLogic {
     const continueLabel = lastSection ? `Continuar em: ${sectionLabels[lastSection]}` : 'Começar pelas Dúvidas';
     const cardBase = 'text-align:left;border:2.5px solid var(--ink);border-radius:14px;padding:20px;background:var(--card);cursor:pointer;box-shadow:4px 4px 0 var(--line);';
     const cardFeatured = 'text-align:left;border:3px solid var(--vinho);border-radius:14px;padding:20px;background:var(--card);cursor:pointer;grid-column:1/-1;box-shadow:5px 5px 0 var(--vinho);';
+    const hasInterviews = this.state.hasInterviews;
     const homeCards = [
-      {icon:'🧠', title:'Dúvidas gerais\n', subtitle:'O núcleo do toolkitnão é gramática solta.', click:()=>this.setView('duvidas'), cardStyle:cardFeatured},
+      {icon:'🗺️', title:'Sua jornada', subtitle:'Etapa 0 e Módulos 1 a 3 — Módulos 4 e 5 liberam no 8º dia.', click:()=>this.setView('jornada'), cardStyle:cardFeatured},
+      {icon:'🧠', title:'Dúvidas gerais\n', subtitle:'O núcleo do toolkitnão é gramática solta.', click:()=>this.setView('duvidas'), cardStyle:cardBase},
       {icon:'📗', title:'Fundamentos', subtitle:'Cumprimentos, To Be, dados pessoais, small talk, likes.', click:()=>this.setView('fundamentos'), cardStyle:cardBase},
-      {icon:'🎯', title:'English for Interviews', subtitle:'Blocos prontos para entrevista.', click:()=>this.setView('interviews'), cardStyle:cardBase},
+      hasInterviews
+        ? {icon:'🎯', title:'English for Interviews', subtitle:'Blocos prontos para entrevista.', click:()=>this.setView('interviews'), cardStyle:cardBase}
+        : {icon:'🔒', title:'English for Interviews', subtitle:'Extra pago · R$ 5 — em breve o link de compra.', click:()=>{}, cardStyle:cardBase+'opacity:0.55;cursor:default;'},
       {icon:'🖨️', title:'Printables', subtitle:'Folhas para imprimir e colar na parede.', click:()=>this.setView('printables'), cardStyle:cardBase},
       {icon:'🧩', title:'Montando a Frase', subtitle:'Desmonte e remonte frases reais.', click:()=>this.setView('lab'), cardStyle:cardBase},
       {icon:'⚙️', title:'Auxiliares e Modais', subtitle:'Do/Does/Did, To Be, Modais, Have.', click:()=>this.setView('auxiliares'), cardStyle:cardBase},
@@ -1371,17 +1904,22 @@ class Component extends DCLogic {
       loginPassword: this.state.loginPassword, onLoginPasswordChange:(e)=>this.onLoginPasswordChange(e),
       loginError: this.state.loginError, loginButtonLabel: this.state.loginLoading ? 'Entrando...' : 'Entrar',
       onLoginSubmit:()=>this.onLoginSubmit(), onLogout:()=>this.onLogout(),
-      authView: this.state.authView, isLoginView: this.state.authView==='login', isForgotView: this.state.authView==='forgot', isResetView: this.state.authView==='reset',
-      onForgotClick:()=>this.onForgotClick(), onBackToLogin:()=>this.onBackToLogin(),
+      authView: this.state.authView, isLoginView: this.state.authView==='login', isForgotView: this.state.authView==='forgot', isResetView: this.state.authView==='reset', isSignupView: this.state.authView==='signup',
+      onForgotClick:()=>this.onForgotClick(), onBackToLogin:()=>this.onBackToLogin(), onGoSignup:()=>this.onGoSignup(),
+      signupEmail: this.state.signupEmail, onSignupEmailChange:(e)=>this.onSignupEmailChange(e),
+      signupPassword: this.state.signupPassword, onSignupPasswordChange:(e)=>this.onSignupPasswordChange(e),
+      signupPassword2: this.state.signupPassword2, onSignupPassword2Change:(e)=>this.onSignupPassword2Change(e),
+      signupError: this.state.signupError, signupDone: this.state.signupDone, signupNotDone: !this.state.signupDone,
+      signupButtonLabel: this.state.signupLoading ? 'Criando...' : 'Criar conta', onSignupSubmit:()=>this.onSignupSubmit(),
       forgotEmail: this.state.forgotEmail, onForgotEmailChange:(e)=>this.onForgotEmailChange(e),
       forgotError: this.state.forgotError, forgotSent: this.state.forgotSent, isForgotFormVisible: !this.state.forgotSent,
       forgotButtonLabel: this.state.forgotLoading ? 'Enviando...' : 'Enviar link de recuperação', onForgotSubmit:()=>this.onForgotSubmit(),
       newPassword: this.state.newPassword, onNewPasswordChange:(e)=>this.onNewPasswordChange(e),
       newPassword2: this.state.newPassword2, onNewPassword2Change:(e)=>this.onNewPassword2Change(e),
       resetError: this.state.resetError, resetButtonLabel: this.state.resetLoading ? 'Salvando...' : 'Salvar nova senha', onResetSubmit:()=>this.onResetSubmit(),
-      isHome: !gated && view==='home', isDuvidas: !gated && view==='duvidas', isFundamentos: !gated && view==='fundamentos', isLab: !gated && view==='lab', isAux: !gated && view==='auxiliares',
-      isWh: !gated && view==='whwords', isInterviews: !gated && view==='interviews', isPrintables: !gated && view==='printables',
-      navItems, topicsView, masteredCount, homeCards,
+      isHome: !gated && view==='home', isJornada: !gated && view==='jornada', isDuvidas: !gated && view==='duvidas', isFundamentos: !gated && view==='fundamentos', isLab: !gated && view==='lab', isAux: !gated && view==='auxiliares',
+      isWh: !gated && view==='whwords', isInterviews: !gated && view==='interviews' && hasInterviews, isPrintables: !gated && view==='printables',
+      navItems, jornadaView, topicsView, masteredCount, homeCards,
       revisionsView, hasRevisions, noRevisions: !hasRevisions, revisionCount: revisionsView.length,
       confirmClear: this.state.confirmClearRevisions, notConfirmClear: !this.state.confirmClearRevisions,
       onAskClear:()=>this.askClearRevisions(), onConfirmClear:()=>this.confirmClearRevisionsNow(), onCancelClear:()=>this.cancelClearRevisions(),
