@@ -1188,7 +1188,11 @@ class Component extends DCLogic {
       lastSection: this.readLS('last_section', null),
       topicActivity: this.readLS('topic_activity', {}),
       streaks: this.readLS('streaks', {correct:{}, wrong:{}}),
-      revisions: this.readLS('revisions', {})
+      revisions: this.readLS('revisions', {}),
+      jornadaChoices: this.readLS('jornada_choices', {}),
+      jornadaTF: this.readLS('jornada_tf', {}),
+      jornadaReveal: this.readLS('jornada_reveal', {}),
+      productionInputs: this.readLS('production_inputs', {})
     });
   }
 
@@ -1480,10 +1484,18 @@ class Component extends DCLogic {
   speakEn(text, rate){ this.speak(text, (this.props&&this.props.englishVoice)||'en-US', rate||1); }
   toggleJornadaModule(id){ this.setState((s)=>({jornadaExpand:{...s.jornadaExpand,[id]: !s.jornadaExpand[id]}})); }
   toggleJornadaLesson(id){ this.setState((s)=>({jornadaLessonExpand:{...s.jornadaLessonExpand,[id]: !s.jornadaLessonExpand[id]}})); }
-  selectChoice(id, idx){ this.setState((s)=>({jornadaChoices:{...s.jornadaChoices, [id]:{selected:idx, checked:true}}})); }
-  selectTF(id, val){ this.setState((s)=>({jornadaTF:{...s.jornadaTF, [id]:{selected:val, checked:true}}})); }
-  toggleReveal(id){ this.setState((s)=>({jornadaReveal:{...s.jornadaReveal, [id]: !s.jornadaReveal[id]}})); }
-  setProduction(id, val){ this.setState((s)=>({productionInputs:{...s.productionInputs, [id]:val}})); }
+  selectChoice(id, idx){
+    this.setState((s)=>{ const next={...s.jornadaChoices,[id]:{selected:idx,checked:true}}; this.writeLS('jornada_choices',next); return {jornadaChoices:next}; });
+  }
+  selectTF(id, val){
+    this.setState((s)=>{ const next={...s.jornadaTF,[id]:{selected:val,checked:true}}; this.writeLS('jornada_tf',next); return {jornadaTF:next}; });
+  }
+  toggleReveal(id){
+    this.setState((s)=>{ const next={...s.jornadaReveal,[id]:!s.jornadaReveal[id]}; this.writeLS('jornada_reveal',next); return {jornadaReveal:next}; });
+  }
+  setProduction(id, val){
+    this.setState((s)=>{ const next={...s.productionInputs,[id]:val}; this.writeLS('production_inputs',next); return {productionInputs:next}; });
+  }
   choiceBtnStyle(selected, checked, isAnswer){
     let bg='var(--card)', color='var(--ink)', border='var(--ink)';
     if(checked && isAnswer){ bg='#3F8F5F'; color='#fff'; border='#3F8F5F'; }
