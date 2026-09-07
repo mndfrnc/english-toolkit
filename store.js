@@ -15,7 +15,10 @@ const META_NS = 'toolkit_meta_';
 // Coleções "dicionário de registros" (id -> valor) onde rastreamos um updated_at
 // por registro, para poder reconciliar corretamente com o Supabase depois.
 // `revisions` já guarda seu próprio updatedAt por registro (não duplicamos aqui).
-const RECORD_COLLECTIONS = ['understood', 'my_explanations', 'interview_answers'];
+const RECORD_COLLECTIONS = [
+  'understood', 'my_explanations', 'interview_answers',
+  'jornada_choices', 'jornada_tf', 'jornada_reveal', 'production_inputs'
+];
 // Preferências simples de valor único, tratadas como um registro "bundle" só.
 const PREF_KEYS = ['theme', 'last_section', 'printables_selected'];
 
@@ -125,6 +128,10 @@ const TABLE_MAP = {
   understood: { table: 'lesson_understood', idField: 'lesson_id', toRow: (id, v) => ({ lesson_id: id, understood: !!v }), fromRow: (r) => !!r.understood },
   my_explanations: { table: 'my_explanations', idField: 'lesson_id', toRow: (id, v) => ({ lesson_id: id, text: v || '' }), fromRow: (r) => r.text || '' },
   interview_answers: { table: 'interview_answers', idField: 'block_id', toRow: (id, v) => ({ block_id: Number(id), text: v || '' }), fromRow: (r) => r.text || '' },
+  jornada_choices: { table: 'journey_state', idField: 'item_id', stateType: 'choice', toRow: (id, v) => ({ state_type: 'choice', item_id: id, value: v }), fromRow: (r) => r.value },
+  jornada_tf: { table: 'journey_state', idField: 'item_id', stateType: 'true_false', toRow: (id, v) => ({ state_type: 'true_false', item_id: id, value: v }), fromRow: (r) => r.value },
+  jornada_reveal: { table: 'journey_state', idField: 'item_id', stateType: 'reveal', toRow: (id, v) => ({ state_type: 'reveal', item_id: id, value: !!v }), fromRow: (r) => !!r.value },
+  production_inputs: { table: 'journey_state', idField: 'item_id', stateType: 'production', toRow: (id, v) => ({ state_type: 'production', item_id: id, value: v || '' }), fromRow: (r) => typeof r.value === 'string' ? r.value : '' },
   revisions: {
     table: 'revisions', idField: 'concept',
     toRow: (id, v) => ({ concept: id, given: v.given, correct_answer: v.correctAnswer, explanation: v.explanation, count: v.count }),
@@ -225,6 +232,10 @@ export const Sync = {
       await Sync._reconcileRecordCollection('understood', TABLE_MAP.understood);
       await Sync._reconcileRecordCollection('my_explanations', TABLE_MAP.my_explanations);
       await Sync._reconcileRecordCollection('interview_answers', TABLE_MAP.interview_answers);
+      await Sync._reconcileRecordCollection('jornada_choices', TABLE_MAP.jornada_choices);
+      await Sync._reconcileRecordCollection('jornada_tf', TABLE_MAP.jornada_tf);
+      await Sync._reconcileRecordCollection('jornada_reveal', TABLE_MAP.jornada_reveal);
+      await Sync._reconcileRecordCollection('production_inputs', TABLE_MAP.production_inputs);
       await Sync._reconcileRevisions();
       await Sync._reconcileTopicActivity();
       await Sync._reconcileStreaks();
@@ -240,7 +251,9 @@ export const Sync = {
   async _reconcileRecordCollection(key, map) {
     const local = Store.get(key, {});
     const localMeta = readMeta(key);
-    const { data: remoteRows, error } = await _client.from(map.table).select('*').eq('user_id', _userId);
+    let query = _client.from(map.table).select('*').eq('user_id', _userId);
+    if (map.stateType) query = query.eq('state_type', map.stateType);
+    const { data: remoteRows, error } = await query;
     if (error) throw error;
     const remoteById = {};
     (remoteRows || []).forEach((r) => { remoteById[r[map.idField]] = r; });
