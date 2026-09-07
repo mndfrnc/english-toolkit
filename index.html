@@ -372,10 +372,15 @@ a:hover{color:var(--vinho)}
 <sc-for list="{{ p.linesView }}" as="dfl" hint-placeholder-count="3">
 <div style="margin-bottom:10px">
 <div style="font-size:13px;font-weight:700;margin-bottom:4px">{{ dfl.speaker }}:</div>
-<div style="font-size:13px;margin-bottom:6px;color:var(--inkSoft)">{{ dfl.en }}</div>
-<div style="display:flex;gap:8px;flex-wrap:wrap"><input value="{{ dfl.exercise.value }}" onChange="{{ dfl.exercise.onChange }}" placeholder="reescreva a fala completa" style="flex:1;min-width:200px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13px"><button onClick="{{ dfl.exercise.onCheck }}" style="background:var(--periwinkle);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13px">Verificar</button></div>
-<sc-if value="{{ dfl.exercise.correct }}" hint-placeholder-val="{{ false }}"><div style="color:#3F8F5F;font-weight:700;font-size:13px;margin-top:6px">✅ Isso mesmo.</div></sc-if>
-<sc-if value="{{ dfl.exercise.incorrect }}" hint-placeholder-val="{{ false }}"><div style="color:var(--vinho);font-weight:700;font-size:13px;margin-top:6px">Esperado: {{ dfl.exercise.correctAnswer }}</div></sc-if>
+<sc-if value="{{ dfl.plainText }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:var(--inkSoft)">{{ dfl.plainText }}</div></sc-if>
+<sc-if value="{{ dfl.hasBlank }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:13px;color:var(--inkSoft);line-height:2.1">
+<sc-for list="{{ dfl.segmentsView }}" as="seg" hint-placeholder-count="2">
+<sc-if value="{{ seg.text }}" hint-placeholder-val="{{ false }}"><span>{{ seg.text }}</span></sc-if>
+<sc-if value="{{ seg.isBlank }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;gap:6px;align-items:center;margin:0 4px"><input value="{{ seg.exercise.value }}" onChange="{{ seg.exercise.onChange }}" placeholder="complete" style="width:140px;padding:6px 8px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13px"><button onClick="{{ seg.exercise.onCheck }}" style="background:var(--periwinkle);color:#fff;border:none;border-radius:6px;padding:6px 10px;font-weight:700;cursor:pointer;font-size:12px">Verificar</button><sc-if value="{{ seg.exercise.correct }}" hint-placeholder-val="{{ false }}"><span style="color:#3F8F5F;font-weight:700;font-size:12px">✅</span></sc-if><sc-if value="{{ seg.exercise.incorrect }}" hint-placeholder-val="{{ false }}"><span style="color:var(--vinho);font-weight:700;font-size:12px">(esperado: {{ seg.exercise.correctAnswer }})</span></sc-if></span></sc-if>
+</sc-for>
+</div>
+</sc-if>
 </div>
 </sc-for>
 </sc-if>
@@ -437,10 +442,15 @@ a:hover{color:var(--vinho)}
 <sc-for list="{{ cp.practice.linesView }}" as="dfl2" hint-placeholder-count="4">
 <div style="margin-bottom:10px">
 <div style="font-size:13px;font-weight:700;margin-bottom:4px">{{ dfl2.speaker }}:</div>
-<div style="font-size:13px;margin-bottom:6px;color:var(--inkSoft)">{{ dfl2.en }}</div>
-<div style="display:flex;gap:8px;flex-wrap:wrap"><input value="{{ dfl2.exercise.value }}" onChange="{{ dfl2.exercise.onChange }}" placeholder="reescreva a fala completa" style="flex:1;min-width:200px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);font-size:13px"><button onClick="{{ dfl2.exercise.onCheck }}" style="background:var(--periwinkle);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13px">Verificar</button></div>
-<sc-if value="{{ dfl2.exercise.correct }}" hint-placeholder-val="{{ false }}"><div style="color:#3F8F5F;font-weight:700;font-size:13px;margin-top:6px">✅ Isso mesmo.</div></sc-if>
-<sc-if value="{{ dfl2.exercise.incorrect }}" hint-placeholder-val="{{ false }}"><div style="color:var(--vinho);font-weight:700;font-size:13px;margin-top:6px">Esperado: {{ dfl2.exercise.correctAnswer }}</div></sc-if>
+<sc-if value="{{ dfl2.plainText }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:var(--inkSoft)">{{ dfl2.plainText }}</div></sc-if>
+<sc-if value="{{ dfl2.hasBlank }}" hint-placeholder-val="{{ false }}">
+<div style="font-size:13px;color:var(--inkSoft);line-height:2.1">
+<sc-for list="{{ dfl2.segmentsView }}" as="seg2" hint-placeholder-count="2">
+<sc-if value="{{ seg2.text }}" hint-placeholder-val="{{ false }}"><span>{{ seg2.text }}</span></sc-if>
+<sc-if value="{{ seg2.isBlank }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;gap:6px;align-items:center;margin:0 4px"><input value="{{ seg2.exercise.value }}" onChange="{{ seg2.exercise.onChange }}" placeholder="complete" style="width:140px;padding:6px 8px;border-radius:6px;border:1px solid var(--line);font-size:13px"><button onClick="{{ seg2.exercise.onCheck }}" style="background:var(--periwinkle);color:#fff;border:none;border-radius:6px;padding:6px 10px;font-weight:700;cursor:pointer;font-size:12px">Verificar</button><sc-if value="{{ seg2.exercise.correct }}" hint-placeholder-val="{{ false }}"><span style="color:#3F8F5F;font-weight:700;font-size:12px">✅</span></sc-if><sc-if value="{{ seg2.exercise.incorrect }}" hint-placeholder-val="{{ false }}"><span style="color:var(--vinho);font-weight:700;font-size:12px">(esperado: {{ seg2.exercise.correctAnswer }})</span></sc-if></span></sc-if>
+</sc-for>
+</div>
+</sc-if>
 </div>
 </sc-for>
 </sc-if>
@@ -1258,6 +1268,32 @@ class Component extends DCLogic {
   }
   normalize(s){ return (s||'').toLowerCase().replace(/[.?!]/g,'').replace(/\s+/g,' ').trim(); }
 
+  // Divide uma fala com lacunas ("__________, Ravi!") na frase já reconstruída
+  // ("Good morning, Ravi!") em segmentos de texto fixo e lacunas individuais, para que
+  // cada lacuna vire seu próprio campo — sem exigir que o aluno redigite o que já está
+  // na tela. Localiza cada trecho fixo do molde dentro da resposta, em ordem.
+  splitDialogueBlanks(template, answer){
+    const parts = String(template).split(/_{2,}/);
+    const segments = [];
+    let pos = 0;
+    for(let i=0;i<parts.length;i++){
+      const literal = parts[i];
+      if(literal){
+        const idx = answer.indexOf(literal, pos);
+        if(idx===-1){ segments.push({kind:'text', value:literal}); continue; }
+        segments.push({kind:'text', value:literal});
+        pos = idx + literal.length;
+      }
+      if(i < parts.length-1){
+        const nextLiteral = parts[i+1];
+        const end = nextLiteral ? answer.indexOf(nextLiteral, pos) : answer.length;
+        const safeEnd = end===-1 ? answer.length : end;
+        segments.push({kind:'blank', value: answer.slice(pos, safeEnd).trim()});
+        pos = safeEnd;
+      }
+    }
+    return segments;
+  }
   // ---------- Motor único de exercícios + revisões (Requisitos 1 e 2) ----------
   setExerciseInput(key, val){
     this.setState((s)=>({ exerciseInputs:{...s.exerciseInputs,[key]:val}, exerciseChecked:{...s.exerciseChecked,[key]:false} }));
@@ -1539,7 +1575,16 @@ class Component extends DCLogic {
       return { ...base, isText:true, itemsView };
     }
     if(isDialogueFill){
-      const linesView = practice.dialogue.lines.map((l,i)=>({ speaker:l.speaker, en:l.en, exercise:this.buildExercise(concept, id+'_dl'+i, l.en, practice.answer[i], null) }));
+      const linesView = practice.dialogue.lines.map((l,i)=>{
+        const hasBlank = /_{2,}/.test(l.en);
+        if(!hasBlank) return { speaker:l.speaker, hasBlank:false, plainText:l.en, segmentsView:[] };
+        const segmentsView = this.splitDialogueBlanks(l.en, practice.answer[i]).map((seg,si)=>
+          seg.kind==='text'
+            ? { isBlank:false, text:seg.value }
+            : { isBlank:true, exercise:this.buildExercise(concept, id+'_dl'+i+'_b'+si, '', seg.value, null) }
+        );
+        return { speaker:l.speaker, hasBlank:true, segmentsView };
+      });
       return { ...base, isDialogueFill:true, linesView };
     }
     let revealText = '';
@@ -1576,7 +1621,10 @@ class Component extends DCLogic {
       modelText: s.model ? s.model.text : null,
       itemsQA: s.items ? s.items.map((it)=>({en:it.en, pt:it.pt})) : null
     }));
-    const practicesView = (lesson.guided_practice||[]).map((p,i)=>this.buildPractice(lesson.id, p, i));
+    // "Associe" (colunas para ligar) e "Organize o diálogo" (falas para numerar) dependem de
+    // interação de arrastar/numerar que não funciona no PWA — ocultas aqui, mas os dados
+    // pedagógicos permanecem intactos em content-data-open.js/content-data-part2.js.
+    const practicesView = (lesson.guided_practice||[]).filter((p)=>!this.isUnsupportedPractice(p)).map((p,i)=>this.buildPractice(lesson.id, p, i));
     const yourTurn = lesson.your_turn ? this.buildProductionView(lesson.your_turn) : null;
     const review = lesson.review ? { instruction:lesson.review.instruction, template:lesson.review.template, possibleAnswer:lesson.review.possible_answer } : null;
     const checkProgress = lesson.check_progress ? { canDo:lesson.check_progress.can_do, criterion:lesson.check_progress.criterion } : null;
@@ -1584,9 +1632,15 @@ class Component extends DCLogic {
     return { id:lesson.id, label:lesson.label, canDo:lesson.can_do||[], opening, understandBlocks, words, seeItWorking, practicesView, yourTurn, review, checkProgress,
       ifStuck: lesson.if_stuck||null, expanded, toggle:()=>this.toggleJornadaLesson(lesson.id) };
   }
+  // "Associe" (tem columnA) e "Organize o diálogo" (shuffled + answer_order no nível da
+  // atividade) exigem arrastar/numerar e não funcionam no PWA. Usado para ocultá-las da
+  // Jornada sem tocar nos arquivos de conteúdo pedagógico.
+  isUnsupportedPractice(p){
+    return !!(p && (p.columnA || (p.shuffled && p.answer_order)));
+  }
   buildCheckpointView(concept, checkpoint){
     if(!checkpoint) return null;
-    const partsView = checkpoint.parts.map((part, pi)=>{
+    const partsView = checkpoint.parts.filter((part)=>!this.isUnsupportedPractice(part)).map((part, pi)=>{
       const built = this.buildPractice(concept+'_chk', {...part, id:part.id||(concept+'_chk_'+pi)}, pi);
       const isProduction = part.type==='producao_livre';
       return { label:part.label, instruction:part.instruction||null, isProduction, production: isProduction ? this.buildProductionView({...part, id:part.id}) : null, practice: isProduction ? null : built };
