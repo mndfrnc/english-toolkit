@@ -1,10 +1,6 @@
-// Service worker mínimo: só habilita "Adicionar à tela inicial" (PWA instalável).
-// Sem cache agressivo — sempre busca a rede primeiro, para nunca servir uma versão
-// desatualizada do conteúdo/lições.
+// PWA online: deixe o navegador acessar a rede diretamente, inclusive o Supabase.
+// Não intercepte requisições nem procure respostas de autenticação no cache.
 self.addEventListener('install', () => self.skipWaiting());
-self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    fetch(event.request).catch(() => caches.match(event.request))
-  );
+self.addEventListener('activate', (event) => {
+  event.waitUntil(self.clients.claim());
 });
